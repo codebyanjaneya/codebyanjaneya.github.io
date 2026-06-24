@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anjaneya Tiwari · Full-Stack &amp; AI Systems Engineer</title>
+<meta name="description" content="Portfolio of Anjaneya Tiwari. Full-stack developer and AI engineer building production systems across voice AI, multi-agent platforms, and cybersecurity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------------------------------------------
+   Design tokens
+--------------------------------------------- */
+:root{
+  --bg: #0B0E13;
+  --bg-elevated: #12161D;
+  --bg-elevated-2: #161B23;
+  --ink: #E9E6DE;
+  --ink-dim: #93989F;
+  --ink-faint: #5C6168;
+  --accent: #FF8A3D;
+  --accent-soft: rgba(255, 138, 61, 0.16);
+  --trace: #4FD1C5;
+  --trace-soft: rgba(79, 209, 197, 0.14);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-bright: rgba(255, 255, 255, 0.16);
+
+  --display: 'Space Grotesk', sans-serif;
+  --body: 'IBM Plex Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+
+  --gutter: clamp(24px, 6vw, 96px);
+  --spine-x: 48px;
+}
+
+@media (max-width: 760px){
+  :root{ --spine-x: 20px; }
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+h1, h2, h3, h4{
+  font-family: var(--display);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+p{ margin: 0; color: var(--ink-dim); }
+
+a{ color: inherit; text-decoration: none; }
+
+.mono{ font-family: var(--mono); }
+
+ul{ margin:0; padding:0; list-style:none; }
+
+/* ---------------------------------------------
+   Background canvas (three.js)
+--------------------------------------------- */
+#bg-canvas{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+main, header, .spine{ position: relative; z-index: 1; }
+
+/* ---------------------------------------------
+   Top bar
+--------------------------------------------- */
+.topbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--gutter);
+  backdrop-filter: blur(10px);
+  background: linear-gradient(to bottom, rgba(11,14,19,0.85), rgba(11,14,19,0));
+}
+
+.brand{
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.brand-dot{
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.topnav{
+  display: flex;
+  gap: 32px;
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+.topnav a{ transition: color 0.2s ease; }
+.topnav a:hover{ color: var(--ink); }
+
+.cta-pill{
+  font-size: 13px;
+  font-family: var(--mono);
+  padding: 9px 18px;
+  border: 1px solid var(--line-bright);
+  border-radius: 100px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.cta-pill:hover{ border-color: var(--accent); background: var(--accent-soft); }
+
+@media (max-width: 760px){
+  .topnav{ display: none; }
+}
+
+/* ---------------------------------------------
+   Spine -- signature element
+--------------------------------------------- */
+.spine{
+  position: fixed;
+  top: 0;
+  left: var(--spine-x);
+  height: 100%;
+  width: 2px;
+  z-index: 5;
+  pointer-events: none;
+}
+.spine-line{
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  overflow: visible;
+}
+.spine-line line{
+  stroke: var(--line-bright);
+  stroke-width: 2;
+}
+.spine::after{
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--trace), transparent);
+  animation: travel 5s linear infinite;
+  opacity: 0.8;
+}
+@keyframes travel{
+  0%{ transform: translateY(-140px); }
+  100%{ transform: translateY(100vh); }
+}
+
+.spine-nodes{
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 1px;
+}
+.spine-node{
+  position: absolute;
+  left: -4px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--ink-faint);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.spine-node.active{
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent);
+}
+
+@media (max-width: 760px){
+  .spine{ display: none; }
+}
+
+/* ---------------------------------------------
+   Shared section rhythm
+--------------------------------------------- */
+section{
+  padding: 140px var(--gutter) 140px calc(var(--spine-x) + 56px);
+  max-width: 1320px;
+}
+@media (max-width: 760px){
+  section{ padding: 88px 20px; }
+}
+
+.section-head{
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 56px;
+}
+.tag{
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.section-head h2{
+  font-size: clamp(28px, 3.4vw, 42px);
+}
+
+/* ---------------------------------------------
+   Hero
+--------------------------------------------- */
+.hero{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 160px;
+  padding-bottom: 80px;
+}
+.hero-inner{ max-width: 880px; }
+
+.eyebrow{
+  color: var(--trace);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+  display: block;
+}
+
+.hero-title{
+  font-size: clamp(56px, 10vw, 128px);
+  line-height: 0.96;
+  color: var(--ink);
+}
+
+.hero-pulse{
+  display: block;
+  width: 100%;
+  max-width: 620px;
+  height: 64px;
+  margin: 18px 0 8px;
+  opacity: 0.85;
+}
+
+.hero-role{
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--ink-dim);
+  margin-top: 4px;
+  margin-bottom: 28px;
+}
+
+.hero-sub{
+  max-width: 540px;
+  font-size: 17px;
+  color: var(--ink-dim);
+  margin-bottom: 44px;
+}
+
+.hero-actions{
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn{
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 14px 26px;
+  border-radius: 8px;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  display: inline-block;
+}
+.btn-primary{
+  background: var(--accent);
+  color: #14110B;
+  font-weight: 500;
+}
+.btn-primary:hover{ transform: translateY(-2px); }
+.btn-ghost{
+  border: 1px solid var(--line-bright);
+  color: var(--ink);
+}
+.btn-ghost:hover{ border-color: var(--trace); transform: translateY(-2px); }
+
+.scroll-cue{
+  position: absolute;
+  bottom: 48px;
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  writing-mode: vertical-rl;
+}
+.scroll-line{
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--ink-faint), transparent);
+}
+@media (max-width: 760px){
+  .scroll-cue{ display: none; }
+}
+
+/* ---------------------------------------------
+   About
+--------------------------------------------- */
+.about-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+}
+.about-lead{
+  font-size: 20px;
+  color: var(--ink);
+  line-height: 1.5;
+  max-width: 560px;
+}
+.about-facts{
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.fact{
+  border-left: 2px solid var(--line);
+  padding-left: 20px;
+}
+.fact-num{
+  display: block;
+  font-size: 28px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.fact-label{
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+@media (max-width: 880px){
+  .about-grid{ grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------
+   Experience / timeline
+--------------------------------------------- */
+.timeline{
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.role{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--line);
+}
+.role:last-child{ border-bottom: none; }
+.role-meta{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.role-date{ color: var(--trace); }
+.role-body h3{
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+.role-org{
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.role-body p{
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+.role-body p:last-child{ margin-bottom: 0; }
+
+@media (max-width: 700px){
+  .role{ grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* ---------------------------------------------
+   Projects
+--------------------------------------------- */
+.project-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.project{
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+  transition: border-color 0.3s ease, transform 0.1s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.project:hover{ border-color: var(--line-bright); }
+.project-feature{
+  grid-column: span 2;
+  background: linear-gradient(155deg, var(--bg-elevated-2), var(--bg-elevated));
+  border-color: var(--line-bright);
+}
+.project-top{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+.project-cat{ color: var(--trace); }
+.project-date{ color: var(--ink-faint); }
+.project h3{
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.project p{
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.project-stack{
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 900px){
+  .project-grid{ grid-template-columns: 1fr; }
+  .project-feature{ grid-column: span 1; }
+}
+
+/* ---------------------------------------------
+   Stack
+--------------------------------------------- */
+.stack-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 28px;
+}
+.stack-group h4{
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.stack-group p{
+  font-size: 14px;
+  color: var(--ink-dim);
+}
+@media (max-width: 900px){
+  .stack-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------------------------------------------
+   Achievements
+--------------------------------------------- */
+.ach-list{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.ach-list li{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.ach-list li:last-child{ border-bottom: none; }
+.ach-org{
+  font-size: 13px;
+  color: var(--trace);
+}
+.ach-list p{
+  font-size: 15px;
+  max-width: 640px;
+}
+@media (max-width: 700px){
+  .ach-list li{ grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ---------------------------------------------
+   Contact
+--------------------------------------------- */
+.contact{
+  padding-bottom: 60px;
+}
+.contact-inner h2{
+  font-size: clamp(32px, 5vw, 56px);
+  max-width: 640px;
+  margin: 18px 0 56px;
+}
+.contact-links{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.contact-link{
+  background: var(--bg);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background 0.25s ease;
+}
+.contact-link:hover{ background: var(--bg-elevated); }
+.contact-label{
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+}
+.contact-value{
+  font-size: 17px;
+  color: var(--ink);
+}
+@media (max-width: 700px){
+  .contact-links{ grid-template-columns: 1fr; }
+}
+
+.footer{
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 700px){
+  .footer{ flex-direction: column; gap: 8px; }
+}
+
+/* ---------------------------------------------
+   Reveal-on-scroll
+--------------------------------------------- */
+.reveal{
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in-view{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<header class="topbar">
+  <a href="#top" class="brand">AT<span class="brand-dot"></span></a>
+  <nav class="topnav">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#stack">Stack</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="cta-pill" href="mailto:anjaneyatiwarii@gmail.com">Get in touch</a>
+</header>
+
+<div class="spine" aria-hidden="true">
+  <svg class="spine-line" viewBox="0 0 2 1000" preserveAspectRatio="none">
+    <line x1="1" y1="0" x2="1" y2="1000" />
+  </svg>
+  <div class="spine-nodes">
+    <span class="spine-node" data-target="top"></span>
+    <span class="spine-node" data-target="about"></span>
+    <span class="spine-node" data-target="experience"></span>
+    <span class="spine-node" data-target="work"></span>
+    <span class="spine-node" data-target="stack"></span>
+    <span class="spine-node" data-target="achievements"></span>
+    <span class="spine-node" data-target="contact"></span>
+  </div>
+</div>
+
+<main>
+
+  <section id="top" class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow mono">Delhi, India · open to full-time roles</p>
+      <h1 class="hero-title">
+        Anjaneya<br>Tiwari
+      </h1>
+      <canvas id="pulse-canvas" class="hero-pulse" aria-hidden="true"></canvas>
+      <p class="hero-role">Full-Stack Developer · AI Systems Engineer · Cybersecurity</p>
+      <p class="hero-sub">I build the infrastructure underneath AI products: the concurrency layer, the agent memory, the observability that tells you what's actually happening when 1,000 requests land at once.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">See the work</a>
+        <a href="https://linkedin.com/in/anjaneya-tiwari" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+    <div class="scroll-cue mono">scroll<span class="scroll-line"></span></div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="section-head">
+      <span class="tag mono">001 / signal</span>
+      <h2>What I actually do</h2>
+    </div>
+    <div class="about-grid">
+      <p class="about-lead">
+        I'm a B.Tech Computer Science student who skipped the part where you wait for permission to ship. Over the last year I've shipped a voice AI pipeline handling Indian-accent speech recognition under real call load, a seven-agent operating system that runs a startup's sales and finance loops on its own, and a phishing detector that fuses machine learning with live threat intelligence.
+      </p>
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-num mono">1000+</span>
+          <span class="fact-label">concurrent requests benchmarked on LoadPulse with graceful degradation</span>
+        </div>
+        <div class="fact">
+          <span class="fact-num mono">&lt;2s</span>
+          <span class="fact-label">response latency on the Telogo voice pipeline, end to end</span>
+        </div>
+        <div class="fact">
+          <span class="fact-num mono">7</span>
+          <span class="fact-label">autonomous agents coordinating in AgentForge without a human in the loop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="experience">
+    <div class="section-head">
+      <span class="tag mono">002 / record</span>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="timeline">
+
+      <article class="role">
+        <div class="role-meta mono">
+          <span class="role-date">Sep 2025 to Mar 2026</span>
+          <span class="role-place">Noida</span>
+        </div>
+        <div class="role-body">
+          <h3>Backend &amp; AI Systems Intern</h3>
+          <p class="role-org">Telogo Communications Ltd.</p>
+          <p>Architected an intelligent IVR system with a custom speech pipeline tuned for Indian accents and dialects. Built concurrent call handling with async task queues, worker pooling, and auto-scaling to keep performance steady under high call volume, reaching sub-two-second response latency through streaming transcription and model warmup.</p>
+          <p>Developed LoadPulse, a real-time concurrency and observability platform on FastAPI with asyncio worker pools and token-bucket rate limiting, simulating and benchmarking over a thousand concurrent requests with controlled degradation instead of system failure. Paired it with a live React and Recharts dashboard over WebSockets for latency, queue depth, and worker utilization.</p>
+        </div>
+      </article>
+
+      <article class="role">
+        <div class="role-meta mono">
+          <span class="role-date">Feb 2025 to Jul 2025</span>
+          <span class="role-place">Noida</span>
+        </div>
+        <div class="role-body">
+          <h3>Software Development Intern</h3>
+          <p class="role-org">Motivus Innovation Pvt. Ltd.</p>
+          <p>Built and improved modules for an AI-powered sustainability and energy platform focused on ESG reporting and renewable energy. Integrated REST APIs and database-driven features, debugged across the stack, and researched ML applications for energy analytics and carbon management alongside cross-functional teams.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="work" class="projects">
+    <div class="section-head">
+      <span class="tag mono">003 / output</span>
+      <h2>Things I've shipped</h2>
+    </div>
+
+    <div class="project-grid">
+
+      <article class="project project-feature" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">multi-agent systems</span>
+          <span class="project-date mono">Jun to Jul 2026</span>
+        </div>
+        <h3>AgentForge</h3>
+        <p>A seven-agent operating system for running a startup: CEO, Sales, Marketing, Support, Research, Finance, and Hiring agents that execute tasks, talk to each other, and improve from past performance. The CEO agent breaks goals into subtasks and delegates them in real time, with a dual-layer memory system, Redis for the last twenty interactions and PostgreSQL for long-term summaries, so the agents retain context across sessions. Ships with a Digital Twin Dashboard tracking revenue, burn rate, runway, and MRR live.</p>
+        <div class="project-stack mono">FastAPI · Next.js · Redis · PostgreSQL · LLM API</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">observability</span>
+          <span class="project-date mono">Telogo</span>
+        </div>
+        <h3>LoadPulse</h3>
+        <p>Real-time concurrency and observability platform built on FastAPI with asyncio worker pools and token-bucket rate limiting. Benchmarked at over 1,000 concurrent requests with graceful degradation, surfaced through a live React and WebSocket dashboard tracking latency, queue depth, and worker utilization.</p>
+        <div class="project-stack mono">FastAPI · React · Recharts · WebSockets</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">recruitment automation</span>
+          <span class="project-date mono">May to Jun 2026</span>
+        </div>
+        <h3>AutoApply Bot</h3>
+        <p>A multi-tenant SaaS on Telegram that automates job hunting end to end: discovery, AI resume scoring, recruiter enrichment, and outreach. Orchestrated through n8n pipelines wiring Groq Llama 4 for matching, Hunter.io and Apollo for contact lookup, and the Gmail API for outreach, with Razorpay billing and tenant-isolated PostgreSQL running on AWS EC2.</p>
+        <div class="project-stack mono">n8n · Groq Llama 4 · Razorpay · AWS EC2</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">cybersecurity</span>
+          <span class="project-date mono">Feb to Mar 2026</span>
+        </div>
+        <h3>AI-PhishGuard</h3>
+        <p>A full-stack phishing detection platform combining a Flask API on EC2 with a React and TypeScript dashboard. A hybrid pipeline runs Scikit-learn classifiers alongside Groq Llama 4 reasoning, WHOIS intelligence, and VirusTotal scoring for layered accuracy, with real-time and bulk scanning, risk tiering, and automated PDF threat reports.</p>
+        <div class="project-stack mono">Flask · React · Scikit-learn · VirusTotal</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">health &amp; wellness</span>
+          <span class="project-date mono">independent</span>
+        </div>
+        <h3>VitalAI</h3>
+        <p>An AI health companion with a full light and dark theming system built on CSS variables, a Spotify-style Health Wrapped recap, and gamification, streaks, XP, and badges, persisted client-side. A Groq-powered chat companion with customizable personas rounds out the experience, deployed on Vercel.</p>
+        <div class="project-stack mono">React · Groq · CSS Variables</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">research tooling</span>
+          <span class="project-date mono">independent</span>
+        </div>
+        <h3>Deep Research Engine</h3>
+        <p>A research assistant pairing a FastAPI backend with a single-page frontend. Switched retrieval to a TF-IDF pipeline after hitting Gemini quota limits, with a Notes tab that renders Mermaid diagrams and metrics visualizations from raw research output.</p>
+        <div class="project-stack mono">FastAPI · Groq · TF-IDF · Mermaid.js</div>
+      </article>
+
+      <article class="project" data-tilt>
+        <div class="project-top">
+          <span class="project-cat mono">iot &amp; energy</span>
+          <span class="project-date mono">independent</span>
+        </div>
+        <h3>Motivus IoT</h3>
+        <p>A Flutter and Django energy management app for ESP32 smart plug devices with a three-tier role system, giving different levels of control to admins, operators, and end users monitoring live power data.</p>
+        <div class="project-stack mono">Flutter · Django · ESP32</div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="stack" class="stack">
+    <div class="section-head">
+      <span class="tag mono">004 / toolset</span>
+      <h2>What I build with</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-group">
+        <h4 class="mono">languages</h4>
+        <p>Python, TypeScript, JavaScript, Dart, Bash</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">backend</h4>
+        <p>FastAPI, Django REST, Flask, REST API design</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">ai &amp; ml</h4>
+        <p>LLM prompt engineering, RAG pipelines, multi-model ensembles, Groq Llama 4, HuggingFace, OpenCV, CNNs</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">cloud &amp; devops</h4>
+        <p>AWS EC2, SNS, SES, Docker, NGINX, Gunicorn, GitHub Actions</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">data</h4>
+        <p>PostgreSQL, Redis, Firebase</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">frontend &amp; mobile</h4>
+        <p>React, Next.js, Flutter, HTML and CSS</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">security</h4>
+        <p>WHOIS API, VirusTotal API, OSINT, Burp Suite, vulnerability assessment</p>
+      </div>
+      <div class="stack-group">
+        <h4 class="mono">automation</h4>
+        <p>n8n, Zapier, browser automation</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements" class="achievements">
+    <div class="section-head">
+      <span class="tag mono">005 / track record</span>
+      <h2>Where it's been tested</h2>
+    </div>
+    <ul class="ach-list">
+      <li>
+        <span class="ach-org mono">HackIndia Spark 4, 2026</span>
+        <p>Qualified Round 2 by building and deploying an AI dermatology assistant with multi-model diagnosis and Hinglish voice AI in 36 hours, shipping both a Flutter Android app and a PWA.</p>
+      </li>
+      <li>
+        <span class="ach-org mono">Vibecon India</span>
+        <p>Qualified Round 2 among 10,000-plus participants, representing AutoApply Bot.</p>
+      </li>
+      <li>
+        <span class="ach-org mono">GSSoC &amp; SSOC 2026</span>
+        <p>Selected as an open-source contributor for both programs, starting June 2026.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="contact-inner">
+      <span class="tag mono">006 / connect</span>
+      <h2>Building something that needs<br>this kind of work?</h2>
+      <div class="contact-links">
+        <a href="mailto:anjaneyatiwarii@gmail.com" class="contact-link">
+          <span class="contact-label mono">email</span>
+          <span class="contact-value">anjaneyatiwarii@gmail.com</span>
+        </a>
+        <a href="tel:+917042035407" class="contact-link">
+          <span class="contact-label mono">phone</span>
+          <span class="contact-value">+91 70420 35407</span>
+        </a>
+        <a href="https://linkedin.com/in/anjaneya-tiwari" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-label mono">linkedin</span>
+          <span class="contact-value">/in/anjaneya-tiwari</span>
+        </a>
+        <a href="https://github.com/codebyanjaneya" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-label mono">github</span>
+          <span class="contact-value">codebyanjaneya</span>
+        </a>
+      </div>
+    </div>
+    <footer class="footer mono">
+      <span>Delhi, India</span>
+      <span>Built and deployed by Anjaneya Tiwari</span>
+    </footer>
+  </section>
+
+</main>
+
+
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+/* ---------------------------------------------
+   1. Three.js particle network background
+--------------------------------------------- */
+(function initBackground(){
+  const canvas = document.getElementById('bg-canvas');
+  if(!canvas) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.z = 14;
+
+  const isMobile = window.innerWidth < 760;
+  const NODE_COUNT = isMobile ? 36 : 90;
+  const RADIUS = 9;
+
+  const positions = new Float32Array(NODE_COUNT * 3);
+  const nodeVelocities = [];
+
+  for(let i = 0; i < NODE_COUNT; i++){
+    const r = RADIUS * (0.4 + Math.random() * 0.6);
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos((Math.random() * 2) - 1);
+    positions[i*3]     = r * Math.sin(phi) * Math.cos(theta);
+    positions[i*3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+    positions[i*3 + 2] = r * Math.cos(phi);
+    nodeVelocities.push({
+      x: (Math.random() - 0.5) * 0.004,
+      y: (Math.random() - 0.5) * 0.004,
+      z: (Math.random() - 0.5) * 0.004
+    });
+  }
+
+  const pointGeo = new THREE.BufferGeometry();
+  pointGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  const pointMat = new THREE.PointsMaterial({
+    color: 0xFF8A3D,
+    size: 0.07,
+    transparent: true,
+    opacity: 0.9
+  });
+  const points = new THREE.Points(pointGeo, pointMat);
+  scene.add(points);
+
+  // Connective lines between nearby nodes
+  const lineGeo = new THREE.BufferGeometry();
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x4FD1C5, transparent: true, opacity: 0.12 });
+  const lineMesh = new THREE.LineSegments(lineGeo, lineMat);
+  scene.add(lineMesh);
+
+  const MAX_DIST = 3.4;
+
+  function rebuildLines(){
+    const verts = [];
+    for(let i = 0; i < NODE_COUNT; i++){
+      for(let j = i + 1; j < NODE_COUNT; j++){
+        const dx = positions[i*3] - positions[j*3];
+        const dy = positions[i*3+1] - positions[j*3+1];
+        const dz = positions[i*3+2] - positions[j*3+2];
+        const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+        if(dist < MAX_DIST){
+          verts.push(positions[i*3], positions[i*3+1], positions[i*3+2]);
+          verts.push(positions[j*3], positions[j*3+1], positions[j*3+2]);
+        }
+      }
+    }
+    lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(verts), 3));
+  }
+  rebuildLines();
+
+  let targetRotX = 0, targetRotY = 0;
+  window.addEventListener('mousemove', (e) => {
+    targetRotY = (e.clientX / window.innerWidth - 0.5) * 0.6;
+    targetRotX = (e.clientY / window.innerHeight - 0.5) * 0.4;
+  });
+
+  let frame = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    frame++;
+
+    if(!prefersReduced){
+      for(let i = 0; i < NODE_COUNT; i++){
+        positions[i*3]   += nodeVelocities[i].x;
+        positions[i*3+1] += nodeVelocities[i].y;
+        positions[i*3+2] += nodeVelocities[i].z;
+      }
+      pointGeo.attributes.position.needsUpdate = true;
+      if(frame % 6 === 0) rebuildLines();
+
+      points.rotation.y += 0.0009;
+      lineMesh.rotation.y += 0.0009;
+    }
+
+    points.rotation.x += (targetRotX - points.rotation.x) * 0.02;
+    points.rotation.y += (targetRotY - points.rotation.y) * 0.02;
+    lineMesh.rotation.x = points.rotation.x;
+    lineMesh.rotation.y = points.rotation.y;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+})();
+
+/* ---------------------------------------------
+   2. Hero pulse waveform (oscilloscope trace)
+--------------------------------------------- */
+(function initPulseCanvas(){
+  const canvas = document.getElementById('pulse-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  resize();
+  window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
+
+  let t = 0;
+  function draw(){
+    requestAnimationFrame(draw);
+    const w = canvas.getBoundingClientRect().width;
+    const h = canvas.getBoundingClientRect().height;
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#FF8A3D';
+    ctx.lineWidth = 1.6;
+    const midY = h / 2;
+    for(let x = 0; x <= w; x += 2){
+      const wobble = Math.sin((x * 0.04) + t) * 6;
+      const pulse = (Math.sin((x * 0.012) - t * 1.4) > 0.93) ? Math.sin((x*0.4)+t*6) * 14 : 0;
+      const y = midY + wobble + pulse;
+      if(x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    t += 0.045;
+  }
+  draw();
+})();
+
+/* ---------------------------------------------
+   3. Spine node activation on scroll
+--------------------------------------------- */
+(function initSpine(){
+  const nodes = document.querySelectorAll('.spine-node');
+  if(!nodes.length) return;
+
+  const sections = Array.from(nodes).map(n => document.getElementById(n.dataset.target));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = sections.indexOf(entry.target);
+      if(idx === -1) return;
+      if(entry.isIntersecting){
+        nodes[idx].classList.add('active');
+      } else {
+        nodes[idx].classList.remove('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -40% 0px' });
+
+  sections.forEach(s => { if(s) observer.observe(s); });
+
+  // position nodes proportionally along the spine based on section position
+  function positionNodes(){
+    const docHeight = document.documentElement.scrollHeight;
+    sections.forEach((s, i) => {
+      if(!s) return;
+      const top = s.offsetTop;
+      const pct = (top / docHeight) * 100;
+      nodes[i].style.top = pct + '%';
+    });
+  }
+  positionNodes();
+  window.addEventListener('resize', positionNodes);
+})();
+
+/* ---------------------------------------------
+   4. Reveal-on-scroll for content blocks
+--------------------------------------------- */
+(function initReveal(){
+  const targets = document.querySelectorAll(
+    '.about-lead, .fact, .role, .project, .stack-group, .ach-list li, .contact-inner'
+  );
+  targets.forEach(t => t.classList.add('reveal'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  targets.forEach(t => observer.observe(t));
+})();
+
+/* ---------------------------------------------
+   5. Subtle 3D tilt on project cards
+--------------------------------------------- */
+(function initTilt(){
+  const cards = document.querySelectorAll('[data-tilt]');
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  if(isTouch) return;
+
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${y * -4}deg) rotateY(${x * 4}deg) translateY(-2px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+})();
+
+});
+</script>
+</body>
+</html>
