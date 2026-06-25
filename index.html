@@ -206,6 +206,16 @@
   footer a:hover { color: var(--ink); }
 
   .reveal { opacity: 0; }
+
+  .section-reveal {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(12deg) translateY(60px);
+    transition: opacity 0.9s cubic-bezier(0.23, 1, 0.32, 1), transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .section-reveal.visible {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) translateY(0px);
+  }
 </style>
 </head>
 <body>
@@ -654,6 +664,26 @@ function basicReveal(){
   const io = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.style.transition='opacity .8s, transform .8s'; en.target.style.opacity='1'; io.unobserve(en.target);} }); }, {threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity='0'; io.observe(el); });
 }
+</script>
+<script>
+/* cinematic scroll-triggered section transitions */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 100);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-card, .skill-chip').forEach(el => {
+  // skip the pinned #work horizontal showcase so ScrollTrigger's pin + card effects stay intact
+  if (el.closest('#work')) return;
+  el.classList.add('section-reveal');
+  revealObserver.observe(el);
+});
 </script>
 </body>
 </html>
