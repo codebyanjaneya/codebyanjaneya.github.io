@@ -162,8 +162,8 @@
     display: flex; flex-direction: column; cursor: pointer;
     transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .4s, box-shadow .4s;
   }
-  .card:hover { transform: translateY(-14px); border-color: color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 30px 80px -20px color-mix(in srgb, var(--c) 55%, transparent); }
-  .card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 0%, color-mix(in srgb, var(--c) 22%, transparent), transparent 60%); opacity: .5; transition: opacity .4s; }
+  .card:hover { transform: translateY(-8px) scale(1.02); border-color: color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--accent-color, rgba(14,165,233,0.2)); }
+  .card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at var(--mx,50%) var(--my,50%), var(--accent-color, rgba(14,165,233,0.15)), transparent 70%); opacity: 0; transition: opacity .4s; pointer-events: none; z-index: 0; }
   .card:hover::before { opacity: 1; }
   .card > * { position: relative; z-index: 1; }
   .card .num { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--c); }
@@ -334,19 +334,19 @@
    DATA
 ========================================================= */
 const PROJECTS = [
-  { n:'01', name:'LoadPulse', cat:'Observability Platform', year:'2026', c:'#0ea5e9',
+  { n:'01', name:'LoadPulse', cat:'Observability Platform', year:'2026', c:'#0ea5e9', ac:'rgba(14,165,233,0.2)',
     desc:'Real-time concurrency dashboard on FastAPI with async worker pools, token-bucket rate limiting, benchmarked at 1000+ concurrent requests. WebSocket dashboard streaming p50/p95/p99 metrics.',
     live:'https://loadpulse-dashboard.vercel.app', git:'https://github.com/codebyanjaneya/loadpulse' },
-  { n:'02', name:'AgentForge', cat:'Multi-Agent AI OS', year:'2026', c:'#8b5cf6',
+  { n:'02', name:'AgentForge', cat:'Multi-Agent AI OS', year:'2026', c:'#8b5cf6', ac:'rgba(139,92,246,0.2)',
     desc:'7 autonomous agents with agent-to-agent communication, dual-layer memory (Redis + PostgreSQL), and a Digital Twin Dashboard tracking live KPIs.',
     live:'https://agentforge-omega-topaz.vercel.app/', git:'https://github.com/codebyanjaneya' },
-  { n:'03', name:'AutoApply Bot', cat:'Recruitment SaaS', year:'2026', c:'#f43f5e',
+  { n:'03', name:'AutoApply Bot', cat:'Recruitment SaaS', year:'2026', c:'#f43f5e', ac:'rgba(244,63,94,0.2)',
     desc:'Multi-tenant Telegram SaaS with n8n pipelines, Groq Llama 4 job matching, Razorpay billing, and PostgreSQL tenant isolation on AWS EC2.',
     live:'https://autoapply-landing-sand.vercel.app/', git:'https://github.com/codebyanjaneya' },
-  { n:'04', name:'AI-PhishGuard', cat:'Phishing Detection', year:'2026', c:'#10b981',
+  { n:'04', name:'AI-PhishGuard', cat:'Phishing Detection', year:'2026', c:'#10b981', ac:'rgba(16,185,129,0.2)',
     desc:'Hybrid ML + LLM pipeline (Scikit-learn + Groq + VirusTotal + WHOIS) with real-time and bulk URL scanning and generated PDF threat reports.',
     live:'https://ai-phishguard.web.app/', git:'https://github.com/codebyanjaneya' },
-  { n:'05', name:'VitalAI', cat:'AI Health Companion', year:'2026', c:'#f59e0b',
+  { n:'05', name:'VitalAI', cat:'AI Health Companion', year:'2026', c:'#f59e0b', ac:'rgba(245,158,11,0.2)',
     desc:'Groq-powered health assistant with gamification — streaks, XP, and a "Health Wrapped" recap that keeps users engaged.',
     live:'https://health-wellness-sepia.vercel.app/', git:'https://github.com/codebyanjaneya' }
 ];
@@ -362,6 +362,7 @@ const isMobile = matchMedia('(max-width:720px)').matches;
     const a = document.createElement('div');
     a.className = 'card';
     a.style.setProperty('--c', p.c);
+    a.style.setProperty('--accent-color', p.ac || 'rgba(14,165,233,0.2)');
     a.dataset.live = p.live || '';
     a.dataset.git = p.git;
     a.innerHTML = `
@@ -371,6 +372,11 @@ const isMobile = matchMedia('(max-width:720px)').matches;
       <p>${p.desc}</p>
       <span class="chip">${p.live ? '↗ View live' : '◷ In progress'}</span>
       <span class="cat">${p.cat}</span>`;
+    a.addEventListener('mousemove', (e) => {
+      const rect = a.getBoundingClientRect();
+      a.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+      a.style.setProperty('--my', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+    });
     a.addEventListener('click', () => {
       const url = p.live || p.git;
       gsap.to(a, { rotateY: 14, duration: .25, transformPerspective: 1000, onComplete: () => {
