@@ -27,12 +27,13 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body { background: var(--bg); color: var(--ink); }
+  html, body { background: var(--bg); color: var(--ink); height: 100%; overflow: hidden; }
 
   body {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100%;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -108,8 +109,9 @@
   @media (max-width: 720px){ .nav-links { display: none; } }
 
   /* ---------- Smooth scroll wrapper ---------- */
-  #smooth-wrapper { position: fixed; inset: 0; overflow: hidden; }
-  #smooth-content { position: relative; z-index: 2; }
+  #smooth-wrapper { position: fixed; inset: 0; height: 100vh; overflow-y: scroll; overflow-x: hidden; scrollbar-width: none; }
+  #smooth-wrapper::-webkit-scrollbar { width: 0; height: 0; display: none; }
+  #smooth-content { position: relative; z-index: 2; will-change: transform; }
 
   section { position: relative; }
   .pad { max-width: 1200px; margin: 0 auto; padding: 140px 34px; }
@@ -608,33 +610,35 @@ window.addEventListener('load', () => {
   if (!window.gsap || !window.ScrollTrigger){ basicReveal(); return; }
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---- smooth scroll via scrollerProxy (works with pin) ---- */
+  /* ---- momentum smooth scroll (native wrapper + lerp) ---- */
   const content = document.querySelector('#smooth-content');
   const wrapper = document.querySelector('#smooth-wrapper');
-  const smoothness = 1;
-  let height;
-  function setHeight(){ height = content.clientHeight; document.body.style.height = height + 'px'; }
-  setHeight();
+  let current = 0, target = 0, ease = 0.075, camTilt = 0;
+  const lerp = (start, end, factor) => start + (end - start) * factor;
 
-  const setY = gsap.quickSetter(content, 'y', 'px');
-  const getY = gsap.getProperty(content);
-  const setScroll = ScrollTrigger.getScrollFunc(window);
-  ScrollTrigger.scrollerProxy(content, {
-    scrollTop(value){ if (arguments.length){ setY(-value); setScroll(value); return; } return -getY('y'); },
-    scrollHeight(){ return document.body.scrollHeight; },
+  wrapper.addEventListener('scroll', () => { target = wrapper.scrollTop; });
+
+  // keep ScrollTrigger (pin, reveals, accent) in sync with the smoothed position
+  ScrollTrigger.scrollerProxy(wrapper, {
+    scrollTop(value){
+      if (arguments.length){ wrapper.scrollTop = value; target = current = value; return; }
+      return current;
+    },
     getBoundingClientRect(){ return { top:0, left:0, width:innerWidth, height:innerHeight }; }
   });
-  ScrollTrigger.defaults({ scroller: content });
+  ScrollTrigger.defaults({ scroller: wrapper });
 
-  const smoothTween = ScrollTrigger.create({
-    animation: gsap.fromTo(content, { y:0 }, {
-      y: () => document.documentElement.clientHeight - height,
-      ease: 'none', onUpdate: ScrollTrigger.update
-    }),
-    scroller: window, invalidateOnRefresh: true, start: 0,
-    end: () => { setHeight(); return height - document.documentElement.clientHeight; },
-    refreshPriority: -999, scrub: smoothness
-  });
+  function smoothScroll(){
+    current = lerp(current, target, ease);
+    if (Math.abs(target - current) < 0.05) current = target;
+    const diff = target - current;
+    const velocity = diff * ease;
+    content.style.transform =
+      `perspective(1200px) translateY(${diff}px) scale(${1 + Math.abs(velocity) * 0.0001}) rotateX(${camTilt}deg)`;
+    ScrollTrigger.update();
+    requestAnimationFrame(smoothScroll);
+  }
+  smoothScroll();
 
   /* ---- horizontal work showcase ---- */
   const track = document.getElementById('h-track');
@@ -679,7 +683,6 @@ window.addEventListener('load', () => {
       onToggle: self => { if (self.isActive) gsap.to(document.documentElement, { '--accent': sec.dataset.accent, duration:.4 }); } });
   });
 
-  ScrollTrigger.addEventListener('refreshInit', setHeight);
   ScrollTrigger.refresh();
 
   /* ---- nav smooth anchor + camera push ---- */
@@ -690,9 +693,9 @@ window.addEventListener('load', () => {
       e.preventDefault();
       const tgt = document.querySelector(href);
       if (!tgt) return;
-      gsap.fromTo(content, { rotateX:0, scale:1 }, { rotateX:2, scale:0.99, duration:.18, transformPerspective:1200, yoyo:true, repeat:1, ease:'power1.inOut' });
+      gsap.to({ t:0 }, { t:1, duration:.36, ease:'power1.inOut', onUpdate(){ camTilt = Math.sin(this.targets()[0].t * Math.PI) * 2; }, onComplete(){ camTilt = 0; } });
       const y = href === '#top' ? 0 : tgt.offsetTop;
-      gsap.to(window, { duration:1.1, ease:'power3.inOut', scrollTo: y } );
+      gsap.to(wrapper, { duration:1.1, ease:'power3.inOut', scrollTop: y });
     });
   });
 });
