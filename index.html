@@ -7,28 +7,28 @@
 <meta name="description" content="Portfolio of Anjaneya Tiwari. Full-stack developer and AI engineer building production systems across voice AI, multi-agent platforms, and cybersecurity.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ---------------------------------------------
    Design tokens
 --------------------------------------------- */
 :root{
-  --bg: #0B0E13;
-  --bg-elevated: #12161D;
-  --bg-elevated-2: #161B23;
-  --ink: #E9E6DE;
-  --ink-dim: #93989F;
-  --ink-faint: #5C6168;
-  --accent: #FF8A3D;
-  --accent-soft: rgba(255, 138, 61, 0.16);
-  --trace: #4FD1C5;
-  --trace-soft: rgba(79, 209, 197, 0.14);
-  --line: rgba(255, 255, 255, 0.08);
-  --line-bright: rgba(255, 255, 255, 0.16);
+  --bg: #050810;
+  --bg-elevated: #0A0F1E;
+  --bg-elevated-2: #0D1426;
+  --ink: #E8EDF7;
+  --ink-dim: #8892A4;
+  --ink-faint: #4A5568;
+  --accent: #6C8EF5;
+  --accent-soft: rgba(108, 142, 245, 0.12);
+  --trace: #7EDCE2;
+  --trace-soft: rgba(126, 220, 226, 0.12);
+  --line: rgba(255, 255, 255, 0.06);
+  --line-bright: rgba(255, 255, 255, 0.12);
 
-  --display: 'Space Grotesk', sans-serif;
-  --body: 'IBM Plex Sans', sans-serif;
-  --mono: 'IBM Plex Mono', monospace;
+  --display: 'Outfit', sans-serif;
+  --body: 'Outfit', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
 
   --gutter: clamp(24px, 6vw, 96px);
   --spine-x: 48px;
@@ -98,7 +98,7 @@ main, header, .spine{ position: relative; z-index: 1; }
   justify-content: space-between;
   padding: 22px var(--gutter);
   backdrop-filter: blur(10px);
-  background: linear-gradient(to bottom, rgba(11,14,19,0.85), rgba(11,14,19,0));
+  background: linear-gradient(to bottom, rgba(5,8,16,0.85), rgba(5,8,16,0));
 }
 
 .brand{
@@ -250,7 +250,7 @@ section{
 }
 
 .hero-title{
-  font-size: clamp(56px, 10vw, 128px);
+  font-size: clamp(48px, 8vw, 110px);
   line-height: 0.96;
   color: var(--ink);
 }
@@ -289,13 +289,13 @@ section{
   font-family: var(--mono);
   font-size: 14px;
   padding: 14px 26px;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
   display: inline-block;
 }
 .btn-primary{
-  background: var(--accent);
-  color: #14110B;
+  background: linear-gradient(135deg, #6C8EF5, #7EDCE2);
+  color: #050810;
   font-weight: 500;
 }
 .btn-primary:hover{ transform: translateY(-2px); }
@@ -418,7 +418,8 @@ section{
 .project{
   background: var(--bg-elevated);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px var(--line), 0 8px 32px rgba(0,0,0,0.4);
   padding: 32px;
   transition: border-color 0.3s ease, transform 0.1s ease;
   transform-style: preserve-3d;
@@ -445,6 +446,35 @@ section{
 .project p{
   font-size: 15px;
   margin-bottom: 20px;
+}
+.project-links{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.project-link{
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid rgba(108, 142, 245, 0.25);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.project-link:hover{
+  background: rgba(108, 142, 245, 0.2);
+  border-color: var(--accent);
+}
+.project-link-ghost{
+  background: transparent;
+  color: var(--ink-dim);
+  border-color: var(--line-bright);
+}
+.project-link-ghost:hover{
+  background: var(--bg-elevated);
+  color: var(--ink);
 }
 .project-stack{
   font-size: 12px;
@@ -703,6 +733,9 @@ section{
         </div>
         <h3>AgentForge</h3>
         <p>A seven-agent operating system for running a startup: CEO, Sales, Marketing, Support, Research, Finance, and Hiring agents that execute tasks, talk to each other, and improve from past performance. The CEO agent breaks goals into subtasks and delegates them in real time, with a dual-layer memory system, Redis for the last twenty interactions and PostgreSQL for long-term summaries, so the agents retain context across sessions. Ships with a Digital Twin Dashboard tracking revenue, burn rate, runway, and MRR live.</p>
+        <div class="project-links">
+          <a href="https://agentforge-omega-topaz.vercel.app/" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+        </div>
         <div class="project-stack mono">FastAPI · Next.js · Redis · PostgreSQL · LLM API</div>
       </article>
 
@@ -713,6 +746,10 @@ section{
         </div>
         <h3>LoadPulse</h3>
         <p>Real-time concurrency and observability platform built on FastAPI with asyncio worker pools and token-bucket rate limiting. Benchmarked at over 1,000 concurrent requests with graceful degradation, surfaced through a live React and WebSocket dashboard tracking latency, queue depth, and worker utilization.</p>
+        <div class="project-links">
+          <a href="https://loadpulse-dashboard.vercel.app" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+          <a href="https://github.com/codebyanjaneya/loadpulse" target="_blank" rel="noopener" class="project-link project-link-ghost">GitHub</a>
+        </div>
         <div class="project-stack mono">FastAPI · React · Recharts · WebSockets</div>
       </article>
 
@@ -723,6 +760,9 @@ section{
         </div>
         <h3>AutoApply Bot</h3>
         <p>A multi-tenant SaaS on Telegram that automates job hunting end to end: discovery, AI resume scoring, recruiter enrichment, and outreach. Orchestrated through n8n pipelines wiring Groq Llama 4 for matching, Hunter.io and Apollo for contact lookup, and the Gmail API for outreach, with Razorpay billing and tenant-isolated PostgreSQL running on AWS EC2.</p>
+        <div class="project-links">
+          <a href="https://autoapply-landing-sand.vercel.app/" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+        </div>
         <div class="project-stack mono">n8n · Groq Llama 4 · Razorpay · AWS EC2</div>
       </article>
 
@@ -733,6 +773,10 @@ section{
         </div>
         <h3>AI-PhishGuard</h3>
         <p>A full-stack phishing detection platform combining a Flask API on EC2 with a React and TypeScript dashboard. A hybrid pipeline runs Scikit-learn classifiers alongside Groq Llama 4 reasoning, WHOIS intelligence, and VirusTotal scoring for layered accuracy, with real-time and bulk scanning, risk tiering, and automated PDF threat reports.</p>
+        <div class="project-links">
+          <a href="https://ai-phishguard.web.app/" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+          <a href="#" target="_blank" rel="noopener" class="project-link project-link-ghost">GitHub</a>
+        </div>
         <div class="project-stack mono">Flask · React · Scikit-learn · VirusTotal</div>
       </article>
 
@@ -743,27 +787,10 @@ section{
         </div>
         <h3>VitalAI</h3>
         <p>An AI health companion with a full light and dark theming system built on CSS variables, a Spotify-style Health Wrapped recap, and gamification, streaks, XP, and badges, persisted client-side. A Groq-powered chat companion with customizable personas rounds out the experience, deployed on Vercel.</p>
+        <div class="project-links">
+          <a href="#" target="_blank" rel="noopener" class="project-link">Live Demo</a>
+        </div>
         <div class="project-stack mono">React · Groq · CSS Variables</div>
-      </article>
-
-      <article class="project" data-tilt>
-        <div class="project-top">
-          <span class="project-cat mono">research tooling</span>
-          <span class="project-date mono">independent</span>
-        </div>
-        <h3>Deep Research Engine</h3>
-        <p>A research assistant pairing a FastAPI backend with a single-page frontend. Switched retrieval to a TF-IDF pipeline after hitting Gemini quota limits, with a Notes tab that renders Mermaid diagrams and metrics visualizations from raw research output.</p>
-        <div class="project-stack mono">FastAPI · Groq · TF-IDF · Mermaid.js</div>
-      </article>
-
-      <article class="project" data-tilt>
-        <div class="project-top">
-          <span class="project-cat mono">iot &amp; energy</span>
-          <span class="project-date mono">independent</span>
-        </div>
-        <h3>Motivus IoT</h3>
-        <p>A Flutter and Django energy management app for ESP32 smart plug devices with a three-tier role system, giving different levels of control to admins, operators, and end users monitoring live power data.</p>
-        <div class="project-stack mono">Flutter · Django · ESP32</div>
       </article>
 
     </div>
@@ -909,7 +936,7 @@ window.addEventListener('DOMContentLoaded', function() {
   pointGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
   const pointMat = new THREE.PointsMaterial({
-    color: 0xFF8A3D,
+    color: 0x6C8EF5,
     size: 0.07,
     transparent: true,
     opacity: 0.9
@@ -919,7 +946,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   // Connective lines between nearby nodes
   const lineGeo = new THREE.BufferGeometry();
-  const lineMat = new THREE.LineBasicMaterial({ color: 0x4FD1C5, transparent: true, opacity: 0.12 });
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x7EDCE2, transparent: true, opacity: 0.12 });
   const lineMesh = new THREE.LineSegments(lineGeo, lineMat);
   scene.add(lineMesh);
 
@@ -1008,7 +1035,7 @@ window.addEventListener('DOMContentLoaded', function() {
     ctx.clearRect(0, 0, w, h);
 
     ctx.beginPath();
-    ctx.strokeStyle = '#FF8A3D';
+    ctx.strokeStyle = '#6C8EF5';
     ctx.lineWidth = 1.6;
     const midY = h / 2;
     for(let x = 0; x <= w; x += 2){
