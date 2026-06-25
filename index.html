@@ -255,15 +255,6 @@ section{
   color: var(--ink);
 }
 
-.hero-pulse{
-  display: block;
-  width: 100%;
-  max-width: 620px;
-  height: 64px;
-  margin: 18px 0 8px;
-  opacity: 0.85;
-}
-
 .hero-role{
   font-family: var(--mono);
   font-size: 15px;
@@ -646,7 +637,6 @@ section{
       <h1 class="hero-title">
         Anjaneya<br>Tiwari
       </h1>
-      <canvas id="pulse-canvas" class="hero-pulse" aria-hidden="true"></canvas>
       <p class="hero-role">Full-Stack Developer · AI Systems Engineer · Cybersecurity</p>
       <p class="hero-sub">I build the infrastructure underneath AI products: the concurrency layer, the agent memory, the observability that tells you what's actually happening when 1,000 requests land at once.</p>
       <div class="hero-actions">
@@ -1008,46 +998,6 @@ window.addEventListener('DOMContentLoaded', function() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
-})();
-
-/* ---------------------------------------------
-   2. Hero pulse waveform (oscilloscope trace)
---------------------------------------------- */
-(function initPulseCanvas(){
-  const canvas = document.getElementById('pulse-canvas');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  function resize(){
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * devicePixelRatio;
-    canvas.height = rect.height * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-  }
-  resize();
-  window.addEventListener('resize', () => { ctx.setTransform(1,0,0,1,0,0); resize(); });
-
-  let t = 0;
-  function draw(){
-    requestAnimationFrame(draw);
-    const w = canvas.getBoundingClientRect().width;
-    const h = canvas.getBoundingClientRect().height;
-    ctx.clearRect(0, 0, w, h);
-
-    ctx.beginPath();
-    ctx.strokeStyle = '#6C8EF5';
-    ctx.lineWidth = 1.6;
-    const midY = h / 2;
-    for(let x = 0; x <= w; x += 2){
-      const wobble = Math.sin((x * 0.04) + t) * 6;
-      const pulse = (Math.sin((x * 0.012) - t * 1.4) > 0.93) ? Math.sin((x*0.4)+t*6) * 14 : 0;
-      const y = midY + wobble + pulse;
-      if(x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-    t += 0.045;
-  }
-  draw();
 })();
 
 /* ---------------------------------------------
