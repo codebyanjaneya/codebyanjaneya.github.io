@@ -656,11 +656,21 @@ window.addEventListener('load', () => {
   });
 
   /* ---- stats counters ---- */
-  gsap.utils.toArray('[data-count]').forEach(el => {
-    const target = +el.dataset.count; const suffix = el.dataset.suffix || '';
-    ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: () => {
-      gsap.to({ v:0 }, { v:target, duration:1.6, ease:'power2.out', onUpdate(){ el.textContent = Math.floor(this.targets()[0].v).toLocaleString()+suffix; }, onComplete(){ el.textContent = target.toLocaleString()+suffix; } });
-    }});
+  const counters = document.querySelectorAll('[data-count]');
+  counters.forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-count'));
+    const duration = 2000;
+    const start = Date.now();
+    setTimeout(() => {
+      const tick = () => {
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.floor(eased * target) + (counter.getAttribute('data-suffix') || '');
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      tick();
+    }, 1000);
   });
 
   /* ---- cursor + accent color shift per section ---- */
