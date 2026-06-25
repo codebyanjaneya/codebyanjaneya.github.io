@@ -1274,5 +1274,90 @@ const isMobile = window.matchMedia('(max-width: 720px)').matches;
   })();
 })();
 </script>
+
+<script>
+(function(){
+  // 1. Global click ripple
+  document.addEventListener('click', function(e){
+    const ripple = document.createElement('div');
+    ripple.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;width:0;height:0;border-radius:50%;border:2px solid rgba(14,165,233,0.5);transform:translate(-50%,-50%);pointer-events:none;z-index:9999;transition:all 0.6s ease-out;`;
+    document.body.appendChild(ripple);
+    requestAnimationFrame(()=>{
+      ripple.style.width='80px';
+      ripple.style.height='80px';
+      ripple.style.opacity='0';
+    });
+    setTimeout(()=>ripple.remove(), 700);
+  });
+
+  // 2. Button click spring
+  document.querySelectorAll('button, .btn, a[href]').forEach(el=>{
+    el.addEventListener('click', function(){
+      this.style.transition='transform 0.15s ease';
+      this.style.transform='scale(0.95) rotate(2deg)';
+      setTimeout(()=>{ this.style.transform=''; }, 200);
+    });
+  });
+
+  // 3. Project card 3D flip on click
+  document.querySelectorAll('.project-card, [class*="project"]').forEach(card=>{
+    card.addEventListener('click', function(){
+      this.style.transition='transform 0.5s ease';
+      this.style.transform='perspective(1000px) rotateY(15deg)';
+      setTimeout(()=>{
+        this.style.transform='perspective(1000px) rotateY(0deg)';
+      }, 250);
+      setTimeout(()=>{ this.style.transform=''; }, 550);
+    });
+  });
+
+  // 4. Section reveal with 3D rotate-in
+  const sections = document.querySelectorAll('section, .section');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.style.transition='transform 0.8s ease-out, opacity 0.8s ease-out';
+        entry.target.style.transform='perspective(1200px) rotateX(0deg) translateY(0)';
+        entry.target.style.opacity='1';
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1});
+
+  sections.forEach(s=>{
+    s.style.transform='perspective(1200px) rotateX(8deg) translateY(30px)';
+    s.style.opacity='0.3';
+    observer.observe(s);
+  });
+
+  // 5. Nav camera push
+  document.querySelectorAll('nav a, .nav a').forEach(link=>{
+    link.addEventListener('click', function(){
+      const wrap = document.querySelector('main') || document.body;
+      wrap.style.transition='transform 0.3s ease';
+      wrap.style.transform='perspective(1200px) rotateX(2deg) scale(0.99)';
+      setTimeout(()=>{ wrap.style.transform=''; }, 350);
+    });
+  });
+
+  // 6. Cosmic ring scroll rotation
+  const ringCanvas = document.getElementById('ring-canvas') || document.querySelector('canvas');
+  if(ringCanvas){
+    let scrollRot = 0;
+    window.addEventListener('scroll', function(){
+      scrollRot = window.scrollY * 0.001;
+      ringCanvas.style.transform = `rotateX(${scrollRot}rad) rotateY(${scrollRot*0.7}rad)`;
+    });
+    document.addEventListener('click', function(){
+      ringCanvas.style.transition='transform 1.2s ease-out';
+      ringCanvas.style.transform='rotateX(0) rotateY(6.28rad)';
+      setTimeout(()=>{
+        ringCanvas.style.transition='';
+        ringCanvas.style.transform=`rotateX(${scrollRot}rad) rotateY(${scrollRot*0.7}rad)`;
+      }, 1300);
+    });
+  }
+})();
+</script>
 </body>
 </html>
