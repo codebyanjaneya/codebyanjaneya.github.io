@@ -27,13 +27,12 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body { background: var(--bg); color: var(--ink); height: 100%; overflow: hidden; }
+  html { scroll-behavior: smooth; }
+  html, body { background: var(--bg); color: var(--ink); }
 
   body {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     line-height: 1.6;
-    overflow: hidden;
-    height: 100%;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -108,12 +107,7 @@
   .nav-links a:hover { opacity: 1; }
   @media (max-width: 720px){ .nav-links { display: none; } }
 
-  /* ---------- Smooth scroll wrapper ---------- */
-  #smooth-wrapper { position: fixed; inset: 0; height: 100vh; overflow-y: scroll; overflow-x: hidden; scrollbar-width: none; }
-  #smooth-wrapper::-webkit-scrollbar { width: 0; height: 0; display: none; }
-  #smooth-content { position: relative; z-index: 2; will-change: transform; }
-
-  section { position: relative; }
+  section { position: relative; z-index: 2; }
   .pad { max-width: 1200px; margin: 0 auto; padding: 140px 34px; }
 
   .eyebrow {
@@ -125,7 +119,7 @@
   h2.title { font-size: clamp(30px,5vw,56px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.04; }
 
   /* ---------- Hero ---------- */
-  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 0; position: relative; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 0; position: relative; z-index: 2; }
   .hero-status {
     display: inline-flex; align-items: center; gap: 9px;
     font-family: 'Space Mono', monospace; font-size: 12.5px; color: var(--ink-dim);
@@ -234,9 +228,6 @@
   </div>
 </nav>
 
-<div id="smooth-wrapper">
-<div id="smooth-content">
-
   <!-- HERO -->
   <header class="hero" id="top" data-accent="#0ea5e9">
     <div class="hero-status"><span class="live"></span> Available for opportunities · Delhi, India</div>
@@ -244,8 +235,8 @@
     <div class="sub mono"><span id="typed"></span><span class="caret">_</span></div>
     <p class="tag">Full-Stack Developer · AI Engineer · Cybersecurity</p>
     <div class="hero-cta">
-      <a href="#work" class="btn btn-primary" data-mag data-nav onclick="var workSection=document.querySelector('#work')||document.querySelector('#projects')||document.querySelector('section:nth-of-type(2)');var wrapper=document.getElementById('smooth-wrapper');if(wrapper&&workSection){wrapper.scrollTo({top:workSection.offsetTop,behavior:'smooth'});}else if(workSection){workSection.scrollIntoView({behavior:'smooth'});}return false;">View Work →</a>
-      <a href="#contact" class="btn" data-mag onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'}); return false;">Get in touch</a>
+      <a href="#work" class="btn btn-primary" data-mag>View Work →</a>
+      <a href="#contact" class="btn" data-mag>Get in touch</a>
     </div>
     <div class="scroll-hint"><span>scroll</span><i></i></div>
   </header>
@@ -335,9 +326,6 @@
       <a href="#top" data-mag data-nav>Back to top ↑</a>
     </footer>
   </section>
-
-</div>
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -610,36 +598,6 @@ window.addEventListener('load', () => {
   if (!window.gsap || !window.ScrollTrigger){ basicReveal(); return; }
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---- momentum smooth scroll (native wrapper + lerp) ---- */
-  const content = document.querySelector('#smooth-content');
-  const wrapper = document.querySelector('#smooth-wrapper');
-  let current = 0, target = 0, ease = 0.075, camTilt = 0;
-  const lerp = (start, end, factor) => start + (end - start) * factor;
-
-  wrapper.addEventListener('scroll', () => { target = wrapper.scrollTop; });
-
-  // keep ScrollTrigger (pin, reveals, accent) in sync with the smoothed position
-  ScrollTrigger.scrollerProxy(wrapper, {
-    scrollTop(value){
-      if (arguments.length){ wrapper.scrollTop = value; target = current = value; return; }
-      return current;
-    },
-    getBoundingClientRect(){ return { top:0, left:0, width:innerWidth, height:innerHeight }; }
-  });
-  ScrollTrigger.defaults({ scroller: wrapper });
-
-  function smoothScroll(){
-    current = lerp(current, target, ease);
-    if (Math.abs(target - current) < 0.05) current = target;
-    const diff = target - current;
-    const velocity = diff * ease;
-    content.style.transform =
-      `perspective(1200px) translateY(${diff}px) scale(${1 + Math.abs(velocity) * 0.0001}) rotateX(${camTilt}deg)`;
-    ScrollTrigger.update();
-    requestAnimationFrame(smoothScroll);
-  }
-  smoothScroll();
-
   /* ---- horizontal work showcase ---- */
   const track = document.getElementById('h-track');
   if (track){
@@ -684,20 +642,6 @@ window.addEventListener('load', () => {
   });
 
   ScrollTrigger.refresh();
-
-  /* ---- nav smooth anchor + camera push ---- */
-  document.querySelectorAll('[data-nav]').forEach(a => {
-    a.addEventListener('click', e => {
-      const href = a.getAttribute('href');
-      if (!href || !href.startsWith('#')) return;
-      e.preventDefault();
-      const tgt = document.querySelector(href);
-      if (!tgt) return;
-      gsap.to({ t:0 }, { t:1, duration:.36, ease:'power1.inOut', onUpdate(){ camTilt = Math.sin(this.targets()[0].t * Math.PI) * 2; }, onComplete(){ camTilt = 0; } });
-      const y = href === '#top' ? 0 : tgt.offsetTop;
-      gsap.to(wrapper, { duration:1.1, ease:'power3.inOut', scrollTop: y });
-    });
-  });
 });
 
 /* fallback reveal if GSAP unavailable */
@@ -705,29 +649,6 @@ function basicReveal(){
   const io = new IntersectionObserver((ents)=>{ ents.forEach(en=>{ if(en.isIntersecting){ en.target.style.transition='opacity .8s, transform .8s'; en.target.style.opacity='1'; io.unobserve(en.target);} }); }, {threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>{ el.style.opacity='0'; io.observe(el); });
 }
-
-/* GSAP scrollTo fallback (no ScrollToPlugin loaded) — use native */
-if (window.gsap) {
-  gsap.registerEffect ? null : null;
-}
-</script>
-<script>
-/* lightweight scrollTo support without ScrollToPlugin */
-(function(){
-  if (!window.gsap) return;
-  const orig = gsap.to;
-  // intercept {scrollTo:y} since ScrollToPlugin isn't loaded
-  gsap.to = function(target, vars){
-    if (vars && typeof vars.scrollTo === 'number' && target === window){
-      const startY = window.scrollY, diff = vars.scrollTo - startY, dur = (vars.duration||1)*1000, t0 = performance.now();
-      const ease = x => 1 - Math.pow(1 - x, 3);
-      function step(now){ const p = Math.min((now-t0)/dur, 1); window.scrollTo(0, startY + diff*ease(p)); if (p<1) requestAnimationFrame(step); }
-      requestAnimationFrame(step);
-      return;
-    }
-    return orig.apply(this, arguments);
-  };
-})();
 </script>
 </body>
 </html>
