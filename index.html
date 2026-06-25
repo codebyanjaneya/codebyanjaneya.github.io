@@ -1144,5 +1144,135 @@ const isMobile = window.matchMedia('(max-width: 720px)').matches;
   }
 })();
 </script>
+
+<!-- =========================================================
+     ADDED INTERACTION LAYER (new behaviors only)
+========================================================= -->
+<script>
+(function interactionLayer(){
+  'use strict';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* -------------------------------------------------------
+     1. COSMIC RING — 3D scroll rotation + click pulse-spin + Z wobble
+        (applied as a CSS 3D transform on the canvas element,
+         leaving the original ring draw loop untouched)
+  ------------------------------------------------------- */
+  (function ringMotion(){
+    const ring = document.getElementById('ring-canvas');
+    if (!ring) return;
+    const SPIN_DUR = 1200;          // 1.2s pulse spin
+    let spinStart = null;
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+    // click anywhere triggers a rapid 360° pulse spin
+    addEventListener('click', () => { spinStart = performance.now(); });
+
+    function loop(now){
+      const sY = window.scrollY || 0;
+      const rotX = sY * 0.001;                       // radians, scroll-driven
+      const rotY = sY * 0.001;
+      const wobble = Math.sin(now * 0.0006) * 4;     // subtle continuous Z wobble (deg)
+      let spinDeg = 0;
+      if (spinStart !== null){
+        const t = (now - spinStart) / SPIN_DUR;
+        if (t >= 1){ spinDeg = 0; spinStart = null; }
+        else spinDeg = easeOut(t) * 360;             // ease-out 360° then release
+      }
+      const rotYtotal = rotY + spinDeg * Math.PI / 180;
+      ring.style.transform =
+        `perspective(1200px) rotateX(${rotX}rad) rotateY(${rotYtotal}rad) rotateZ(${wobble}deg)`;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+
+  /* -------------------------------------------------------
+     2. SECTION TRANSITION — cinematic 3D rotate-in on scroll
+  ------------------------------------------------------- */
+  (function sectionTransitions(){
+    if (reduceMotion) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting){
+          en.target.animate([
+            { transform: 'perspective(1200px) rotateX(15deg) translateY(40px)', opacity: 0.45 },
+            { transform: 'perspective(1200px) rotateX(0deg) translateY(0)',    opacity: 1 }
+          ], { duration: 800, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'backwards' });
+          obs.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('section').forEach(s => obs.observe(s));
+  })();
+
+  /* -------------------------------------------------------
+     3. PROJECT CARDS — quick 3D flip on click (hover hole stays)
+  ------------------------------------------------------- */
+  (function cardFlip(){
+    document.querySelectorAll('.project').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;   // let links work normally
+        // keep the hover lift (-8px) so it doesn't jump
+        card.animate([
+          { transform: 'translateY(-8px) rotateY(0deg)' },
+          { transform: 'translateY(-8px) rotateY(15deg)' },
+          { transform: 'translateY(-8px) rotateY(0deg)' }
+        ], { duration: 500, easing: 'ease-out' });
+      });
+    });
+  })();
+
+  /* -------------------------------------------------------
+     4. NAV LINKS — "camera push" on the page content
+  ------------------------------------------------------- */
+  (function cameraPush(){
+    const wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+    const push = () => {
+      wrap.animate([
+        { transform: 'perspective(1200px) rotateX(0deg) scale(1)' },
+        { transform: 'perspective(1200px) rotateX(3deg) scale(0.98)' },
+        { transform: 'perspective(1200px) rotateX(0deg) scale(1)' }
+      ], { duration: 300, easing: 'ease-out' });
+    };
+    document.querySelectorAll('.nav-links a, .brand').forEach(a => a.addEventListener('click', push));
+  })();
+
+  /* -------------------------------------------------------
+     5. BUTTONS — spring tap on click
+  ------------------------------------------------------- */
+  (function buttonTap(){
+    document.querySelectorAll('.btn, button').forEach(b => {
+      b.addEventListener('click', () => {
+        b.animate([
+          { transform: 'rotateZ(0deg) scale(1)' },
+          { transform: 'rotateZ(2deg) scale(0.95)' },
+          { transform: 'rotateZ(0deg) scale(1)' }
+        ], { duration: 150, easing: 'ease-out' });
+      });
+    });
+  })();
+
+  /* -------------------------------------------------------
+     6. GLOBAL CLICK RIPPLE
+  ------------------------------------------------------- */
+  (function clickRipple(){
+    addEventListener('click', (e) => {
+      const r = document.createElement('span');
+      r.style.cssText =
+        'position:fixed;left:' + e.clientX + 'px;top:' + e.clientY + 'px;' +
+        'width:0;height:0;border:2px solid rgba(14,165,233,0.4);border-radius:50%;' +
+        'transform:translate(-50%,-50%);pointer-events:none;z-index:9998;';
+      document.body.appendChild(r);
+      const anim = r.animate([
+        { width: '0px',   height: '0px',   opacity: 1 },
+        { width: '160px', height: '160px', opacity: 0 }
+      ], { duration: 600, easing: 'ease-out' });
+      anim.onfinish = () => r.remove();
+    });
+  })();
+})();
+</script>
 </body>
 </html>
