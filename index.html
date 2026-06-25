@@ -244,7 +244,7 @@
     <div class="sub mono"><span id="typed"></span><span class="caret">_</span></div>
     <p class="tag">Full-Stack Developer · AI Engineer · Cybersecurity</p>
     <div class="hero-cta">
-      <a href="#work" class="btn btn-primary" data-mag data-nav onclick="document.querySelector('#work').scrollIntoView({behavior:'smooth'}); return false;">View Work →</a>
+      <a href="#work" class="btn btn-primary" data-mag data-nav onclick="var workSection=document.querySelector('#work')||document.querySelector('#projects')||document.querySelector('section:nth-of-type(2)');var wrapper=document.getElementById('smooth-wrapper');if(wrapper&&workSection){wrapper.scrollTo({top:workSection.offsetTop,behavior:'smooth'});}else if(workSection){workSection.scrollIntoView({behavior:'smooth'});}return false;">View Work →</a>
       <a href="#contact" class="btn" data-mag onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'}); return false;">Get in touch</a>
     </div>
     <div class="scroll-hint"><span>scroll</span><i></i></div>
