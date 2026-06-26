@@ -406,6 +406,18 @@
 
   .reveal { opacity: 0; }
 
+  .section-num {
+    position: absolute;
+    left: clamp(24px, 4vw, 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 0.1em;
+    writing-mode: vertical-rl;
+  }
+
   .section-reveal {
     opacity: 0;
     transform: perspective(1200px) rotateX(12deg) translateY(60px);
@@ -509,6 +521,9 @@
   <div class="loader-pct" id="loader-pct">0%</div>
 </div>
 
+<div id="page-transition" style="position:fixed;inset:0;background:#020408;z-index:9998;opacity:0;pointer-events:none;transition:opacity 0.4s ease;"></div>
+<canvas id="noise-canvas" style="position:fixed;inset:0;z-index:1;opacity:0.03;pointer-events:none;"></canvas>
+
 <canvas id="bg"></canvas>
 <div class="vignette"></div>
 
@@ -585,6 +600,7 @@
 
   <!-- WORK (horizontal) -->
   <section id="work" data-accent="#8b5cf6">
+    <span class="section-num">01 / WORK</span>
     <div class="work-head reveal">
       <div class="eyebrow">01 / Selected Work</div>
       <h2 class="title">Things I've built &amp; shipped.</h2>
@@ -596,6 +612,7 @@
 
   <!-- ABOUT -->
   <section id="about" data-accent="#f43f5e">
+    <span class="section-num">02 / ABOUT</span>
     <div class="pad">
       <div class="about-grid">
         <div class="reveal">
@@ -636,6 +653,7 @@
 
   <!-- SKILLS -->
   <section id="skills" data-accent="#10b981">
+    <span class="section-num">03 / STACK</span>
     <div class="pad">
       <div class="reveal">
         <div class="eyebrow">03 / Stack</div>
@@ -650,6 +668,7 @@
 
   <!-- CONTACT -->
   <section id="contact" class="contact" data-accent="#0ea5e9">
+    <span class="section-num">04 / CONTACT</span>
     <div class="pad">
       <div class="reveal">
         <div class="eyebrow" style="justify-content:center">04 / Contact</div>
@@ -1142,6 +1161,57 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
     draw();
   });
 })();
+</script>
+<script>
+/* page transition overlay on in-page nav clicks */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const overlay = document.getElementById('page-transition');
+    overlay.style.opacity = '0.4';
+    overlay.style.pointerEvents = 'all';
+    setTimeout(() => {
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+    }, 400);
+  });
+});
+
+/* film grain noise overlay */
+(function(){
+  const canvas = document.getElementById('noise-canvas');
+  const ctx = canvas.getContext('2d');
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  function drawNoise(){
+    const imageData = ctx.createImageData(canvas.width, canvas.height);
+    const data = imageData.data;
+    for(let i = 0; i < data.length; i += 4){
+      const v = Math.random() * 255;
+      data[i] = data[i+1] = data[i+2] = v;
+      data[i+3] = 255;
+    }
+    ctx.putImageData(imageData, 0, 0);
+    setTimeout(drawNoise, 100);
+  }
+  drawNoise();
+})();
+
+/* active nav indicator */
+const navLinks = document.querySelectorAll('nav a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + entry.target.id
+          ? '#ffffff'
+          : 'rgba(255,255,255,0.5)';
+      });
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => navObserver.observe(s));
 </script>
 </body>
 </html>
