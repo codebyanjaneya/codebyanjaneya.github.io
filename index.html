@@ -813,7 +813,7 @@ let bgMouse = { x: 0, y: 0 };
   const nCol = new Float32Array(N*3);
   for (let i=0;i<N;i++){
     const v = { x:(Math.random()-0.5)*700, y:(Math.random()-0.5)*500, z:(Math.random()-0.5)*300,
-                vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4, vz:(Math.random()-0.5)*0.4 };
+                vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2, vz:(Math.random()-0.5)*0.4 };
     nodes.push(v);
     nPos[i*3]=v.x; nPos[i*3+1]=v.y; nPos[i*3+2]=v.z;
     const col = new THREE.Color(COLORS[i%3]); nCol[i*3]=col.r; nCol[i*3+1]=col.g; nCol[i*3+2]=col.b;
@@ -837,7 +837,7 @@ let bgMouse = { x: 0, y: 0 };
   function frame(){
     requestAnimationFrame(frame);
     bgFrame++;
-    if (bgFrame % 2 !== 0) return; // render every other frame
+    if (bgFrame % 3 !== 0) return; // render every 3rd frame
     // move nodes
     for (let i=0;i<N;i++){
       const v = nodes[i];
@@ -880,7 +880,7 @@ let bgMouse = { x: 0, y: 0 };
     camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
   });
-  addEventListener('mousemove', e => { bgMouse.x = e.clientX/innerWidth-0.5; bgMouse.y = e.clientY/innerHeight-0.5; });
+  addEventListener('mousemove', e => { if (window.scrollY > window.innerHeight) return; bgMouse.x = e.clientX/innerWidth-0.5; bgMouse.y = e.clientY/innerHeight-0.5; });
 })();
 
 /* =========================================================
@@ -963,8 +963,8 @@ let bgMouse = { x: 0, y: 0 };
   });
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
+    ringX += (mouseX - ringX) * 0.25;
+    ringY += (mouseY - ringY) * 0.25;
     ring.style.left = ringX + 'px';
     ring.style.top = ringY + 'px';
     requestAnimationFrame(animateRing);
