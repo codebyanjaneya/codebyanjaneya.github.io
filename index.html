@@ -292,6 +292,20 @@
   .card p { color: var(--ink-dim); font-weight: 300; font-size: 15px; flex: 0 0 auto; }
   .card .chip { display: inline-block; margin-top: 18px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); border-radius: 100px; padding: 6px 14px; width: fit-content; }
   .card .yr { position: absolute; top: 34px; right: 34px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-faint); }
+  .card-preview {
+    width: 100%;
+    height: 140px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    background: #0a0a0f;
+  }
+  .card-preview canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 
   /* ---------- About ---------- */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
@@ -700,6 +714,7 @@ const isMobile = matchMedia('(max-width:720px)').matches;
     a.dataset.live = p.live || '';
     a.dataset.git = p.git;
     a.innerHTML = `
+      <div class="card-preview"><canvas></canvas></div>
       <span class="yr">${p.year}</span>
       <span class="num">${p.n}</span>
       <h3>${p.name}</h3>
@@ -1061,6 +1076,71 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
     bar.style.width = progress + '%';
     pct.textContent = Math.floor(progress) + '%';
   }, 80);
+})();
+</script>
+<script>
+/* animated canvas preview on each project card */
+(function(){
+  const previews = document.querySelectorAll('.card-preview canvas');
+  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b'];
+
+  previews.forEach((canvas, idx) => {
+    const ctx = canvas.getContext('2d');
+    canvas.width = 400;
+    canvas.height = 140;
+    const color = colors[idx % colors.length];
+    const particles = Array.from({length: 40}, () => ({
+      x: Math.random() * 400,
+      y: Math.random() * 140,
+      vx: (Math.random() - 0.5) * 1.5,
+      vy: (Math.random() - 0.5) * 1.5,
+      r: Math.random() * 2 + 1
+    }));
+
+    let animId;
+    const card = canvas.closest('.card');
+
+    function draw() {
+      ctx.fillStyle = 'rgba(10,10,15,0.15)';
+      ctx.fillRect(0, 0, 400, 140);
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x < 0 || p.x > 400) p.vx *= -1;
+        if(p.y < 0 || p.y > 140) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.7;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      // Draw connections
+      particles.forEach((p, i) => {
+        particles.slice(i+1).forEach(p2 => {
+          const dist = Math.hypot(p.x-p2.x, p.y-p2.y);
+          if(dist < 80) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = color;
+            ctx.globalAlpha = (1 - dist/80) * 0.3;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        });
+      });
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    // Start animation always (not just on hover)
+    draw();
+  });
 })();
 </script>
 </body>
