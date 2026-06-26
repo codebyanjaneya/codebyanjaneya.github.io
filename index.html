@@ -774,7 +774,7 @@ let bgMouse = { x: 0, y: 0 };
 
   // --- depth starfield (far layer) ---
   const starGeo = new THREE.BufferGeometry();
-  const starN = isMobile ? 700 : 1600;
+  const starN = isMobile ? 700 : 600;
   const sPos = new Float32Array(starN*3);
   for (let i=0;i<starN;i++){
     sPos[i*3]   = (Math.random()-0.5)*1600;
@@ -786,7 +786,7 @@ let bgMouse = { x: 0, y: 0 };
   scene.add(stars);
 
   // --- near network nodes (with lines) ---
-  const N = isMobile ? 60 : 120;
+  const N = isMobile ? 60 : 60;
   const nodes = [];
   const COLORS = [0x0ea5e9, 0x8b5cf6, 0xf43f5e];
   const nodeGeo = new THREE.BufferGeometry();
@@ -811,22 +811,14 @@ let bgMouse = { x: 0, y: 0 };
   const lines = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color:0x335577, transparent:true, opacity:0.22 }));
   scene.add(lines);
 
-  // --- floating 3D ring (hero) ---
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(150, 1.4, 16, 160),
-    new THREE.MeshBasicMaterial({ color:0x8b5cf6, transparent:true, opacity:0.35, wireframe:false })
-  );
-  ring.rotation.x = 1.1; scene.add(ring);
-  const ring2 = new THREE.Mesh(
-    new THREE.TorusGeometry(210, 0.8, 12, 160),
-    new THREE.MeshBasicMaterial({ color:0x0ea5e9, transparent:true, opacity:0.22 })
-  );
-  ring2.rotation.x = 1.3; scene.add(ring2);
-
   const posAttr = nodeGeo.attributes.position;
-  const linkDist = isMobile ? 90 : 120;
+  const linkDist = isMobile ? 70 : 90;
 
+  let bgFrame = 0;
   function frame(){
+    requestAnimationFrame(frame);
+    bgFrame++;
+    if (bgFrame % 2 !== 0) return; // render every other frame
     // move nodes
     for (let i=0;i<N;i++){
       const v = nodes[i];
@@ -855,8 +847,6 @@ let bgMouse = { x: 0, y: 0 };
     lineGeo.attributes.position.needsUpdate = true;
 
     stars.rotation.y += 0.0003;
-    ring.rotation.z += 0.0024; ring.rotation.y += 0.0011;
-    ring2.rotation.z -= 0.0016; ring2.rotation.y += 0.0008;
 
     // mouse parallax (depth)
     camera.position.x += (bgMouse.x*60 - camera.position.x)*0.04;
@@ -864,7 +854,6 @@ let bgMouse = { x: 0, y: 0 };
     camera.lookAt(0,0,0);
 
     renderer.render(scene, camera);
-    requestAnimationFrame(frame);
   }
   frame();
 
