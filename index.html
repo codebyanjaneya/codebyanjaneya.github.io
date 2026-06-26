@@ -322,8 +322,73 @@
   .contact p { color: var(--ink-dim); max-width: 520px; margin: 26px auto 38px; font-weight: 300; }
   .contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  footer { border-top: 1px solid var(--line); padding: 34px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; font-family: 'Space Mono', monospace; font-size: 13px; color: var(--ink-faint); }
-  footer a:hover { color: var(--ink); }
+  #contact { position: relative; }
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.04);
+    position: relative;
+    z-index: 1;
+  }
+  .contact-btn:hover {
+    border-color: #0ea5e9;
+    color: #ffffff;
+    background: rgba(14,165,233,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(14,165,233,0.2);
+  }
+
+  .site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px clamp(24px, 6vw, 96px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-brand {
+    color: rgba(255,255,255,0.6);
+    font-weight: 500;
+    margin-right: 16px;
+  }
+  .footer-top {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    margin-left: 24px;
+  }
+  .footer-top:hover { color: #0ea5e9; }
+  .footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   .reveal { opacity: 0; }
 
@@ -493,16 +558,21 @@
         <h2>Let's build<br/><span class="g">something real.</span></h2>
         <p>Open to full-time roles, internships, and collaborations on ambitious backend &amp; AI systems.</p>
         <div class="contact-links">
-          <a href="mailto:anjaneyatiwarii@gmail.com" class="btn btn-primary" data-mag>anjaneyatiwarii@gmail.com</a>
-          <a href="https://linkedin.com/in/anjaneya-tiwari" target="_blank" rel="noopener" class="btn" data-mag>LinkedIn</a>
-          <a href="https://github.com/codebyanjaneya" target="_blank" rel="noopener" class="btn" data-mag>GitHub</a>
+          <a href="mailto:anjaneyatiwarii@gmail.com" class="contact-btn" data-mag>anjaneyatiwarii@gmail.com</a>
+          <a href="https://linkedin.com/in/anjaneya-tiwari" target="_blank" rel="noopener" class="contact-btn" data-mag>LinkedIn</a>
+          <a href="https://github.com/codebyanjaneya" target="_blank" rel="noopener" class="contact-btn" data-mag>GitHub</a>
         </div>
       </div>
     </div>
-    <footer>
-      <span>© 2026 Anjaneya Tiwari</span>
-      <span>Three.js · GSAP · Delhi, India</span>
-      <a href="#top" data-mag data-nav>Back to top ↑</a>
+    <footer class="site-footer">
+      <div class="footer-left">
+        <span class="footer-brand">codebyanjaneya</span>
+        <span class="footer-copy">© 2026 Anjaneya Tiwari</span>
+      </div>
+      <div class="footer-right">
+        <span>Built with Three.js · GSAP · Vanilla JS</span>
+        <a href="#top" class="footer-top">Back to top ↑</a>
+      </div>
     </footer>
   </section>
 
