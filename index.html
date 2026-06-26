@@ -106,19 +106,31 @@
   }
 
   /* ---------- Custom cursor ---------- */
-  .cursor-dot, .cursor-ring {
-    position: fixed; top: 0; left: 0; border-radius: 50%;
-    pointer-events: none; z-index: 9999; transform: translate(-50%,-50%);
-    will-change: transform;
+  #cursor-dot {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease, transform 0.1s ease;
+    mix-blend-mode: difference;
   }
-  .cursor-dot { width: 6px; height: 6px; background: var(--accent); transition: background .4s; }
-  .cursor-ring {
-    width: 36px; height: 36px; border: 1.5px solid var(--accent);
-    transition: width .25s, height .25s, background .25s, border-color .4s, opacity .25s;
-    opacity: .6;
+  #cursor-ring {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    mix-blend-mode: difference;
   }
-  .cursor-ring.active { width: 64px; height: 64px; background: color-mix(in srgb, var(--accent) 12%, transparent); opacity: 1; }
-  @media (max-width: 720px){ .cursor-dot, .cursor-ring { display: none; } }
+  @media (max-width: 720px){ #cursor-dot, #cursor-ring { display: none; } }
 
   /* ---------- Nav ---------- */
   nav {
@@ -282,8 +294,8 @@
 <canvas id="bg"></canvas>
 <div class="vignette"></div>
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <nav>
   <a href="#top" class="brand" data-mag><span class="dot"></span>codebyanjaneya</a>
@@ -680,18 +692,58 @@ let bgMouse = { x: 0, y: 0 };
    CUSTOM CURSOR + MAGNETIC + section accent
 ========================================================= */
 (function cursor(){
-  if (isMobile) return;
-  const dot = document.querySelector('.cursor-dot');
-  const ring = document.querySelector('.cursor-ring');
-  let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-  addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`; });
-  (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
-  document.querySelectorAll('a,button,.btn,.card,.stat,.chip2,[data-mag]').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('active'));
-    el.addEventListener('mouseleave', () => { ring.classList.remove('active'); if (el.dataset.mag!==undefined) gsap.to(el,{x:0,y:0,duration:.4,ease:'elastic.out(1,0.4)'}); });
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if (!dot || !ring) return;
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    dot.style.left = mouseX + 'px';
+    dot.style.top = mouseY + 'px';
   });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    ring.style.left = ringX + 'px';
+    ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Expand on hover over interactive elements
+  document.querySelectorAll('a, button, [data-mag]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '64px';
+      ring.style.height = '64px';
+      ring.style.borderColor = '#0ea5e9';
+      ring.style.background = 'rgba(14,165,233,0.08)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '40px';
+      ring.style.height = '40px';
+      ring.style.borderColor = 'rgba(255,255,255,0.5)';
+      ring.style.background = 'transparent';
+      if (el.dataset.mag !== undefined && window.gsap) gsap.to(el, { x:0, y:0, duration:.4, ease:'elastic.out(1,0.4)' });
+    });
+  });
+
+  // Magnetic pull on [data-mag] elements
   document.querySelectorAll('[data-mag]').forEach(el => {
-    el.addEventListener('mousemove', e => { const r=el.getBoundingClientRect(); gsap.to(el,{ x:(e.clientX-(r.left+r.width/2))*0.3, y:(e.clientY-(r.top+r.height/2))*0.4, duration:.3 }); });
+    el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(); if (window.gsap) gsap.to(el, { x:(e.clientX-(r.left+r.width/2))*0.3, y:(e.clientY-(r.top+r.height/2))*0.4, duration:.3 }); });
+  });
+
+  // Hide on mouse leave
+  document.addEventListener('mouseleave', () => {
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+  });
+  document.addEventListener('mouseenter', () => {
+    dot.style.opacity = '1';
+    ring.style.opacity = '1';
   });
 })();
 
