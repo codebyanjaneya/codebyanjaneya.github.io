@@ -55,42 +55,67 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity 1s ease, visibility 1s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  #loader-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .loader-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
   }
-  #loader.hidden {
-    opacity: 0;
-    visibility: hidden;
+  .loader-letters {
+    display: flex;
+    gap: 4px;
   }
-  .loader-name {
+  .ll {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(24px, 4vw, 48px);
+    font-size: clamp(40px, 8vw, 96px);
     font-weight: 700;
     background: linear-gradient(135deg, #0ea5e9, #8b5cf6, #f43f5e);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: letter-in 0.6s cubic-bezier(0.23,1,0.32,1) forwards;
+    animation-delay: calc(var(--i) * 0.08s);
   }
-  .loader-bar-wrap {
+  @keyframes letter-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .loader-line-wrap {
     width: 200px;
-    height: 2px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
     overflow: hidden;
   }
-  .loader-bar {
+  .loader-line {
     height: 100%;
-    background: linear-gradient(90deg, #0ea5e9, #8b5cf6);
+    background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #f43f5e);
     width: 0%;
-    transition: width 0.05s linear;
+    animation: line-fill 1.8s cubic-bezier(0.23,1,0.32,1) forwards;
+    animation-delay: 0.8s;
   }
-  .loader-pct {
+  @keyframes line-fill { to { width: 100%; } }
+  .loader-sub {
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fade-in 0.5s ease forwards;
+    animation-delay: 0.6s;
   }
+  @keyframes fade-in { to { opacity: 1; } }
 
   /* ---------- Background canvas ---------- */
   #bg {
@@ -532,9 +557,21 @@
 <body>
 
 <div id="loader">
-  <div class="loader-name">anjaneya tiwari</div>
-  <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
-  <div class="loader-pct" id="loader-pct">0%</div>
+  <canvas id="loader-canvas"></canvas>
+  <div class="loader-content">
+    <div class="loader-letters">
+      <span class="ll" style="--i:0">A</span>
+      <span class="ll" style="--i:1">N</span>
+      <span class="ll" style="--i:2">J</span>
+      <span class="ll" style="--i:3">A</span>
+      <span class="ll" style="--i:4">N</span>
+      <span class="ll" style="--i:5">E</span>
+      <span class="ll" style="--i:6">Y</span>
+      <span class="ll" style="--i:7">A</span>
+    </div>
+    <div class="loader-line-wrap"><div class="loader-line"></div></div>
+    <div class="loader-sub">initializing portfolio_</div>
+  </div>
 </div>
 
 <div id="page-transition" style="position:fixed;inset:0;background:#020408;z-index:9998;opacity:0;pointer-events:none;transition:opacity 0.4s ease;"></div>
@@ -1086,23 +1123,55 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
 <script>
 /* cinematic page loader */
 (function(){
-  const loader = document.getElementById('loader');
-  const bar = document.getElementById('loader-bar');
-  const pct = document.getElementById('loader-pct');
-  let progress = 0;
-  const interval = setInterval(() => {
-    progress += Math.random() * 15;
-    if(progress >= 100) {
-      progress = 100;
-      clearInterval(interval);
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        setTimeout(() => loader.remove(), 900);
-      }, 300);
-    }
-    bar.style.width = progress + '%';
-    pct.textContent = Math.floor(progress) + '%';
-  }, 80);
+  // Particle burst on loader canvas
+  const canvas = document.getElementById('loader-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = Array.from({length: 80}, () => ({
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    angle: Math.random() * Math.PI * 2,
+    speed: Math.random() * 2 + 0.5,
+    r: Math.random() * 2 + 1,
+    life: 1,
+    decay: Math.random() * 0.008 + 0.004,
+    color: ['#0ea5e9','#8b5cf6','#f43f5e'][Math.floor(Math.random()*3)]
+  }));
+
+  let animId;
+  function drawLoader(){
+    ctx.fillStyle = 'rgba(2,4,8,0.15)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+      p.x += Math.cos(p.angle) * p.speed;
+      p.y += Math.sin(p.angle) * p.speed;
+      p.life -= p.decay;
+      if(p.life <= 0){
+        p.x = canvas.width/2;
+        p.y = canvas.height/2;
+        p.angle = Math.random()*Math.PI*2;
+        p.life = 1;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life * 0.6;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    animId = requestAnimationFrame(drawLoader);
+  }
+  drawLoader();
+
+  // Hide loader after 2.2s
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('hidden');
+    cancelAnimationFrame(animId);
+    setTimeout(() => loader.remove(), 1100);
+  }, 2200);
 })();
 </script>
 <script>
