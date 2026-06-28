@@ -119,7 +119,7 @@
 
   /* ---------- Background canvas ---------- */
   #bg {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; will-change: transform;
   }
   .vignette {
     position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -320,7 +320,7 @@
     border: 1px solid var(--line); border-radius: 24px; padding: 38px;
     background: var(--glass); backdrop-filter: blur(12px); overflow: visible;
     display: flex; flex-direction: column; justify-content: space-between; cursor: pointer;
-    scroll-snap-align: start;
+    scroll-snap-align: start; will-change: transform;
     transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .4s, box-shadow .4s;
   }
   .card:hover { transform: translateY(-8px) scale(1.02); border-color: color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px var(--accent-color, rgba(14,165,233,0.2)); }
@@ -534,10 +534,13 @@
     .marquee-wrap { overflow: hidden; }
 
     /* Three.js canvas - lower opacity on mobile for performance */
-    #bg-canvas, #bg { opacity: 0.3 !important; }
+    #bg-canvas, #bg { opacity: 0.2 !important; }
 
     /* Skills canvas - hide on mobile */
-    #skills-canvas { display: none; }
+    #skills-canvas { display: none !important; }
+
+    /* Card preview canvases - disable on mobile */
+    .card-preview { display: none !important; }
 
     /* Horizontal scroll section - disable on mobile */
     #work { overflow-x: hidden; }
@@ -818,7 +821,7 @@ const isMobile = matchMedia('(max-width:720px)').matches;
    THREE.JS BACKGROUND — particle field + lines + ring
 ========================================================= */
 let bgMouse = { x: 0, y: 0 };
-(function bg(){
+function bg(){
   if (!window.THREE) return;
   const canvas = document.getElementById('bg');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -830,7 +833,7 @@ let bgMouse = { x: 0, y: 0 };
 
   // --- depth starfield (far layer) ---
   const starGeo = new THREE.BufferGeometry();
-  const starN = isMobile ? 700 : 600;
+  const starN = isMobile ? 80 : 300;
   const sPos = new Float32Array(starN*3);
   for (let i=0;i<starN;i++){
     sPos[i*3]   = (Math.random()-0.5)*1600;
@@ -842,7 +845,7 @@ let bgMouse = { x: 0, y: 0 };
   scene.add(stars);
 
   // --- near network nodes (with lines) ---
-  const N = isMobile ? 60 : 60;
+  const N = isMobile ? 20 : 40;
   const nodes = [];
   const COLORS = [0x0ea5e9, 0x8b5cf6, 0xf43f5e];
   const nodeGeo = new THREE.BufferGeometry();
@@ -868,13 +871,13 @@ let bgMouse = { x: 0, y: 0 };
   scene.add(lines);
 
   const posAttr = nodeGeo.attributes.position;
-  const linkDist = isMobile ? 70 : 90;
+  const linkDist = isMobile ? 50 : 60;
 
   let bgFrame = 0;
   function frame(){
     requestAnimationFrame(frame);
     bgFrame++;
-    if (bgFrame % 3 !== 0) return; // render every 3rd frame
+    if (bgFrame % 4 !== 0) return; // render every 4th frame
     // move nodes
     for (let i=0;i<N;i++){
       const v = nodes[i];
@@ -917,8 +920,9 @@ let bgMouse = { x: 0, y: 0 };
     camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
   });
-  addEventListener('mousemove', e => { if (window.scrollY > window.innerHeight) return; bgMouse.x = e.clientX/innerWidth-0.5; bgMouse.y = e.clientY/innerHeight-0.5; });
-})();
+  addEventListener('mousemove', e => { if (window.innerWidth < 768) return; if (window.scrollY > window.innerHeight) return; bgMouse.x = e.clientX/innerWidth-0.5; bgMouse.y = e.clientY/innerHeight-0.5; });
+}
+setTimeout(() => bg(), 2300); // start after loader hides
 
 /* =========================================================
    THREE.JS SKILLS — orbiting nodes
@@ -927,6 +931,7 @@ let bgMouse = { x: 0, y: 0 };
   if (!window.THREE) return;
   const canvas = document.getElementById('skills-canvas');
   if (!canvas) return;
+  if (window.innerWidth < 768) return; // skip WebGL skills scene on mobile
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   function size(){ renderer.setSize(canvas.clientWidth, canvas.clientHeight); }
@@ -954,7 +959,11 @@ let bgMouse = { x: 0, y: 0 };
   let mx=0,my=0;
   canvas.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); mx=(e.clientX-r.left)/r.width-0.5; my=(e.clientY-r.top)/r.height-0.5; });
 
+  let skFrame = 0;
   function frame(){
+    requestAnimationFrame(frame);
+    skFrame++;
+    if (skFrame % 2 !== 0) return; // render every 2nd frame
     orbits.forEach(o => {
       o.a += o.sp;
       const x = Math.cos(o.a)*o.r, z = Math.sin(o.a)*o.r;
@@ -965,7 +974,6 @@ let bgMouse = { x: 0, y: 0 };
     group.rotation.y += (mx*0.3)*0.02;
     core.rotation.x += 0.005; core.rotation.y += 0.007;
     renderer.render(scene, camera);
-    requestAnimationFrame(frame);
   }
   frame();
   addEventListener('resize', () => { camera.aspect = canvas.clientWidth/canvas.clientHeight; camera.updateProjectionMatrix(); size(); });
@@ -1177,6 +1185,7 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
 <script>
 /* animated canvas preview on each project card */
 (function(){
+  if (window.innerWidth < 768) return; // disable card canvases on mobile
   const previews = document.querySelectorAll('.card-preview canvas');
   const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b'];
 
@@ -1193,7 +1202,8 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
       r: Math.random() * 2 + 1
     }));
 
-    let animId;
+    let animId = null;
+    let visible = false;
     const card = canvas.closest('.card');
 
     function draw() {
@@ -1234,8 +1244,18 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
       animId = requestAnimationFrame(draw);
     }
 
-    // Start animation always (not just on hover)
-    draw();
+    // Run only while the card is in the viewport; stop when scrolled away
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          if (!visible) { visible = true; draw(); }
+        } else {
+          visible = false;
+          if (animId) { cancelAnimationFrame(animId); animId = null; }
+        }
+      });
+    }, { threshold: 0 });
+    if (card) io.observe(card); else { visible = true; draw(); }
   });
 })();
 </script>
