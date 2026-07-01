@@ -546,8 +546,12 @@
     /* Card preview canvases - disable on mobile */
     .card-preview { display: none !important; }
 
-    /* Horizontal scroll section - disable on mobile */
-    #work { overflow-x: hidden; }
+    /* Horizontal scroll section - native touch swipe on mobile */
+    #work {
+      overflow: visible !important;
+      height: auto !important;
+      padding: 80px 0 60px !important;
+    }
 
     /* ----- mobile layout overhaul ----- */
     #top, .hero {
@@ -573,21 +577,31 @@
     }
     /* Work section - horizontal touch scroll on mobile */
     .h-outer {
-      overflow-x: auto !important;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
+      overflow-x: scroll !important;
+      overflow-y: visible !important;
+      -webkit-overflow-scrolling: touch !important;
+      scroll-snap-type: x mandatory !important;
+      height: auto !important;
+      padding: 20px 20px 30px !important;
+      cursor: grab;
     }
     .h-track {
       display: flex !important;
       flex-direction: row !important;
       transform: none !important;
       width: max-content !important;
+      gap: 16px !important;
+      height: auto !important;
+      padding: 10px 0 !important;
     }
     .card {
-      width: 85vw !important;
+      width: 82vw !important;
       min-width: 280px !important;
-      scroll-snap-align: start;
-      flex-shrink: 0;
+      max-width: 340px !important;
+      height: auto !important;
+      min-height: 380px !important;
+      flex-shrink: 0 !important;
+      scroll-snap-align: start !important;
     }
     .about-grid, .about-inner {
       grid-template-columns: 1fr !important;
@@ -1405,6 +1419,18 @@ if (window.innerWidth < 768) {
     card.addEventListener('touchstart', () => { card.style.transform = 'scale(0.98)'; });
     card.addEventListener('touchend', () => { card.style.transform = ''; });
   });
+}
+
+/* mobile: reset GSAP transforms so cards aren't hidden + kill ScrollTrigger */
+if (window.innerWidth < 768) {
+  const track = document.querySelector('.h-track');
+  if (track) {
+    track.style.transform = 'none';
+    track.style.willChange = 'auto';
+  }
+  if (window.ScrollTrigger) {
+    ScrollTrigger.getAll().forEach(t => t.kill());
+  }
 }
 </script>
 </body>
