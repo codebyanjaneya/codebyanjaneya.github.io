@@ -550,7 +550,7 @@
     #work {
       overflow: visible !important;
       height: auto !important;
-      padding: 80px 0 60px !important;
+      min-height: auto !important;
     }
 
     /* ----- mobile layout overhaul ----- */
@@ -582,8 +582,8 @@
       -webkit-overflow-scrolling: touch !important;
       scroll-snap-type: x mandatory !important;
       height: auto !important;
-      padding: 20px 20px 30px !important;
-      cursor: grab;
+      padding: 0 16px 24px !important;
+      display: block !important;
     }
     .h-track {
       display: flex !important;
@@ -593,15 +593,18 @@
       gap: 16px !important;
       height: auto !important;
       padding: 10px 0 !important;
+      will-change: auto !important;
     }
     .card {
       width: 82vw !important;
-      min-width: 280px !important;
-      max-width: 340px !important;
+      min-width: 260px !important;
+      max-width: 320px !important;
       height: auto !important;
-      min-height: 380px !important;
+      min-height: 360px !important;
       flex-shrink: 0 !important;
       scroll-snap-align: start !important;
+      display: flex !important;
+      flex-direction: column !important;
     }
     .about-grid, .about-inner {
       grid-template-columns: 1fr !important;
@@ -1167,6 +1170,32 @@ window.addEventListener('load', () => {
       x: () => -dist(), ease: 'none',
       scrollTrigger: { trigger: '#work', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true }
     });
+  }
+
+  // Mobile: force native horizontal scroll
+  if (window.innerWidth < 768) {
+    const track = document.querySelector('.h-track');
+    const outer = document.querySelector('.h-outer');
+    if (track) {
+      // Kill any GSAP inline styles
+      track.style.cssText = 'display:flex !important; flex-direction:row !important; transform:none !important; width:max-content !important; gap:16px !important;';
+      track.removeAttribute('data-gsap');
+    }
+    if (outer) {
+      outer.style.cssText = 'overflow-x:scroll !important; overflow-y:visible !important; -webkit-overflow-scrolling:touch !important; height:auto !important; padding:20px !important;';
+    }
+    // Kill all ScrollTriggers on mobile
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    }
+    // Re-apply after GSAP has had a chance to run
+    setTimeout(() => {
+      if (track) track.style.transform = 'none';
+      if (track) track.style.width = 'max-content';
+    }, 500);
+    setTimeout(() => {
+      if (track) track.style.transform = 'none';
+    }, 1500);
   }
 
   /* ---- section reveal: fade + rotate + perspective ---- */
