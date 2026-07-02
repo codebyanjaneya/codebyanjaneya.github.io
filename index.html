@@ -1163,39 +1163,54 @@ window.addEventListener('load', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---- horizontal work showcase ---- */
-  const track = document.getElementById('h-track');
-  if (track && window.innerWidth >= 768){
-    const dist = () => track.scrollWidth - innerWidth + 80;
-    gsap.to(track, {
-      x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: '#work', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true }
-    });
-  }
+  if (window.innerWidth >= 768) {
+    // desktop horizontal scroll
+    const cards = document.querySelectorAll('.card');
+    const totalWidth = Array.from(cards).reduce((acc, c) => acc + c.offsetWidth + 32, 0);
+    const scrollDist = totalWidth - window.innerWidth;
 
-  // Mobile: force native horizontal scroll
-  if (window.innerWidth < 768) {
+    gsap.to('.h-track', {
+      x: -scrollDist,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#work',
+        start: 'top top',
+        end: () => '+=' + scrollDist,
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true,
+      }
+    });
+  } else {
+    // MOBILE: completely disable GSAP, use native scroll
+    // Remove all inline styles that GSAP might set
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.querySelector('.h-track');
+      const outer = document.querySelector('.h-outer');
+      if (track) {
+        gsap.set(track, { clearProps: 'all' });
+        track.style.cssText = '';
+        track.setAttribute('style', 'display:flex;flex-direction:row;transform:none;width:max-content;gap:16px;');
+      }
+      if (outer) {
+        outer.setAttribute('style', 'overflow-x:scroll;-webkit-overflow-scrolling:touch;height:auto;padding:16px;');
+      }
+    });
+
+    // Also run immediately
     const track = document.querySelector('.h-track');
     const outer = document.querySelector('.h-outer');
     if (track) {
-      // Kill any GSAP inline styles
-      track.style.cssText = 'display:flex !important; flex-direction:row !important; transform:none !important; width:max-content !important; gap:16px !important;';
-      track.removeAttribute('data-gsap');
+      track.setAttribute('style', 'display:flex;flex-direction:row;transform:none;width:max-content;gap:16px;');
     }
     if (outer) {
-      outer.style.cssText = 'overflow-x:scroll !important; overflow-y:visible !important; -webkit-overflow-scrolling:touch !important; height:auto !important; padding:20px !important;';
+      outer.setAttribute('style', 'overflow-x:scroll;-webkit-overflow-scrolling:touch;height:auto;padding:16px;');
     }
-    // Kill all ScrollTriggers on mobile
+
+    // Kill ScrollTrigger horizontal pin only
     if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.getAll().forEach(st => st.kill());
+      ScrollTrigger.getAll().filter(st => st.vars && st.vars.pin === true).forEach(st => st.kill());
     }
-    // Re-apply after GSAP has had a chance to run
-    setTimeout(() => {
-      if (track) track.style.transform = 'none';
-      if (track) track.style.width = 'max-content';
-    }, 500);
-    setTimeout(() => {
-      if (track) track.style.transform = 'none';
-    }, 1500);
   }
 
   /* ---- section reveal: fade + rotate + perspective ---- */
@@ -1459,6 +1474,20 @@ if (window.innerWidth < 768) {
   }
   if (window.ScrollTrigger) {
     ScrollTrigger.getAll().forEach(t => t.kill());
+  }
+}
+
+/* mobile: MutationObserver guard - prevent GSAP from re-setting transform */
+if (window.innerWidth < 768) {
+  const track = document.querySelector('.h-track');
+  if (track) {
+    const mo = new MutationObserver(() => {
+      if (track.style.transform && track.style.transform !== 'none') {
+        track.style.transform = 'none';
+        track.style.width = 'max-content';
+      }
+    });
+    mo.observe(track, { attributes: true, attributeFilter: ['style'] });
   }
 }
 </script>
