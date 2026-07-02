@@ -657,6 +657,14 @@
       padding: 6px 14px;
     }
   }
+  @media (max-width: 767px) {
+    .h-outer, .h-track { display: none !important; }
+    #mobile-cards { display: block !important; }
+    #work { height: auto !important; min-height: auto !important; }
+  }
+  @media (min-width: 768px) {
+    #mobile-cards { display: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -766,6 +774,7 @@
         <span class="arrow-hint">← scroll to explore →</span>
       </div>
     </div>
+    <div id="mobile-cards"></div>
     <div class="h-outer">
       <div class="h-track" id="h-track"><!-- cards injected --></div>
     </div>
@@ -1490,6 +1499,40 @@ if (window.innerWidth < 768) {
     mo.observe(track, { attributes: true, attributeFilter: ['style'] });
   }
 }
+
+/* mobile: render dedicated simple touch-friendly project cards */
+(function(){
+  if (window.innerWidth >= 768) return;
+
+  const projects = [
+    { num:'01', name:'LoadPulse', cat:'OBSERVABILITY PLATFORM', year:'2026', desc:'Real-time concurrency dashboard on FastAPI with async worker pools, token-bucket rate limiting, benchmarked at 1000+ concurrent requests.', link:'https://loadpulse-dashboard.vercel.app', color:'#0ea5e9' },
+    { num:'02', name:'AgentForge', cat:'MULTI-AGENT AI OS', year:'2026', desc:'7 autonomous agents with agent-to-agent communication, dual-layer memory (Redis + PostgreSQL), and a Digital Twin Dashboard tracking live KPIs.', link:'https://agentforge-omega-topaz.vercel.app/', color:'#8b5cf6' },
+    { num:'03', name:'AutoApply Bot', cat:'RECRUITMENT SAAS', year:'2026', desc:'Multi-tenant Telegram SaaS with n8n pipelines, Groq Llama 4 job matching, Razorpay billing, and PostgreSQL tenant isolation on AWS EC2.', link:'https://autoapply-landing-sand.vercel.app/', color:'#f43f5e' },
+    { num:'04', name:'AI-PhishGuard', cat:'PHISHING DETECTION', year:'2026', desc:'Hybrid ML + LLM pipeline (Scikit-learn + Groq + VirusTotal + WHOIS) with real-time scanning and generated PDF threat reports.', link:'https://ai-phishguard.web.app/', color:'#10b981' },
+    { num:'05', name:'VitalAI', cat:'AI HEALTH COMPANION', year:'2026', desc:'Groq-powered health assistant with gamification, streaks, XP, and a Health Wrapped recap that keeps users engaged.', link:'https://health-wellness-sepia.vercel.app/', color:'#f59e0b' },
+  ];
+
+  const container = document.getElementById('mobile-cards');
+  if (!container) return;
+
+  container.style.cssText = 'padding:0 16px 40px; display:flex; flex-direction:column; gap:20px;';
+
+  projects.forEach(p => {
+    const card = document.createElement('div');
+    card.style.cssText = `background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:24px; position:relative; overflow:hidden;`;
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+        <span style="font-family:'Space Mono',monospace;font-size:11px;color:${p.color};">${p.num}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);">${p.year}</span>
+      </div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff;margin:0 0 12px;">${p.name}</h3>
+      <p style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin:0 0 20px;">${p.desc}</p>
+      <a href="${p.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:12px;color:${p.color};border:1px solid ${p.color}33;padding:8px 16px;border-radius:100px;text-decoration:none;">↗ View live</a>
+      <div style="position:absolute;bottom:16px;right:16px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;">${p.cat}</div>
+    `;
+    container.appendChild(card);
+  });
+})();
 </script>
 </body>
 </html>
