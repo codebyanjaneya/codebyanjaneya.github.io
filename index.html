@@ -897,7 +897,7 @@ const PROJECTS = [
   { n:'06', name:'DermaCam', cat:'AI Dermatology', year:'2026', c:'#ec4899', ac:'rgba(236,72,153,0.2)',
     desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Redis caching, Hinglish voice assistant, PWA and Android.',
     live:'', git:'https://github.com/codebyanjaneya/Dermacam' },
-  { n:'07', name:'Nudge', cat:'AI Productivity Coach', year:'2026', c:'#84cc16', ac:'rgba(132,204,22,0.2)',
+  { n:'07', name:'Nudge', cat:'AI Productivity Coach', year:'2026', c:'#6366f1', ac:'rgba(99,102,241,0.2)',
     desc:'AI productivity coach that returns exactly one concrete next action toward your goal, with reasoning, ordered steps, and a time breakdown. FastAPI + Groq backend, Flutter + Firebase app, multi-language, plus an offline dino-style mini-game.',
     live:'', git:'https://github.com/codebyanjaneya/Nudge' }
 ];
@@ -1357,7 +1357,7 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
 (function(){
   if (window.innerWidth < 768) return; // disable card canvases on mobile
   const previews = document.querySelectorAll('.card-preview canvas');
-  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#84cc16'];
+  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#6366f1'];
 
   previews.forEach((canvas, idx) => {
     const ctx = canvas.getContext('2d');
@@ -1525,7 +1525,7 @@ if (window.innerWidth < 768) {
     { num:'04', name:'AI-PhishGuard', cat:'PHISHING DETECTION', year:'2026', desc:'Hybrid ML + LLM pipeline (Scikit-learn + Groq + VirusTotal + WHOIS) with real-time scanning and generated PDF threat reports.', link:'https://ai-phishguard.web.app/', color:'#10b981' },
     { num:'05', name:'VitalAI', cat:'AI HEALTH COMPANION', year:'2026', desc:'Groq-powered health assistant with gamification, streaks, XP, and a Health Wrapped recap that keeps users engaged.', link:'https://health-wellness-sepia.vercel.app/', color:'#f59e0b' },
     { num:'06', name:'DermaCam', cat:'AI DERMATOLOGY', year:'2026', desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Hinglish voice assistant, PWA and Android.', link:'https://github.com/codebyanjaneya/Dermacam', color:'#ec4899', repo:true },
-    { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#84cc16', repo:true },
+    { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#6366f1', repo:true },
   ];
 
   const container = document.getElementById('mobile-cards');
