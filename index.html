@@ -1543,8 +1543,10 @@ if (window.innerWidth < 768) {
       </div>
       <h3 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff;margin:0 0 12px;">${p.name}</h3>
       <p style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin:0 0 20px;">${p.desc}</p>
-      <a href="${p.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:12px;color:${p.color};border:1px solid ${p.color}33;padding:8px 16px;border-radius:100px;text-decoration:none;">${p.repo ? '↗ View on GitHub' : '↗ View live'}</a>
-      <div style="position:absolute;bottom:16px;right:16px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;">${p.cat}</div>
+      <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 14px;">
+        <a href="${p.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:12px;color:${p.color};border:1px solid ${p.color}33;padding:8px 16px;border-radius:100px;text-decoration:none;white-space:nowrap;">${p.repo ? '↗ View on GitHub' : '↗ View live'}</a>
+        <span style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-align:right;">${p.cat}</span>
+      </div>
     `;
     const glow = document.createElement('div');
     glow.style.cssText = `position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%, ${p.color}15, transparent 60%);animation:spin-glow 8s linear infinite;pointer-events:none;z-index:0;`;
