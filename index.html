@@ -343,6 +343,7 @@
   .card-preview {
     width: 100%;
     height: 140px;
+    flex-shrink: 0;
     border-radius: 8px;
     margin-bottom: 20px;
     overflow: hidden;
@@ -906,7 +907,7 @@ const PROJECTS = [
     desc:'AI productivity coach that returns exactly one concrete next action toward your goal, with reasoning, ordered steps, and a time breakdown. FastAPI + Groq backend, Flutter + Firebase app, multi-language, plus an offline dino-style mini-game.',
     live:'', git:'https://github.com/codebyanjaneya/Nudge' },
   { n:'08', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#d946ef', ac:'rgba(217,70,239,0.2)',
-    desc:'Fully-local, JARVIS-style AI voice assistant. Wakes on a double-clap or wake word, transcribes with faster-whisper, reasons with Groq Llama 3.3 70B tool-calling to run real actions on your machine, and replies in a cloned XTTS-v2 voice, all synced to a holographic Canvas HUD. Speech-to-text and voice cloning run 100% on-device.',
+    desc:'Fully-local, JARVIS-style voice assistant. Runs real actions via Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice.',
     live:'', git:'https://github.com/codebyanjaneya/Project-Hercs', building:true }
 ];
 const SKILLS = ['Python','FastAPI','React','Flutter','Next.js','PostgreSQL','Redis','Firebase','AWS EC2','Docker','NGINX','Groq Llama 4','HuggingFace','n8n','Burp Suite','LangChain'];
