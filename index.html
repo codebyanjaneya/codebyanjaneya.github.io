@@ -337,9 +337,9 @@
   .card p { color: var(--ink-dim); font-weight: 300; font-size: 15px; flex: 0 0 auto; }
   .card .chip { display: inline-block; margin-top: auto; flex-shrink: 0; position: relative; z-index: 10; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--c); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); border-radius: 100px; padding: 6px 14px; width: fit-content; }
   .card .yr { position: absolute; top: 34px; right: 34px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-faint); }
-  .card .yr.building { display: inline-flex; align-items: center; gap: 7px; color: var(--c); }
-  .card .yr.building::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); animation: pulse-dot 1.4s ease-in-out infinite; }
-  @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.55); } }
+  .card .build-badge { display: inline-flex; align-items: center; gap: 9px; width: fit-content; margin: 14px 0 2px; font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); border: 1px solid color-mix(in srgb, var(--c) 60%, transparent); border-radius: 100px; padding: 9px 18px; box-shadow: 0 0 24px color-mix(in srgb, var(--c) 32%, transparent); }
+  .card .build-badge::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--c); box-shadow: 0 0 12px var(--c); animation: pulse-dot 1.3s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.25; transform: scale(0.5); } }
   .card-preview {
     width: 100%;
     height: 140px;
@@ -902,10 +902,10 @@ const PROJECTS = [
   { n:'06', name:'DermaCam', cat:'AI Dermatology', year:'2026', c:'#ec4899', ac:'rgba(236,72,153,0.2)',
     desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Redis caching, Hinglish voice assistant, PWA and Android.',
     live:'', git:'https://github.com/codebyanjaneya/Dermacam' },
-  { n:'07', name:'Nudge', cat:'AI Productivity Coach', year:'2026', c:'#d946ef', ac:'rgba(217,70,239,0.2)',
+  { n:'07', name:'Nudge', cat:'AI Productivity Coach', year:'2026', c:'#a3e635', ac:'rgba(163,230,53,0.2)',
     desc:'AI productivity coach that returns exactly one concrete next action toward your goal, with reasoning, ordered steps, and a time breakdown. FastAPI + Groq backend, Flutter + Firebase app, multi-language, plus an offline dino-style mini-game.',
     live:'', git:'https://github.com/codebyanjaneya/Nudge' },
-  { n:'08', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#22d3ee', ac:'rgba(34,211,238,0.2)',
+  { n:'08', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#d946ef', ac:'rgba(217,70,239,0.2)',
     desc:'Fully-local, JARVIS-style AI voice assistant. Wakes on a double-clap or wake word, transcribes with faster-whisper, reasons with Groq Llama 3.3 70B tool-calling to run real actions on your machine, and replies in a cloned XTTS-v2 voice, all synced to a holographic Canvas HUD. Speech-to-text and voice cloning run 100% on-device.',
     live:'', git:'https://github.com/codebyanjaneya/Project-Hercs', building:true }
 ];
@@ -926,8 +926,9 @@ const isMobile = matchMedia('(max-width:720px)').matches;
     a.dataset.git = p.git;
     a.innerHTML = `
       <div class="card-preview"><canvas></canvas></div>
-      ${p.building ? '<span class="yr building">Building</span>' : `<span class="yr">${p.year}</span>`}
+      <span class="yr">${p.year}</span>
       <span class="num">${p.n}</span>
+      ${p.building ? '<span class="build-badge">Building now</span>' : ''}
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
       <span class="chip">${p.live ? '↗ View live' : '↗ View on GitHub'}</span>
@@ -1365,7 +1366,7 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
 (function(){
   if (window.innerWidth < 768) return; // disable card canvases on mobile
   const previews = document.querySelectorAll('.card-preview canvas');
-  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#d946ef','#22d3ee'];
+  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#a3e635','#d946ef'];
 
   previews.forEach((canvas, idx) => {
     const ctx = canvas.getContext('2d');
@@ -1533,8 +1534,8 @@ if (window.innerWidth < 768) {
     { num:'04', name:'AI-PhishGuard', cat:'PHISHING DETECTION', year:'2026', desc:'Hybrid ML + LLM pipeline (Scikit-learn + Groq + VirusTotal + WHOIS) with real-time scanning and generated PDF threat reports.', link:'https://ai-phishguard.web.app/', color:'#10b981' },
     { num:'05', name:'VitalAI', cat:'AI HEALTH COMPANION', year:'2026', desc:'Groq-powered health assistant with gamification, streaks, XP, and a Health Wrapped recap that keeps users engaged.', link:'https://health-wellness-sepia.vercel.app/', color:'#f59e0b' },
     { num:'06', name:'DermaCam', cat:'AI DERMATOLOGY', year:'2026', desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Hinglish voice assistant, PWA and Android.', link:'https://github.com/codebyanjaneya/Dermacam', color:'#ec4899', repo:true },
-    { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#d946ef', repo:true },
-    { num:'08', name:'H.E.R.C.S', cat:'JARVIS-STYLE VOICE AI', year:'2026', desc:'Fully-local JARVIS-style voice assistant. Wakes on a double-clap, reasons with Groq Llama 3.3 70B tool-calling to run real actions, and replies in a cloned XTTS-v2 voice, all synced to a holographic HUD. Runs 100% offline on-device.', link:'https://github.com/codebyanjaneya/Project-Hercs', color:'#22d3ee', repo:true, building:true },
+    { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#a3e635', repo:true },
+    { num:'08', name:'H.E.R.C.S', cat:'JARVIS-STYLE VOICE AI', year:'2026', desc:'Fully-local JARVIS-style voice assistant. Wakes on a double-clap, reasons with Groq Llama 3.3 70B tool-calling to run real actions, and replies in a cloned XTTS-v2 voice, all synced to a holographic HUD. Runs 100% offline on-device.', link:'https://github.com/codebyanjaneya/Project-Hercs', color:'#d946ef', repo:true, building:true },
   ];
 
   const container = document.getElementById('mobile-cards');
@@ -1548,8 +1549,9 @@ if (window.innerWidth < 768) {
     card.innerHTML = `
       <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
         <span style="font-family:'Space Mono',monospace;font-size:11px;color:${p.color};">${p.num}</span>
-        ${p.building ? `<span style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:11px;color:${p.color};"><span style="width:6px;height:6px;border-radius:50%;background:${p.color};box-shadow:0 0 8px ${p.color};display:inline-block;animation:pulse-dot 1.4s ease-in-out infinite;"></span>Building</span>` : `<span style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);">${p.year}</span>`}
+        <span style="font-family:'Space Mono',monospace;font-size:11px;color:rgba(255,255,255,0.3);">${p.year}</span>
       </div>
+      ${p.building ? `<div style="display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;font-family:'Space Mono',monospace;font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:${p.color};background:${p.color}26;border:1px solid ${p.color}99;border-radius:100px;padding:8px 16px;box-shadow:0 0 20px ${p.color}55;"><span style="width:8px;height:8px;border-radius:50%;background:${p.color};box-shadow:0 0 10px ${p.color};display:inline-block;animation:pulse-dot 1.3s ease-in-out infinite;"></span>Building now</div>` : ''}
       <h3 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff;margin:0 0 12px;">${p.name}</h3>
       <p style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin:0 0 20px;">${p.desc}</p>
       <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 14px;">
