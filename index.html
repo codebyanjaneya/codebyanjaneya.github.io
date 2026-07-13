@@ -1140,16 +1140,16 @@ setTimeout(() => bg(), 2300); // start after loader hides
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-  });
+    // Dot is glued to the real pointer at event-rate, independent of the RAF loop
+    // (so it never lags even when the hero's 3D background is heavy)
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
 
   function animateCursor() {
-    // Dot follows instantly via transform
-    dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-
-    // Ring lerps smoothly
-    ringX += (mouseX - ringX) * 0.28;
-    ringY += (mouseY - ringY) * 0.28;
-    ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+    // Ring trails the pointer smoothly
+    ringX += (mouseX - ringX) * 0.35;
+    ringY += (mouseY - ringY) * 0.35;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
 
     rafId = requestAnimationFrame(animateCursor);
   }
