@@ -301,10 +301,10 @@
 
   /* ---------- Horizontal work showcase ---------- */
   #work { position: relative; }
-  .work-head { max-width: 1200px; margin: 0 auto; padding: 120px 34px 0; }
+  .work-head { max-width: 1200px; margin: 0 auto; padding: 44px 34px 0; }
   .scroll-hint-arrows {
-    margin-top: 12px;
-    margin-bottom: 24px;
+    margin-top: 10px;
+    margin-bottom: 16px;
   }
   .arrow-hint {
     font-family: 'Space Mono', monospace;
@@ -906,7 +906,7 @@ const PROJECTS = [
   { n:'07', name:'Nudge', cat:'AI Productivity Coach', year:'2026', c:'#a3e635', ac:'rgba(163,230,53,0.2)',
     desc:'AI productivity coach that returns exactly one concrete next action toward your goal, with reasoning, ordered steps, and a time breakdown. FastAPI + Groq backend, Flutter + Firebase app, multi-language, plus an offline dino-style mini-game.',
     live:'', git:'https://github.com/codebyanjaneya/Nudge' },
-  { n:'08', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#d946ef', ac:'rgba(217,70,239,0.2)',
+  { n:'08', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#f97316', ac:'rgba(249,115,22,0.2)',
     desc:'Fully-local, JARVIS-style voice assistant. Runs real actions via Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice.',
     live:'', git:'https://github.com/codebyanjaneya/Project-Hercs', building:true }
 ];
@@ -1367,7 +1367,7 @@ document.querySelectorAll('section, .section, h2, h3, p, .project-card, .stat-ca
 (function(){
   if (window.innerWidth < 768) return; // disable card canvases on mobile
   const previews = document.querySelectorAll('.card-preview canvas');
-  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#a3e635','#d946ef'];
+  const colors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#a3e635','#f97316'];
 
   previews.forEach((canvas, idx) => {
     const ctx = canvas.getContext('2d');
@@ -1536,7 +1536,7 @@ if (window.innerWidth < 768) {
     { num:'05', name:'VitalAI', cat:'AI HEALTH COMPANION', year:'2026', desc:'Groq-powered health assistant with gamification, streaks, XP, and a Health Wrapped recap that keeps users engaged.', link:'https://health-wellness-sepia.vercel.app/', color:'#f59e0b' },
     { num:'06', name:'DermaCam', cat:'AI DERMATOLOGY', year:'2026', desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Hinglish voice assistant, PWA and Android.', link:'https://github.com/codebyanjaneya/Dermacam', color:'#ec4899', repo:true },
     { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#a3e635', repo:true },
-    { num:'08', name:'H.E.R.C.S', cat:'JARVIS-STYLE VOICE AI', year:'2026', desc:'Fully-local JARVIS-style voice assistant. Wakes on a double-clap, reasons with Groq Llama 3.3 70B tool-calling to run real actions, and replies in a cloned XTTS-v2 voice, all synced to a holographic HUD. Runs 100% offline on-device.', link:'https://github.com/codebyanjaneya/Project-Hercs', color:'#d946ef', repo:true, building:true },
+    { num:'08', name:'H.E.R.C.S', cat:'JARVIS-STYLE VOICE AI', year:'2026', desc:'Fully-local JARVIS-style voice assistant. Wakes on a double-clap, reasons with Groq Llama 3.3 70B tool-calling to run real actions, and replies in a cloned XTTS-v2 voice, all synced to a holographic HUD. Runs 100% offline on-device.', link:'https://github.com/codebyanjaneya/Project-Hercs', color:'#f97316', repo:true, building:true },
   ];
 
   const container = document.getElementById('mobile-cards');
