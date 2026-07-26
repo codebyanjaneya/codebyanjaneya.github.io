@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Anjaneya Tiwari — Full-Stack Developer · AI Engineer · Cybersecurity</title>
+<title>Anjaneya Tiwari - Full-Stack Developer · AI Engineer · Cybersecurity</title>
 <meta name="description" content="I build the infrastructure underneath AI products. Voice AI pipelines, multi-agent operating systems, and real-time observability platforms." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -790,7 +790,7 @@
       <div class="eyebrow">01 / Selected Work</div>
       <h2 class="title">Things I've built &amp; shipped.</h2>
       <div class="scroll-hint-arrows">
-        <span class="arrow-hint">← scroll to explore →</span>
+        <span class="arrow-hint">scroll to explore</span>
       </div>
     </div>
     <div id="mobile-cards"></div>
@@ -808,7 +808,7 @@
           <div class="eyebrow">02 / About</div>
           <h2 class="title">Production systems, independently shipped.</h2>
           <p class="about-bio" style="margin-top:20px">
-            B.Tech CS student shipping <strong>production-grade systems</strong> — voice AI pipelines,
+            B.Tech CS student shipping <strong>production-grade systems</strong>: voice AI pipelines,
             multi-agent operating systems, and real-time observability platforms.
             <strong>Two internships</strong>, multiple live products, all
             <strong>independently architected and deployed</strong>.
@@ -824,7 +824,7 @@
           <div class="bar"><i style="background:#f43f5e"></i><i style="background:#facc15"></i><i style="background:#22c55e"></i></div>
           <div class="body">
             <div><span class="g">$</span> whoami</div>
-            <div><span class="c">›</span> anjaneya — builds the layer AI runs on</div>
+            <div><span class="c">›</span> anjaneya - builds the layer AI runs on</div>
             <div>&nbsp;</div>
             <div><span class="g">$</span> cat ~/.focus</div>
             <div><span class="c">›</span> <span class="b">backend infra</span> · <span class="p">multi-agent AI</span> · <span class="r">security</span></div>
@@ -881,7 +881,7 @@
       </div>
       <div class="footer-right">
         <span>Built with Three.js · GSAP · Vanilla JS</span>
-        <a href="#top" class="footer-top">Back to top ↑</a>
+        <a href="#top" class="footer-top">Back to top</a>
       </div>
     </footer>
   </section>
@@ -907,7 +907,7 @@ const PROJECTS = [
     desc:'Hybrid ML + LLM pipeline (Scikit-learn + Groq + VirusTotal + WHOIS) with real-time and bulk URL scanning and generated PDF threat reports.',
     live:'https://ai-phishguard.web.app/', git:'https://github.com/codebyanjaneya' },
   { n:'05', name:'VitalAI', cat:'AI Health Companion', year:'2026', c:'#f59e0b', ac:'rgba(245,158,11,0.2)',
-    desc:'Groq-powered health assistant with gamification — streaks, XP, and a "Health Wrapped" recap that keeps users engaged.',
+    desc:'Groq-powered health assistant with gamification: streaks, XP, and a "Health Wrapped" recap that keeps users engaged.',
     live:'https://health-wellness-sepia.vercel.app/', git:'https://github.com/codebyanjaneya' },
   { n:'06', name:'DermaCam', cat:'AI Dermatology', year:'2026', c:'#ec4899', ac:'rgba(236,72,153,0.2)',
     desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Redis caching, Hinglish voice assistant, PWA and Android.',
@@ -916,7 +916,7 @@ const PROJECTS = [
     desc:'AI productivity coach that returns exactly one concrete next action toward your goal, with reasoning, ordered steps, and a time breakdown. FastAPI + Groq backend, Flutter + Firebase app, multi-language, plus an offline dino-style mini-game.',
     live:'', git:'https://github.com/codebyanjaneya/Nudge' },
   { n:'08', name:'LLM Gate', cat:'LLM Governance Gateway', year:'2026', c:'#d946ef', ac:'rgba(217,70,239,0.2)',
-    desc:'Policy-driven governance gateway for LLM APIs — Terraform-provisioned infra, automated guardrail and policy checks, and a retry-aware orchestrator enforcing safety, routing, and cost controls before requests reach the model.',
+    desc:'Policy-driven governance gateway for LLM APIs: Terraform-provisioned infra, automated guardrail and policy checks, and a retry-aware orchestrator enforcing safety, routing, and cost controls before requests reach the model.',
     live:'', git:'https://github.com/codebyanjaneya/LLM-Gate' },
   { n:'09', name:'H.E.R.C.S', cat:'JARVIS-Style Voice AI', year:'2026', c:'#f97316', ac:'rgba(249,115,22,0.2)',
     desc:'Fully-local, JARVIS-style voice assistant. Runs real actions via Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice.',
@@ -961,7 +961,7 @@ const isMobile = matchMedia('(max-width:720px)').matches;
       ${p.building ? '<span class="build-badge">Building now</span>' : ''}
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
-      <span class="chip">${p.live ? '↗ View live' : '↗ View on GitHub'}</span>
+      <span class="chip">${p.live ? 'View live' : 'View on GitHub'}</span>
       <span class="cat">${p.cat}</span>`;
     a.addEventListener('mousemove', (e) => {
       const rect = a.getBoundingClientRect();
@@ -989,7 +989,7 @@ const isMobile = matchMedia('(max-width:720px)').matches;
 })();
 
 /* =========================================================
-   THREE.JS BACKGROUND — particle field + lines + ring
+   THREE.JS BACKGROUND - particle field + lines + ring
 ========================================================= */
 let bgMouse = { x: 0, y: 0 };
 function bg(){
@@ -1096,7 +1096,7 @@ function bg(){
 setTimeout(() => bg(), 2300); // start after loader hides
 
 /* =========================================================
-   THREE.JS SKILLS — orbiting nodes
+   THREE.JS SKILLS - orbiting nodes
 ========================================================= */
 (function skills3d(){
   if (!window.THREE) return;
@@ -1572,7 +1572,7 @@ if (window.innerWidth < 768) {
     { num:'05', name:'VitalAI', cat:'AI HEALTH COMPANION', year:'2026', desc:'Groq-powered health assistant with gamification, streaks, XP, and a Health Wrapped recap that keeps users engaged.', link:'https://health-wellness-sepia.vercel.app/', color:'#f59e0b' },
     { num:'06', name:'DermaCam', cat:'AI DERMATOLOGY', year:'2026', desc:'7 specialised models across 4 platforms run in parallel with a majority-voting ensemble to diagnose skin, hair, and nail conditions in ~3 seconds. Hinglish voice assistant, PWA and Android.', link:'https://github.com/codebyanjaneya/Dermacam', color:'#ec4899', repo:true },
     { num:'07', name:'Nudge', cat:'AI PRODUCTIVITY COACH', year:'2026', desc:'AI productivity coach that returns one concrete next action toward your goal, with reasoning and a time breakdown. FastAPI + Groq, Flutter + Firebase, multi-language, plus an offline dino-style mini-game.', link:'https://github.com/codebyanjaneya/Nudge', color:'#a3e635', repo:true },
-    { num:'08', name:'LLM Gate', cat:'LLM GOVERNANCE GATEWAY', year:'2026', desc:'Policy-driven governance gateway for LLM APIs — Terraform-provisioned infra, automated guardrail and policy checks, and a retry-aware orchestrator enforcing safety, routing, and cost controls before requests reach the model.', link:'https://github.com/codebyanjaneya/LLM-Gate', color:'#d946ef', repo:true },
+    { num:'08', name:'LLM Gate', cat:'LLM GOVERNANCE GATEWAY', year:'2026', desc:'Policy-driven governance gateway for LLM APIs: Terraform-provisioned infra, automated guardrail and policy checks, and a retry-aware orchestrator enforcing safety, routing, and cost controls before requests reach the model.', link:'https://github.com/codebyanjaneya/LLM-Gate', color:'#d946ef', repo:true },
     { num:'09', name:'H.E.R.C.S', cat:'JARVIS-STYLE VOICE AI', year:'2026', desc:'Fully-local JARVIS-style voice assistant. Wakes on a double-clap, reasons with Groq Llama 3.3 70B tool-calling to run real actions, and replies in a cloned XTTS-v2 voice, all synced to a holographic HUD. Runs 100% offline on-device.', link:'https://github.com/codebyanjaneya/Project-Hercs', color:'#f97316', repo:true, building:true },
   ];
 
@@ -1593,7 +1593,7 @@ if (window.innerWidth < 768) {
       <h3 style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#fff;margin:0 0 12px;">${p.name}</h3>
       <p style="font-family:'Space Grotesk',sans-serif;font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin:0 0 20px;">${p.desc}</p>
       <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 14px;">
-        <a href="${p.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:12px;color:${p.color};border:1px solid ${p.color}33;padding:8px 16px;border-radius:100px;text-decoration:none;white-space:nowrap;">${p.repo ? '↗ View on GitHub' : '↗ View live'}</a>
+        <a href="${p.link}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:12px;color:${p.color};border:1px solid ${p.color}33;padding:8px 16px;border-radius:100px;text-decoration:none;white-space:nowrap;">${p.repo ? 'View on GitHub' : 'View live'}</a>
         <span style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-align:right;">${p.cat}</span>
       </div>
     `;
