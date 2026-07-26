@@ -376,10 +376,29 @@
   .chip2 { font-family: 'Space Mono', monospace; font-size: 13.5px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 100px; background: var(--glass); color: var(--ink-dim); transition: transform .2s, border-color .2s, color .2s, background .2s; }
   .chip2:hover { transform: translateY(-3px); color: var(--ink); border-color: var(--purple); background: rgba(139,92,246,0.1); }
   .skill-cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .skill-cat { border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: rgba(255,255,255,0.02); }
-  .skill-cat h4 { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
-  .skill-cat .chip3 { display: inline-block; margin: 0 6px 7px 0; font-family: 'Space Mono', monospace; font-size: 12px; padding: 5px 11px; border: 1px solid var(--line); border-radius: 100px; color: var(--ink-dim); transition: color .2s, border-color .2s; }
-  .skill-cat .chip3:hover { color: var(--ink); border-color: var(--purple); }
+  .skill-cat {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 16px; padding: 22px 22px 18px;
+    background: rgba(255,255,255,0.02);
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s, background .35s;
+  }
+  .skill-cat::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(120% 80% at 0% 0%, var(--cat, #8b5cf6), transparent 55%);
+    opacity: 0; transition: opacity .4s;
+  }
+  .skill-cat:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--cat, #8b5cf6) 55%, transparent);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 24px color-mix(in srgb, var(--cat, #8b5cf6) 30%, transparent);
+    background: rgba(255,255,255,0.03);
+  }
+  .skill-cat:hover::before { opacity: 0.1; }
+  .skill-cat > * { position: relative; z-index: 1; }
+  .skill-cat h4 { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cat, #8b5cf6); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .skill-cat h4::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cat, #8b5cf6); box-shadow: 0 0 10px var(--cat, #8b5cf6); }
+  .skill-cat .chip3 { display: inline-block; margin: 0 6px 7px 0; font-family: 'Space Mono', monospace; font-size: 12px; padding: 5px 11px; border: 1px solid var(--line); border-radius: 100px; color: var(--ink-dim); transition: color .2s, border-color .2s, background .2s, transform .2s; }
+  .skill-cat .chip3:hover { color: var(--ink); border-color: color-mix(in srgb, var(--cat, #8b5cf6) 60%, transparent); background: color-mix(in srgb, var(--cat, #8b5cf6) 12%, transparent); transform: translateY(-2px); }
 
   /* ---------- Contact ---------- */
   .contact { text-align: center; }
@@ -980,9 +999,11 @@ const isMobile = matchMedia('(max-width:720px)').matches;
   const chips = document.getElementById('chips');
   SKILLS.forEach(s => { const c = document.createElement('span'); c.className='chip2'; c.textContent=s; chips.appendChild(c); });
   const catWrap = document.getElementById('skill-cats');
-  if (catWrap) Object.entries(CATEGORIES).forEach(([cat, items]) => {
+  const catColors = ['#0ea5e9','#8b5cf6','#f43f5e','#10b981','#f59e0b','#ec4899','#a3e635','#f97316','#d946ef','#14b8a6'];
+  if (catWrap) Object.entries(CATEGORIES).forEach(([cat, items], ci) => {
     const g = document.createElement('div');
     g.className = 'skill-cat';
+    g.style.setProperty('--cat', catColors[ci % catColors.length]);
     g.innerHTML = '<h4>' + cat + '</h4>' + items.map(s => '<span class="chip3">' + s + '</span>').join('');
     catWrap.appendChild(g);
   });
