@@ -696,7 +696,7 @@
 </div>
 
 <div id="page-transition" style="position:fixed;inset:0;background:#020408;z-index:9998;opacity:0;pointer-events:none;transition:opacity 0.4s ease;"></div>
-<canvas id="noise-canvas" style="position:fixed;inset:0;z-index:1;opacity:0.03;pointer-events:none;"></canvas>
+<canvas id="noise-canvas" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:1;opacity:0.03;pointer-events:none;"></canvas>
 
 <canvas id="bg"></canvas>
 <div class="vignette"></div>
@@ -915,7 +915,7 @@ const PROJECTS = [
     desc:'Fully-local, JARVIS-style voice assistant. Runs real actions via Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice.',
     live:'', git:'https://github.com/codebyanjaneya/Project-Hercs', building:true }
 ];
-const SKILLS = ['Python','FastAPI','React','Flutter','Next.js','PostgreSQL','Redis','Firebase','AWS EC2','Docker','NGINX','Groq Llama 4','HuggingFace','n8n','Burp Suite','LangChain'];
+const SKILLS = ['Python','JavaScript','TypeScript','Dart','SQL','Bash','FastAPI','Node.js','React','Next.js','Flutter','Tailwind CSS','Three.js','GSAP','PostgreSQL','Redis','Firebase','Docker','NGINX','AWS EC2','Terraform','GitHub Actions','CI/CD','Linux','Vercel','WebSockets','REST APIs','Groq Llama 4','LangChain','HuggingFace','Scikit-learn','RAG','Whisper','Prompt Engineering','n8n','Razorpay','Burp Suite','Git'];
 const isMobile = matchMedia('(max-width:720px)').matches;
 
 /* =========================================================
@@ -1462,9 +1462,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 (function(){
   const canvas = document.getElementById('noise-canvas');
   const ctx = canvas.getContext('2d');
-  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
+  // Small fixed-resolution grain tile, CSS-stretched to full screen (cheap — avoids full-viewport per-pixel noise)
+  canvas.width = 160;
+  canvas.height = 160;
   function drawNoise(){
     const imageData = ctx.createImageData(canvas.width, canvas.height);
     const data = imageData.data;
@@ -1474,7 +1474,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       data[i+3] = 255;
     }
     ctx.putImageData(imageData, 0, 0);
-    setTimeout(drawNoise, 100);
+    setTimeout(drawNoise, 120);
   }
   drawNoise();
 })();
