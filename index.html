@@ -995,8 +995,8 @@ let bgMouse = { x: 0, y: 0 };
 function bg(){
   if (!window.THREE) return;
   const canvas = document.getElementById('bg');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setSize(innerWidth, innerHeight);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 2000);
@@ -1103,8 +1103,8 @@ setTimeout(() => bg(), 2300); // start after loader hides
   const canvas = document.getElementById('skills-canvas');
   if (!canvas) return;
   if (window.innerWidth < 768) return; // skip WebGL skills scene on mobile
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:false, alpha:true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   function size(){ renderer.setSize(canvas.clientWidth, canvas.clientHeight); }
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(55, canvas.clientWidth/canvas.clientHeight, 0.1, 1000);
