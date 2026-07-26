@@ -143,7 +143,6 @@
     transform: translate(0,0);
     will-change: transform;
     transition: background 0.3s ease;
-    mix-blend-mode: difference;
   }
   #cursor-ring {
     position: fixed;
@@ -157,7 +156,6 @@
     transform: translate(0,0);
     will-change: transform;
     transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-    mix-blend-mode: difference;
   }
   @media (max-width: 720px){ #cursor-dot, #cursor-ring { display: none; } }
 
@@ -377,6 +375,11 @@
   .chips { display: flex; flex-wrap: wrap; gap: 11px; }
   .chip2 { font-family: 'Space Mono', monospace; font-size: 13.5px; padding: 9px 16px; border: 1px solid var(--line); border-radius: 100px; background: var(--glass); color: var(--ink-dim); transition: transform .2s, border-color .2s, color .2s, background .2s; }
   .chip2:hover { transform: translateY(-3px); color: var(--ink); border-color: var(--purple); background: rgba(139,92,246,0.1); }
+  .skill-cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .skill-cat { border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: rgba(255,255,255,0.02); }
+  .skill-cat h4 { font-family: 'Space Mono', monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+  .skill-cat .chip3 { display: inline-block; margin: 0 6px 7px 0; font-family: 'Space Mono', monospace; font-size: 12px; padding: 5px 11px; border: 1px solid var(--line); border-radius: 100px; color: var(--ink-dim); transition: color .2s, border-color .2s; }
+  .skill-cat .chip3:hover { color: var(--ink); border-color: var(--purple); }
 
   /* ---------- Contact ---------- */
   .contact { text-align: center; }
@@ -847,8 +850,12 @@
       </div>
       <div class="skills-grid" style="margin-top:40px">
         <div class="reveal"><canvas id="skills-canvas"></canvas></div>
-        <div class="chips reveal" id="chips"></div>
+        <div class="reveal">
+          <div class="eyebrow" style="margin-bottom:18px">Core Strengths</div>
+          <div class="chips" id="chips"></div>
+        </div>
       </div>
+      <div id="skill-cats" class="skill-cats reveal" style="margin-top:56px"></div>
     </div>
   </section>
 
@@ -915,7 +922,24 @@ const PROJECTS = [
     desc:'Fully-local, JARVIS-style voice assistant. Runs real actions via Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice.',
     live:'', git:'https://github.com/codebyanjaneya/Project-Hercs', building:true }
 ];
-const SKILLS = ['Python','JavaScript','TypeScript','Dart','SQL','Bash','FastAPI','Node.js','React','Next.js','Flutter','Tailwind CSS','Three.js','GSAP','PostgreSQL','Redis','Firebase','Docker','NGINX','AWS EC2','Terraform','GitHub Actions','CI/CD','Linux','Vercel','WebSockets','REST APIs','Groq Llama 4','LangChain','HuggingFace','Scikit-learn','RAG','Whisper','Prompt Engineering','n8n','Razorpay','Burp Suite','Git'];
+const SKILLS = ['Python','FastAPI','PostgreSQL','SQLAlchemy','Redis','React','Flutter','AWS EC2','Docker','AI / LLMs','RAG','Multi-Agent AI','n8n','REST APIs','WebSockets','Async Programming','System Design','Phishing Detection','Computer Vision','Cloud Deployment'];
+const CATEGORIES = {
+  'Languages': ['Python','JavaScript','TypeScript','Dart','Bash','HTML5','CSS3'],
+  'Backend': ['FastAPI','Flask','Django','Django REST (DRF)','SQLAlchemy','REST API Design','Async / asyncio','WebSockets','Microservices','JWT Auth','Background Workers','Connection Pooling','API Integration'],
+  'Frontend': ['React.js','Next.js','HTML / CSS','Responsive UI','Recharts','Three.js','GSAP'],
+  'Mobile': ['Flutter','Firebase Auth','Cross-platform Apps'],
+  'Databases': ['PostgreSQL','PostGIS','Redis','Firebase','Supabase','Database Design','Query Optimization'],
+  'Cloud & DevOps': ['AWS EC2','AWS SNS','AWS SES','Docker','NGINX','Gunicorn','CI/CD','GitHub Actions','Linux'],
+  'AI / Machine Learning': ['Prompt Engineering','LLM Applications','RAG','Multi-Agent Systems','Multi-Model Ensemble','Hugging Face','Groq Llama 4','OpenCV','CNN','Computer Vision','Vector Databases','Embeddings'],
+  'AI Voice Systems': ['Speech-to-Text','Text-to-Speech','Voice AI','AI IVR Systems','Streaming Transcription','Multilingual AI'],
+  'Automation': ['n8n','Zapier','Browser Automation','Webhooks','Workflow Automation','Scheduled Jobs'],
+  'Cybersecurity': ['Phishing Detection','VirusTotal API','WHOIS API','OSINT','Burp Suite','Vulnerability Assessment','Email Threat Detection'],
+  'Concurrency & Performance': ['asyncio','concurrent.futures','Multithreading','Rate Limiting','Token Bucket','Caching (Redis)','Scalability'],
+  'APIs & Integrations': ['Razorpay','Cashfree','Hunter.io','Apollo','Gmail API','Supabase APIs','Third-party APIs'],
+  'Software Engineering': ['System Design','Software Architecture','Distributed Systems','SDLC','Testing','Debugging','Deployment','Production Systems'],
+  'AI Agent Development': ['Agent-to-Agent Comm','Agent Memory','AI Orchestration','Digital Twin Dashboards','Autonomous Workflows'],
+  'Developer Tools': ['Git','GitHub','Postman','VS Code']
+};
 const isMobile = matchMedia('(max-width:720px)').matches;
 
 /* =========================================================
@@ -955,6 +979,13 @@ const isMobile = matchMedia('(max-width:720px)').matches;
   });
   const chips = document.getElementById('chips');
   SKILLS.forEach(s => { const c = document.createElement('span'); c.className='chip2'; c.textContent=s; chips.appendChild(c); });
+  const catWrap = document.getElementById('skill-cats');
+  if (catWrap) Object.entries(CATEGORIES).forEach(([cat, items]) => {
+    const g = document.createElement('div');
+    g.className = 'skill-cat';
+    g.innerHTML = '<h4>' + cat + '</h4>' + items.map(s => '<span class="chip3">' + s + '</span>').join('');
+    catWrap.appendChild(g);
+  });
 })();
 
 /* =========================================================
@@ -964,8 +995,8 @@ let bgMouse = { x: 0, y: 0 };
 function bg(){
   if (!window.THREE) return;
   const canvas = document.getElementById('bg');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.setSize(innerWidth, innerHeight);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 2000);
@@ -1072,8 +1103,8 @@ setTimeout(() => bg(), 2300); // start after loader hides
   const canvas = document.getElementById('skills-canvas');
   if (!canvas) return;
   if (window.innerWidth < 768) return; // skip WebGL skills scene on mobile
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:false, alpha:true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
   function size(){ renderer.setSize(canvas.clientWidth, canvas.clientHeight); }
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(55, canvas.clientWidth/canvas.clientHeight, 0.1, 1000);
