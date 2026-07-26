@@ -699,7 +699,7 @@
 </div>
 
 <div id="page-transition" style="position:fixed;inset:0;background:#020408;z-index:9998;opacity:0;pointer-events:none;transition:opacity 0.4s ease;"></div>
-<canvas id="noise-canvas" style="position:fixed;inset:0;width:100vw;height:100vh;z-index:1;opacity:0.03;pointer-events:none;"></canvas>
+<canvas id="noise-canvas" style="position:fixed;inset:0;z-index:1;opacity:0.03;pointer-events:none;"></canvas>
 
 <canvas id="bg"></canvas>
 <div class="vignette"></div>
@@ -1493,9 +1493,9 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 (function(){
   const canvas = document.getElementById('noise-canvas');
   const ctx = canvas.getContext('2d');
-  // Small fixed-resolution grain tile, CSS-stretched to full screen (cheap — avoids full-viewport per-pixel noise)
-  canvas.width = 160;
-  canvas.height = 160;
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
   function drawNoise(){
     const imageData = ctx.createImageData(canvas.width, canvas.height);
     const data = imageData.data;
@@ -1505,7 +1505,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       data[i+3] = 255;
     }
     ctx.putImageData(imageData, 0, 0);
-    setTimeout(drawNoise, 120);
+    setTimeout(drawNoise, 100);
   }
   drawNoise();
 })();
