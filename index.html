@@ -504,6 +504,10 @@
     /* Hide custom cursor on mobile */
     #cursor-dot, #cursor-ring { display: none; }
 
+    /* Force scroll-reveal content visible on mobile (GSAP ScrollTrigger reveals
+       can fail to fire on mobile, leaving skills/contact stuck at opacity:0) */
+    .reveal, .section-reveal { opacity: 1 !important; transform: none !important; }
+
     /* Hero */
     .hero, .hero-inner, #hero .hero-inner, section#top .hero-inner {
       padding: 120px 24px 60px;
