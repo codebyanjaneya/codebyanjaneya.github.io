@@ -1263,23 +1263,28 @@ window.addEventListener('load', () => {
 
   /* ---- horizontal work showcase ---- */
   if (window.innerWidth >= 768) {
-    // desktop horizontal scroll
-    const cards = document.querySelectorAll('.card');
-    const totalWidth = Array.from(cards).reduce((acc, c) => acc + c.offsetWidth + 32, 0);
-    const scrollDist = totalWidth - window.innerWidth;
+    // desktop horizontal scroll with dynamic recalculation
+    let st = null;
+    const createScroll = () => {
+      if (st) st.kill();
+      const cards = document.querySelectorAll('.card');
+      const totalWidth = Array.from(cards).reduce((acc, c) => acc + c.offsetWidth + 32, 0);
+      const scrollDist = Math.max(totalWidth - window.innerWidth, 0);
 
-    gsap.to('.h-track', {
-      x: -scrollDist,
-      ease: 'none',
-      scrollTrigger: {
+      st = ScrollTrigger.create({
         trigger: '#work',
         start: 'top top',
-        end: () => '+=' + scrollDist,
+        end: scrollDist ? () => '+=' + scrollDist : 'top top',
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true,
-      }
-    });
+        onUpdate: self => {
+          gsap.set('.h-track', { x: -scrollDist * self.getProgress() });
+        }
+      });
+    };
+    createScroll();
+    window.addEventListener('resize', () => setTimeout(createScroll, 100));
   } else {
     // MOBILE: completely disable GSAP, use native scroll
     // Remove all inline styles that GSAP might set
@@ -1346,6 +1351,8 @@ window.addEventListener('load', () => {
   });
 
   ScrollTrigger.refresh();
+  // Recalculate after images/canvases load
+  setTimeout(() => ScrollTrigger.refresh(), 500);
 });
 
 /* fallback reveal if GSAP unavailable */
@@ -1523,11 +1530,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 (function(){
   const canvas = document.getElementById('noise-canvas');
   const ctx = canvas.getContext('2d');
-  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
   function drawNoise(){
-    const imageData = ctx.createImageData(canvas.width, canvas.height);
+    canvas.width = 256;
+    canvas.height = 144;
+    const imageData = ctx.createImageData(256, 144);
     const data = imageData.data;
     for(let i = 0; i < data.length; i += 4){
       const v = Math.random() * 255;
@@ -1535,7 +1541,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       data[i+3] = 255;
     }
     ctx.putImageData(imageData, 0, 0);
-    setTimeout(drawNoise, 100);
   }
   drawNoise();
 })();
