@@ -1266,9 +1266,10 @@ window.addEventListener('load', () => {
     const createScroll = () => {
       ScrollTrigger.getAll().filter(st => st.vars && st.vars.pin === true && st.trigger && st.trigger.id === 'work').forEach(st => st.kill());
       const cards = document.querySelectorAll('.card');
-      const cardsWidth = Array.from(cards).reduce((acc, c) => acc + c.offsetWidth + 32, 0) - 32;
+      const cardWidths = Array.from(cards).reduce((acc, c) => acc + c.offsetWidth, 0);
+      const gaps = (cards.length - 1) * 30;
       const padding = 120;
-      const totalWidth = cardsWidth + padding;
+      const totalWidth = cardWidths + gaps + padding;
       const scrollDist = Math.max(0, totalWidth - window.innerWidth);
 
       gsap.to('.h-track', {
