@@ -1,63 +1,34 @@
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:020408,50:0ea5e9,100:8b5cf6&height=160&section=header&text=codebyanjaneya.github.io&fontColor=ffffff&fontSize=32&animation=fadeIn&fontAlignY=40" />
+# codebyanjaneya.github.io
 
-<div align="center">
+Personal portfolio of Anjaneya Tiwari, a backend and AI systems engineer. Live at <https://codebyanjaneya.github.io>.
 
-[![Live Portfolio](https://img.shields.io/badge/LIVE_PORTFOLIO-codebyanjaneya.github.io-0ea5e9?style=for-the-badge&logo=vercel&logoColor=white)](https://codebyanjaneya.github.io)
+Plain HTML and CSS: no framework, no build step, no JavaScript, no runtime dependencies. Only external request is Google Fonts (Instrument Serif, Inter, JetBrains Mono), with system fallbacks.
 
-</div>
+## Structure
 
-Personal portfolio built from scratch — Three.js WebGL background, GSAP scroll animations, custom cursor, cinematic loader, and a horizontal project showcase. No templates. No frameworks.
+| File | Purpose |
+|------|---------|
+| `index.html` | Home: hero, six featured case studies, experience, expertise, about, contact |
+| `projects.html` | Directory of additional projects, grouped by kind |
+| `style.css` | Shared design system (warm paper background, charcoal text, cobalt accent) |
+| `resume.pdf` | Resume linked from the nav, hero and contact section |
 
-## Tech Used
+Featured case studies: XENOM Intelligence, Rooftop Rush, Email Triage Assistant, LoadPulse, Gleska workforce marketplace, AgentForge. Each pairs verified facts with a small diagram built in HTML/CSS.
 
-[![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=three.js&logoColor=white)]()
-[![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black)]()
-[![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-F7DF1E?style=flat-square&logo=javascript&logoColor=black)]()
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)]()
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)]()
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-181717?style=flat-square&logo=github&logoColor=white)]()
-
-## Features
-
-```
-$ cat features.txt
-
-> Three.js WebGL particle network background
->
-> GSAP ScrollTrigger horizontal project showcase
->
-> Custom GPU-accelerated magnetic cursor
->
-> Cinematic letter-burst loader animation
->
-> Mobile-responsive with touch swipe cards
->
-> Section reveal animations with perspective
->
-> Orbiting skill nodes (Three.js canvas)
->
-> Film grain + page transition effects
-```
-
-## Quick Start
+## Local development
 
 ```bash
-# Clone
 git clone https://github.com/codebyanjaneya/codebyanjaneya.github.io.git
-
-# Open directly
-open index.html
-
-# Or visit live
-https://codebyanjaneya.github.io
+cd codebyanjaneya.github.io
+python -m http.server 8000
 ```
 
----
+Open <http://localhost:8000>. Edit the files and refresh.
 
-<div align="center">
+## Deployment
 
-[![Profile](https://img.shields.io/badge/GitHub_Profile-codebyanjaneya-181717?style=flat-square&logo=github)](https://github.com/codebyanjaneya)
+Hosted on GitHub Pages from the `main` branch root (Settings → Pages → Deploy from a branch). Pushing to `main` publishes the site; there is nothing to build.
 
-</div>
+## Content
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:8b5cf6,50:0ea5e9,100:020408&height=100&section=footer" />
+Experience and project details are taken from the author's resume. Update `index.html` and `projects.html` directly when they change.
