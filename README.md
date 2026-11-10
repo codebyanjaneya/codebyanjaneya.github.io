@@ -1,19 +1,29 @@
-# codebyanjaneya.github.io
+# Anjaneya Tiwari — Software Engineer
 
-Personal portfolio of Anjaneya Tiwari, a backend and AI systems engineer. Live at <https://codebyanjaneya.github.io>.
+Backend, AI and full-stack engineer. I build software that works beyond the demo: an orchestration layer over 500+ APIs, a geospatial matching engine for a deployed marketplace, and voice-AI infrastructure handling 1,000+ concurrent requests.
 
-Plain HTML and CSS: no framework, no build step, no JavaScript, no runtime dependencies. Only external request is Google Fonts (Instrument Serif, Inter, JetBrains Mono), with system fallbacks.
+**Live portfolio:** <https://codebyanjaneya.github.io>
 
-## Structure
+## What's on the site
+
+- **Home**: positioning, availability and primary links.
+- **Selected work**: six case studies (XENOM Intelligence, Rooftop Rush, Email Triage Assistant, LoadPulse, Gleska marketplace, AgentForge), each covering the problem, what was built, the engineering decisions and the outcome.
+- **Projects directory** (`projects.html`): additional builds grouped by kind.
+- **Experience**: Rootstock Technology, Gleska, Telogo Communications and Motivus Innovation.
+- **Expertise**: skills grouped by engineering area rather than as a badge list.
+- **About and contact**.
+
+## Tech stack
+
+HTML5, CSS3 and Google Fonts (Instrument Serif, Inter, JetBrains Mono), hosted on GitHub Pages. No framework, no build step, no JavaScript.
+
+## Repository layout
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Home: hero, six featured case studies, experience, expertise, about, contact |
-| `projects.html` | Directory of additional projects, grouped by kind |
-| `style.css` | Shared design system (warm paper background, charcoal text, cobalt accent) |
-| `resume.pdf` | Resume linked from the nav, hero and contact section |
-
-Featured case studies: XENOM Intelligence, Rooftop Rush, Email Triage Assistant, LoadPulse, Gleska workforce marketplace, AgentForge. Each pairs verified facts with a small diagram built in HTML/CSS.
+| `index.html` | Home page and case studies |
+| `projects.html` | Projects directory |
+| `style.css` | Shared styles |
 
 ## Local development
 
@@ -23,12 +33,8 @@ cd codebyanjaneya.github.io
 python -m http.server 8000
 ```
 
-Open <http://localhost:8000>. Edit the files and refresh.
+Open <http://localhost:8000>.
 
 ## Deployment
 
-Hosted on GitHub Pages from the `main` branch root (Settings → Pages → Deploy from a branch). Pushing to `main` publishes the site; there is nothing to build.
-
-## Content
-
-Experience and project details are taken from the author's resume. Update `index.html` and `projects.html` directly when they change.
+GitHub Pages serves the root of the `main` branch. Pushing to `main` publishes the site within a few minutes; there is nothing to build.
