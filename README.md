@@ -1,8 +1,8 @@
-# Anjaneya Tiwari — Software Engineer
+# Anjaneya Tiwari - Software Engineer
 
 Backend, AI and full-stack engineer. I build software that works beyond the demo: an orchestration layer over 500+ APIs, a geospatial matching engine for a deployed marketplace, and voice-AI infrastructure handling 1,000+ concurrent requests.
 
-**Live portfolio:** <https://codebyanjaneya.github.io>
+Live portfolio: <https://codebyanjaneya.github.io>
 
 ## What's on the site
 
