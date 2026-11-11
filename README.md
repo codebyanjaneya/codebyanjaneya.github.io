@@ -6,8 +6,8 @@ Live portfolio: <https://codebyanjaneya.github.io>
 
 ## What's on the site
 
-- **Home** (`index.html`): hero, five featured case studies (XENOM Intelligence, Rooftop Rush, Email Triage Assistant, LoadPulse, AgentForge), an index of smaller builds, experience timeline and expertise, about, contact.
-- **Projects** (`projects.html`): six smaller builds (DermaCam, AutoApply Bot, LLM Gate, Nudge, H.E.R.C.S, VitalAI), each with its own colour field and a small diagram.
+- **Home** (`index.html`): hero, five featured case studies (XENOM Intelligence, Rooftop Rush, Email Triage Assistant, LoadPulse, AgentForge), an index of six more projects, experience timeline and expertise, about, contact.
+- **Projects** (`projects.html`): six more projects (DermaCam, AutoApply Bot, LLM Gate, Nudge, H.E.R.C.S, VitalAI), each with its own colour field and an interactive diagram.
 
 ## Design approach
 
@@ -20,7 +20,7 @@ An editorial engineering journal rather than a template. The idea is "the parts 
 
 ## Interactions
 
-Plain JavaScript in `app.js` (no libraries). Claim-to-source tracing, an annotated real gameplay screenshot with a flight and landing-safety schematic, a 200 → 15 API-call scrubber, a request-flow and latency simulation, a step-through orchestration diagram, and small diagrams for the smaller builds.
+Plain JavaScript in `app.js` (no libraries). Claim-to-source tracing, an annotated real gameplay screenshot with a flight and landing-safety schematic, a 200 → 15 API-call scrubber, a request-flow and latency simulation, a step-through orchestration diagram, and interactive diagrams for the six more projects.
 
 - Respects `prefers-reduced-motion`, and a footer button pauses all animation. Every control still works with motion off.
 - Keyboard operable, with visible focus states and labelled controls. Live regions stay quiet while a diagram auto-plays.
@@ -30,7 +30,7 @@ Plain JavaScript in `app.js` (no libraries). Claim-to-source tracing, an annotat
 | File | Purpose |
 |------|---------|
 | `index.html` | Home page and case studies |
-| `projects.html` | Smaller builds |
+| `projects.html` | Six more projects |
 | `style.css` | Design system and all diagram styles |
 | `app.js` | Interactive diagrams |
 | `assets/` | Real gameplay screenshot for Rooftop Rush (two sizes) |
