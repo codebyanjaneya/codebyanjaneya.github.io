@@ -3,41 +3,128 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Projects — Anjaneya Tiwari</title>
+<title>Also built — Anjaneya Tiwari</title>
 <meta name="description" content="More projects by Anjaneya Tiwari: AI applications, automation SaaS, LLM governance and voice AI.">
 <link rel="canonical" href="https://codebyanjaneya.github.io/projects.html">
-<meta name="theme-color" content="#f3f0e8">
+<meta name="theme-color" content="#e7e9df">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=" js"</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav aria-label="Primary"><div class="wrap">
-  <a class="brand" href="index.html">Anjaneya Tiwari</a>
-  <div class="links"><a class="home" href="index.html">Home</a><a href="index.html#work">Work</a><a href="index.html#experience">Experience</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a><a class="res" href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a></div>
-</div></nav>
-<main><div class="wrap" style="padding-top:64px;padding-bottom:80px">
-  <p class="mono">Projects</p>
-  <h2 style="margin:12px 0 14px">Beyond the featured six.</h2>
-  <p style="color:var(--mute);max-width:56ch">Smaller or earlier builds, grouped by kind. The <a href="index.html#work" style="color:var(--accent)">featured case studies</a> are the deeper work; everything else lives on <a href="https://github.com/codebyanjaneya" style="color:var(--accent)" target="_blank" rel="noopener">GitHub</a>.</p>
-
-  <div class="dir-cat"><h2>AI &amp; agentic applications</h2>
-    <div class="row"><p class="mono">HackIndia Spark 4 · 2026</p><div><h3>DermaCam</h3><p>AI skin, hair and nail diagnosis. 7 specialised models across 4 platforms run in parallel with a majority-voting ensemble, returning results in about 3 seconds. Redis caching, Hinglish voice assistant, PWA and Android. Built in a 36-hour hackathon (Round 2).</p></div><p class="ln"><a href="https://github.com/codebyanjaneya/Dermacam" target="_blank" rel="noopener">GitHub ↗</a></p></div>
-    <div class="row"><p class="mono">2026</p><div><h3>Nudge</h3><p>AI productivity coach that returns one concrete next action toward your goal, with reasoning, ordered steps and a time breakdown. FastAPI and Groq backend; Flutter and Firebase app; multi-language.</p></div><p class="ln"><a href="https://github.com/codebyanjaneya/Nudge" target="_blank" rel="noopener">GitHub ↗</a></p></div>
-    <div class="row"><p class="mono">2026</p><div><h3>VitalAI</h3><p>Groq-powered health assistant with streaks, XP and a "Health Wrapped" recap.</p></div><p class="ln"><a href="https://health-wellness-sepia.vercel.app/" target="_blank" rel="noopener">Live ↗</a></p></div>
-    <div class="row"><p class="mono">Building now</p><div><h3>H.E.R.C.S</h3><p>Fully local voice assistant that runs real actions through Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice. In progress.</p></div><p class="ln"><a href="https://github.com/codebyanjaneya/Project-Hercs" target="_blank" rel="noopener">GitHub ↗</a></p></div>
+<a href="#list" class="skip">Skip to projects</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="wm" href="index.html" aria-label="Anjaneya Tiwari, home"><b>AT</b>Anjaneya Tiwari</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="index.html#work">Work</a></li><li><a href="index.html#experience">Experience</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#contact">Contact</a></li>
+    </ul></nav>
   </div>
+</header>
 
-  <div class="dir-cat"><h2>Full-stack products</h2>
-    <div class="row"><p class="mono">May – Jun 2026<br>Vibecon India · Round 2</p><div><h3>AutoApply Bot</h3><p>Solo-built multi-tenant SaaS on Telegram for job discovery, AI resume scoring and recruiter outreach. n8n pipelines with Groq Llama 4, Hunter.io, Apollo and Gmail API on AWS EC2. Razorpay billing with webhook-driven payments, PostgreSQL tenant isolation and rate limiting.</p></div><p class="ln"><a href="https://autoapply-landing-sand.vercel.app/" target="_blank" rel="noopener">Live ↗</a></p></div>
+<main>
+<section class="pg-h">
+  <div class="wrap">
+    <p class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Also built</p>
+    <h1 class="disp">The smaller<br>builds</h1>
+    <p class="s">Hackathon entries, products and experiments. Each has a small diagram of how it works (illustrative, not live data). The five <a class="lnk" href="index.html#work">featured case studies</a> are on the home page, and everything else is on <a class="lnk" href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub ↗</a>.</p>
+    <ul class="pjx" aria-label="Jump to a project"><li><a href="#dermacam"><b>DermaCam</b><span>Model ensembles under a 36-hour deadline.</span></a></li><li><a href="#autoapply"><b>AutoApply Bot</b><span>Multi-tenant billing, isolation and rate limiting in one product.</span></a></li><li><a href="#llmgate"><b>LLM Gate</b><span>Policy enforcement and infrastructure as code for LLM calls.</span></a></li><li><a href="#nudge"><b>Nudge</b><span>Constraining an AI to one useful answer.</span></a></li><li><a href="#hercs"><b>H.E.R.C.S</b><span>Local voice plus real tool-calling. Still in progress.</span></a></li><li><a href="#vitalai"><b>VitalAI</b><span>Engagement mechanics around an AI assistant.</span></a></li></ul>
   </div>
+</section>
 
-  <div class="dir-cat"><h2>Backend &amp; systems</h2>
-    <div class="row"><p class="mono">2026</p><div><h3>LLM Gate</h3><p>Policy-driven governance gateway for LLM APIs: Terraform-provisioned infrastructure, automated guardrail and policy checks, and a retry-aware orchestrator enforcing safety, routing and cost controls before requests reach the model.</p></div><p class="ln"><a href="https://github.com/codebyanjaneya/LLM-Gate" target="_blank" rel="noopener">GitHub ↗</a></p></div>
-  </div>
-</div></main>
-<footer><div class="wrap"><span>© 2026 Anjaneya Tiwari</span><a href="index.html">← Back to portfolio</a></div></footer>
+<div id="list">
+
+<section class="entry" id="dermacam" style="--c:var(--clay)"><div class="wrap">
+  <div><p class="tag mono">HackIndia Spark 4 · Round 2 · 2026</p><h2 class="disp">DermaCam</h2><p class="why">Model ensembles under a 36-hour deadline.</p></div>
+  <p class="d">AI skin, hair and nail diagnosis. 7 specialised models across 4 platforms run in parallel with a majority-voting ensemble, returning results in about 3 seconds. Redis caching, a Hinglish voice assistant, PWA and Android. Built and deployed in a 36-hour hackathon.</p>
+  <figure class="vz" data-viz="derma">
+    <p class="mono pt">Majority voting · click a model to flip its vote</p>
+    <div class="mrow"><span>M1</span><div class="vb"><i style="--d:1.1s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M2</span><div class="vb"><i style="--d:1.9s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M3</span><div class="vb"><i style="--d:1.4s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M4</span><div class="vb"><i style="--d:2.4s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M5</span><div class="vb"><i style="--d:1.7s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M6</span><div class="vb"><i style="--d:2.1s"></i></div><button type="button" class="vote"></button></div>
+    <div class="mrow"><span>M7</span><div class="vb"><i style="--d:1.3s"></i></div><button type="button" class="vote"></button></div>
+    <p class="st" data-res aria-live="polite"></p>
+    <div class="ctls"><button type="button" class="ctl" data-run>Run in parallel</button></div>
+    <figcaption><b class="chip i">Illustrative</b> Illustrative votes. The real system runs 7 specialised models across 4 platforms in parallel and uses a majority-voting ensemble.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/Dermacam" target="_blank" rel="noopener">GitHub ↗</a></p>
+</div></section>
+
+<section class="entry" id="autoapply" style="--c:var(--sand)"><div class="wrap">
+  <div><p class="tag mono">Vibecon India · Round 2 · May – Jun 2026</p><h2 class="disp">AutoApply Bot</h2><p class="why">Multi-tenant billing, isolation and rate limiting in one product.</p></div>
+  <p class="d">A solo-built, multi-tenant SaaS on Telegram for job discovery, AI resume scoring and recruiter outreach. n8n pipelines with Groq Llama 4, Hunter.io, Apollo and the Gmail API on AWS EC2. Razorpay billing with webhook-driven payments, PostgreSQL tenant isolation and rate limiting.</p>
+  <figure class="vz" data-viz="autoapply">
+    <p class="mono pt">One pipeline, separate tenant data</p>
+    <div class="lane"><span>Telegram</span><span>n8n pipeline</span><span>Groq Llama 4 scoring</span><span>Hunter.io · Apollo · Gmail</span></div>
+    <div class="db"><span>Tenant A</span><span>Tenant B</span><span>Tenant C</span></div>
+    <p class="mono" style="margin-top:6px">PostgreSQL · tenant isolation · Razorpay webhooks drive billing</p>
+    <figcaption><b class="chip i">Illustrative</b> Each tenant's jobs move through the same pipeline while their data stays separated in PostgreSQL.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://autoapply-landing-sand.vercel.app/" target="_blank" rel="noopener">Live ↗</a></p>
+</div></section>
+
+<section class="entry" id="llmgate" style="--c:var(--paper)"><div class="wrap">
+  <div><p class="tag mono">Backend · Infrastructure · 2026</p><h2 class="disp">LLM Gate</h2><p class="why">Policy enforcement and infrastructure as code for LLM calls.</p></div>
+  <p class="d">A policy-driven governance gateway for LLM APIs: Terraform-provisioned infrastructure, automated guardrail and policy checks, and a retry-aware orchestrator that enforces safety, routing and cost controls before requests reach the model.</p>
+  <figure class="vz" data-viz="gate">
+    <p class="mono pt">Send a request through the gate</p>
+    <div class="pipe"><div class="gn">Request</div><div class="gn">Guardrail &amp; policy checks</div><div class="gn">Retry-aware orchestrator</div><div class="gn">Model</div></div>
+    <div class="ctls" role="group" aria-label="Choose a request"><button type="button" class="ctl" data-go="ok" aria-pressed="true">Compliant</button><button type="button" class="ctl" data-go="bad" aria-pressed="false">Violating</button><button type="button" class="ctl" data-go="retry" aria-pressed="false">Upstream failure</button></div>
+    <p class="st" data-cap aria-live="polite"></p>
+    <figcaption><b class="chip i">Illustrative</b> Illustrative request paths through the documented design.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/LLM-Gate" target="_blank" rel="noopener">GitHub ↗</a></p>
+</div></section>
+
+<section class="entry" id="nudge" style="--c:var(--sage)"><div class="wrap">
+  <div><p class="tag mono">AI · Mobile · 2026</p><h2 class="disp">Nudge</h2><p class="why">Constraining an AI to one useful answer.</p></div>
+  <p class="d">An AI productivity coach that returns one concrete next action toward your goal, with reasoning, ordered steps and a time breakdown. FastAPI and Groq backend, Flutter and Firebase app, multi-language, plus an offline dino-style mini-game.</p>
+  <figure class="vz" data-viz="nudge" data-one="false">
+    <p class="mono pt">From a pile of options to one next action</p>
+    <div class="opts"><div></div><div></div><div class="pick"></div><div></div><div></div><div></div></div>
+    <div class="card1"><b>Next action</b> · one concrete step toward your goal<br><b>Reasoning</b> · why this step, now<br><b>Steps</b> · 1, 2, 3 in order<br><b>Time</b> · how long each part takes</div>
+    <div class="ctls"><button type="button" class="ctl" data-ask aria-pressed="false">Ask Nudge</button></div>
+    <figcaption><b class="chip i">Illustrative</b> Illustrative. Real output: one next action with reasoning, ordered steps and a time breakdown.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/Nudge" target="_blank" rel="noopener">GitHub ↗</a></p>
+</div></section>
+
+<section class="entry" id="hercs" style="--c:var(--sun)"><div class="wrap">
+  <div><p class="tag mono">Voice AI · In progress</p><h2 class="disp">H.E.R.C.S</h2><p class="why">Local voice plus real tool-calling. Still in progress.</p></div>
+  <p class="d">A fully local voice assistant that runs real actions through Groq Llama 3.3 70B tool-calling and replies in a cloned XTTS-v2 voice. Still being built.</p>
+  <figure class="vz" data-viz="hercs" data-on="false">
+    <p class="mono pt">Voice in, action, voice out</p>
+    <div class="pipe"><div class="gn">You speak</div><div class="gn">Llama 3.3 70B picks a tool call</div><div class="gn">The action runs</div><div class="gn">Reply in a cloned XTTS-v2 voice</div></div>
+    <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="ctls"><button type="button" class="ctl" data-speak aria-pressed="false">Speak</button></div>
+    <figcaption><b class="chip i">Illustrative</b> Illustrative flow of the documented design.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/Project-Hercs" target="_blank" rel="noopener">GitHub ↗</a></p>
+</div></section>
+
+<section class="entry" id="vitalai" style="--c:var(--mint)"><div class="wrap">
+  <div><p class="tag mono">AI · Health · 2026</p><h2 class="disp">VitalAI</h2><p class="why">Engagement mechanics around an AI assistant.</p></div>
+  <p class="d">A Groq-powered health assistant with gamification: streaks, XP and a "Health Wrapped" recap.</p>
+  <figure class="vz" data-viz="vital">
+    <p class="mono pt">Tap days to check in</p>
+    <div class="cal"><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button><button type="button" class="day"></button></div>
+    <div class="xp"><i></i></div>
+    <p class="st" data-out aria-live="polite"></p>
+    <div class="ctls"><button type="button" class="ctl" data-recap>Health Wrapped</button></div>
+    <p class="st" data-wrap aria-live="polite"></p>
+    <figcaption><b class="chip i">Illustrative</b> Illustrative: streaks and XP are the idea, and the numbers here are made up.</figcaption>
+  </figure>
+  <p class="links"><a class="lnk" href="https://health-wellness-sepia.vercel.app/" target="_blank" rel="noopener">Live ↗</a></p>
+</div></section>
+</div>
+</main>
+<footer><div class="wrap"><span>© 2026 Anjaneya Tiwari</span><nav aria-label="Footer"><a href="index.html#work">Work</a><a href="index.html#experience">Experience</a><a href="index.html#about">About</a><a href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub</a></nav><button type="button" class="mt" data-motion-toggle hidden>Pause animations</button><a href="index.html">← Back to portfolio</a></div></footer>
+<script src="app.js" defer></script>
 </body>
 </html>

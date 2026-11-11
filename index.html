@@ -4,241 +4,368 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Anjaneya Tiwari — Backend &amp; AI Systems Engineer</title>
-<meta name="description" content="Anjaneya Tiwari is a software engineer building backend systems, AI applications and full-stack products: a 500+ API orchestration layer, geospatial matching, voice AI at 1,000+ concurrent requests.">
+<meta name="description" content="Anjaneya Tiwari builds backend systems, AI applications and full-stack products: a 500+ API orchestration layer, geospatial matching for a deployed marketplace, voice AI at 1,000+ concurrent requests.">
 <link rel="canonical" href="https://codebyanjaneya.github.io/">
 <meta property="og:title" content="Anjaneya Tiwari — Backend & AI Systems Engineer">
-<meta property="og:description" content="Backend systems, AI applications and full-stack products that work beyond the demo.">
+<meta property="og:description" content="Software that works beyond the demo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://codebyanjaneya.github.io/">
-<meta name="theme-color" content="#f3f0e8">
+<meta name="theme-color" content="#e7e9df">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,400..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=" js"</script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a href="#work" class="skip mono">Skip to work</a>
-<nav aria-label="Primary">
+<a href="#work" class="skip">Skip to work</a>
+<header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">Anjaneya Tiwari</a>
-    <div class="links">
-      <a class="home" href="#top">Home</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a>
-      <a class="res" href="resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
-    </div>
-  </div>
-</nav>
-
-<main>
-<header class="hero" id="top">
-  <div class="wrap">
-    <p class="mono"><i></i> Open to backend &amp; AI roles · Currently R&amp;D Apprentice at Rootstock Technology · Delhi</p>
-    <h1>Anjaneya <br>Tiwari</h1>
-    <div class="hero-grid">
-      <p class="lead">I build software that <em style="color:var(--accent)">works beyond the demo.</em></p>
-      <div>
-        <p class="sub">Backend, AI and full-stack engineer. I've built an orchestration layer over 500+ APIs, a geospatial matching engine for a deployed marketplace, and voice-AI infrastructure handling 1,000+ concurrent requests.</p>
-        <div class="cta">
-          <a class="btn p" href="#work">Explore selected work</a>
-          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View resume</a>
-          <a class="btn" href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="#contact">Contact</a>
-        </div>
-      </div>
-    </div>
+    <a class="wm" href="#top" aria-label="Anjaneya Tiwari, home"><b>AT</b>Anjaneya Tiwari</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="#work">Work</a></li><li><a href="#experience">Experience</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
+    </ul></nav>
   </div>
 </header>
 
-<section id="work">
+<main id="top">
+<section class="hero">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="mono">Selected work</p>
-      <div><h2>Six systems, built end to end.</h2>
-      <p>Each one with the problem, what I built and the decisions behind it. <a href="projects.html">More projects →</a></p></div>
+    <p class="status mono">Open to backend &amp; AI roles · R&amp;D apprentice at Rootstock Technology · Delhi</p>
+    <div>
+      <div class="name"><h1 class="disp"><span>Anjaneya</span><span>Tiwari</span></h1>
+      <p class="say">I build software that <em>works beyond the demo.</em></p></div>
+      <div class="hero-mid"><p class="go"><a class="lnk" href="#work">Selected work ↓</a><a class="lnk" href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub ↗</a><a class="lnk" href="https://www.linkedin.com/in/anjaneya-tiwari/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="lnk" href="mailto:anjaneyatiwarii@gmail.com">Email ↗</a></p><p class="who">Backend, AI and full-stack engineer in Delhi. I build async APIs, agentic pipelines and voice-AI infrastructure, and I built and deployed a multiplayer 3D game.</p></div>
     </div>
-
-    <article class="case">
-      <div class="meta"><span class="n">01</span><p>Independent project</p><p>Backend · Research systems</p></div>
-      <div>
-        <h3>XENOM Intelligence</h3>
-        <p class="one">Company intelligence where every insight traces back to its source.</p>
-        <div class="body">
-          <dl class="facts">
-            <div><dt>Problem</dt><dd>AI-generated research is hard to trust when you can't see where a claim came from.</dd></div>
-            <div><dt>What I built</dt><dd>A research and company-intelligence platform that ingests, normalizes and deduplicates sources, extracts claims, and links every insight to its supporting citations.</dd></div>
-            <div><dt>Decisions</dt><dd>Auditability is the core constraint. Semantic embeddings are optional, and live search depends on configuration, so the pipeline works without them. Docker config is included.</dd></div>
-            <div><dt>Related</dt><dd>At Rootstock I built an agentic research pipeline on the same ideas: news discovery, evidence ranking, source-backed intelligence.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Evidence pipeline</p>
-            <ol class="flow"><li>Sources<small>ingest · normalize · deduplicate</small></li><li>Claims<small>extracted from each source</small></li><li>Citations<small>every insight linked to its support</small></li><li>Insight<small>competitor analysis · opportunity detection</small></li></ol></div>
-        </div>
-        <p class="stack">React · TypeScript · FastAPI · PostgreSQL/pgvector · Groq</p>
-        <p class="ln"><a href="https://github.com/codebyanjaneya/Xenom-Intelligence-System" target="_blank" rel="noopener">GitHub ↗</a></p>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta"><span class="n">02</span><p>Independent project</p><p>3D · Multiplayer · Shipped</p></div>
-      <div>
-        <h3>Rooftop Rush</h3>
-        <p class="one">A 3D multiplayer racing game, live on the web and Google Play.</p>
-        <div class="body flip">
-          <dl class="facts">
-            <div><dt>What I built</dt><dd>A 3D racing game in TypeScript and Three.js with chase and first-person cameras, a GLB car model, three districts, and combo scoring.</dd></div>
-            <div><dt>Modes</dt><dd>Five-chapter Story, Endless and Multiplayer, plus Ghost Rival, which races a replay of your previous run.</dd></div>
-            <div><dt>Decisions</dt><dd>A fixed-timestep loop and object pooling keep long sessions stable. Tracks are generated dynamically, with flight sections and landing-safety logic. The server decides multiplayer results.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Client / server split</p>
-            <div class="two"><div>Client<small>TypeScript · Three.js. Fixed-timestep loop, object pooling. Firebase Hosting.</small></div><div>Game server<small>Node.js WebSocket. Rooms, shared-seed tracks, server-decided results, real-time updates.</small></div></div></div>
-        </div>
-        <p class="stack">TypeScript · Three.js · Node.js · WebSockets · Firebase Hosting</p>
-        <p class="ln"><a href="https://rooftoprush.web.app/" target="_blank" rel="noopener">Live demo ↗</a><a href="https://play.google.com/store/apps/details?id=com.anjaneya.rooftoprush" target="_blank" rel="noopener">Google Play · Tester access ↗</a><a href="https://github.com/codebyanjaneya/Rooftop-Rush" target="_blank" rel="noopener">GitHub ↗</a></p>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta"><span class="n">03</span><p>Independent project · Aug 2026</p><p>Backend · AI · Security</p></div>
-      <div>
-        <h3>Email Triage Assistant</h3>
-        <p class="one">An inbox assistant that learns from corrections and never sends on its own.</p>
-        <div class="body">
-          <dl class="facts">
-            <div><dt>What I built</dt><dd>A Gmail add-on, FastAPI dashboard and CLI for multi-user triage: priority scoring, deadline extraction, local semantic search, and reply drafts.</dd></div>
-            <div><dt>Decisions</dt><dd>Rules run first with an LLM fallback. The system adapts to user corrections. Replies are saved as drafts only. OAuth 2.0 with PKCE and per-user data isolation.</dd></div>
-            <div><dt>Result</dt><dd>Gmail API calls cut by 92.5% by batching and searching locally, validated across 1,800+ messages, with 59 regression tests and documented real-Gmail validation.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Gmail API calls per inbox</p>
-            <div class="bignum"><s>200</s><span>→</span><b>15</b></div>
-            <div class="bar"><i style="width:7.5%"></i></div><p class="mono">−92.5% · 1,800+ messages</p></div>
-        </div>
-        <p class="stack">FastAPI · Google Apps Script · Groq · FastEmbed · OAuth 2.0 (PKCE)</p>
-        <p class="ln"><a href="https://github.com/codebyanjaneya/Email-Triage-Assistant" target="_blank" rel="noopener">GitHub ↗</a></p>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta"><span class="n">04</span><p>Built during Telogo internship</p><p>Backend · Observability</p></div>
-      <div>
-        <h3>LoadPulse</h3>
-        <p class="one">Concurrency benchmarking you can watch in real time.</p>
-        <div class="body flip">
-          <dl class="facts">
-            <div><dt>Problem</dt><dd>The voice-AI backend at Telogo had to hold up under load, and that needed measuring, not guessing.</dd></div>
-            <div><dt>What I built</dt><dd>A benchmarking and observability platform on FastAPI with async worker pools and token-bucket rate limiting, benchmarked at 1,000+ concurrent requests.</dd></div>
-            <div><dt>Output</dt><dd>A React and Recharts dashboard fed over WebSockets, streaming p50/p95/p99 latency.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Request path</p>
-            <ol class="flow"><li>Requests<small>1,000+ concurrent</small></li><li>Token-bucket rate limiter</li><li>Async worker pool</li><li>WebSocket stream<small>p50 / p95 / p99</small></li><li>Live dashboard</li></ol></div>
-        </div>
-        <p class="stack">FastAPI · asyncio · React · Recharts · WebSockets</p>
-        <p class="ln"><a href="https://loadpulse-dashboard.vercel.app/" target="_blank" rel="noopener">Live dashboard ↗</a><a href="https://github.com/codebyanjaneya/loadpulse" target="_blank" rel="noopener">GitHub ↗</a></p>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta"><span class="n">05</span><p>Gleska Private Limited</p><p>Backend · Geospatial · Payments</p></div>
-      <div>
-        <h3>Gleska workforce marketplace</h3>
-        <p class="one">Matching workers to nearby jobs, in real time.</p>
-        <div class="body">
-          <dl class="facts">
-            <div><dt>What I built</dt><dd>The backend of a deployed real-time workforce marketplace: 7+ REST APIs, 9 data models and 12 migrations, with a service-layer design.</dd></div>
-            <div><dt>Matching</dt><dd>A PostGIS engine using ST_DistanceSphere with 50/30/20 weighted ranking and an adaptive 10–30 km search radius.</dd></div>
-            <div><dt>Workflow</dt><dd>A six-stage job workflow with two-minute offer expiry, transactional state transitions and dual-OTP verification.</dd></div>
-            <div><dt>Payments</dt><dd>Cashfree Payments and Verification: subscription billing, webhook reconciliation, business and worker KYC.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Ranking weights · search radius</p>
-            <div class="weights"><span>50</span><span>30</span><span>20</span></div>
-            <p class="mono">Radius adapts 10 km → 30 km</p>
-            <p class="mono" style="margin-top:8px">Offers expire after 2 min</p></div>
-        </div>
-        <p class="stack">FastAPI · PostgreSQL/PostGIS · async SQLAlchemy · Supabase · Cashfree</p>
-        <p class="ln"><a href="https://www.goleska.in/" target="_blank" rel="noopener">Gleska ↗</a></p>
-      </div>
-    </article>
-
-    <article class="case">
-      <div class="meta"><span class="n">06</span><p>Independent project · Jun 2026</p><p>Multi-agent · Full-stack</p></div>
-      <div>
-        <h3>AgentForge</h3>
-        <p class="one">A multi-agent operating system for running a company's functions.</p>
-        <div class="body flip">
-          <dl class="facts">
-            <div><dt>What I built</dt><dd>Seven agents (CEO, Sales, Marketing, Support, Research, Finance, Hiring) on FastAPI, Next.js and LLM APIs. The CEO agent decomposes goals and delegates to specialists.</dd></div>
-            <div><dt>Decisions</dt><dd>Agent memory in Redis and PostgreSQL. A digital-twin dashboard tracks MRR, revenue, burn rate and runway.</dd></div>
-            <div><dt>Status</dt><dd>Deployed with Docker on AWS EC2 and tested by 4–5 users.</dd></div>
-          </dl>
-          <div class="fig"><p class="mono cap">Delegation</p>
-            <div class="tree"><div class="ceo">CEO agent: decomposes goals</div>
-            <div class="sub"><span>Sales</span><span>Marketing</span><span>Support</span><span>Research</span><span>Finance</span><span>Hiring</span></div></div></div>
-        </div>
-        <p class="stack">FastAPI · Next.js · Redis · PostgreSQL · Docker · AWS EC2</p>
-        <p class="ln"><a href="https://agentforge-omega-topaz.vercel.app/" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/codebyanjaneya/agentforge" target="_blank" rel="noopener">GitHub ↗</a></p>
-      </div>
-    </article>
+    <div class="skipbox">
+      <p class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>The parts demos skip<span class="lab-n"> · numbers from my work, each linked to its context</span></p>
+      <ol class="skips">
+        <li><a href="#experience"><b>500+</b><span>APIs behind one orchestration layer: routing, discovery, integrations.</span></a></li>
+        <li><a href="#telogo-role"><b>1,000+</b><span>concurrent voice requests, under 2 seconds end to end.</span></a></li>
+        <li><a href="#email"><b>92.5%</b><span>fewer Gmail API calls, with 59 regression tests behind it.</span></a></li>
+        <li><a href="#gleska-role"><b>2:00</b><span>offer expiry in a job workflow with dual-OTP verification.</span></a></li>
+        <li><a href="#agentforge"><b>7</b><span>agents. One decomposes the goal, six do the work.</span></a></li>
+      </ol>
+    </div>
   </div>
 </section>
 
-<section id="experience">
+<section class="sec" id="work">
   <div class="wrap">
-    <div class="sec-head"><p class="mono">Experience</p><h2>Where I've shipped.</h2></div>
-    <div class="job"><p class="mono">Aug 2026 – Present<br>New Delhi</p><div>
-      <h3><a href="https://www.rootstocktech.co.in/" target="_blank" rel="noopener">Rootstock Technology</a></h3><p class="role">Research &amp; Development Apprentice</p>
-      <ul><li>Engineered a 500+ API orchestration layer for AI workflows: endpoints, routing, API discovery and integrations.</li>
-      <li>Built GPU-accelerated computer-vision pipelines with Qwen on 2× Tesla V100 32GB GPUs for image recognition and ad verification.</li>
-      <li>Developed 3D and robotics simulation workflows with Unity (C#), ROS, Gazebo and NVIDIA Isaac Sim.</li></ul></div></div>
-    <div class="job"><p class="mono">Jun 2026 – Aug 2026<br>New Delhi</p><div>
-      <h3><a href="https://www.goleska.in/" target="_blank" rel="noopener">Gleska Private Limited</a></h3><p class="role">Full-Stack Developer</p>
-      <ul><li>Built the FastAPI/PostgreSQL backend for a real-time workforce marketplace: 7+ REST APIs, 9 data models, 12 migrations.</li>
-      <li>Implemented PostGIS geospatial matching and a fault-tolerant job workflow with offer expiry and dual-OTP verification.</li>
-      <li>Integrated Cashfree payment and verification APIs for billing, webhook reconciliation and KYC.</li></ul></div></div>
-    <div class="job"><p class="mono">Sep 2025 – Mar 2026<br>Noida</p><div>
-      <h3><a href="https://www.telogo.com/" target="_blank" rel="noopener">Telogo Communications</a></h3><p class="role">Backend &amp; AI Systems Intern</p>
-      <ul><li>Architected voice-AI infrastructure processing 1,000+ concurrent requests with async workers, autoscaling and streaming inference, at under 2 seconds end to end.</li>
-      <li>Built a real-time observability stack for multilingual speech systems, profiling latency, throughput, queue depth and worker utilization.</li></ul></div></div>
-    <div class="job"><p class="mono">Feb 2025 – Jul 2025<br>Noida</p><div>
-      <h3><a href="https://www.motivusi.com/" target="_blank" rel="noopener">Motivus Innovation</a></h3><p class="role">Software Development Intern</p>
-      <ul><li>Built production backend services and data pipelines for AI-driven ESG platforms, optimizing database workflows across renewable-energy and carbon-accounting systems.</li>
-      <li>Prototyped AI/ML models for sustainability analytics and turned research into deployable features.</li></ul></div></div>
+    <p class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Selected work</p>
+    <div class="intro">
+      <div>
+        <h2 class="disp big">Work</h2>
+        <p class="deck">Five systems I built end to end, then six smaller builds. Each one shows the problem, the approach, the trade-off and the result, with a diagram you can poke at.</p>
+        <p class="legend"><span><b class="chip m">Measured</b> a result from real runs</span><span><b class="chip i">Illustrative</b> a simulation that explains the mechanism, not live data</span></p>
+      </div>
+      <ol class="pidx">
+        <li><a href="#xenom"><span class="t"><b>XENOM Intelligence</b><span>Research where every insight cites its source.</span></span></a></li>
+        <li><a href="#rooftop"><span class="t"><b>Rooftop Rush</b><span>3D multiplayer racing game, live on the web. Google Play: tester access only.</span></span></a></li>
+        <li><a href="#email"><span class="t"><b>Email Triage Assistant</b><span>Gmail API calls cut 92.5% across 1,800+ messages.</span></span><b class="chip m">Measured</b></a></li>
+        <li><a href="#loadpulse"><span class="t"><b>LoadPulse</b><span>An async backend shedding load, with live p50 / p95 / p99.</span></span></a></li>
+        <li><a href="#agentforge"><span class="t"><b>AgentForge</b><span>Seven agents; a CEO agent delegates to six specialists.</span></span></a></li>
+        <li class="more"><a href="projects.html"><span class="t"><b>Six smaller builds</b><span>DermaCam, AutoApply Bot, LLM Gate, Nudge, H.E.R.C.S, VitalAI</span></span></a></li>
+      </ol>
+    </div>
+  </div>
+</section>
 
-    <div class="sec-head" style="margin-top:72px"><p class="mono">Expertise</p><h2>What I work with.</h2></div>
-    <dl class="skills">
-      <dt>Languages</dt><dd><span class="k">Python, TypeScript</span> · <span class="r">JavaScript, SQL, C#, Bash</span></dd>
-      <dt>Backend &amp; distributed systems</dt><dd><span class="k">FastAPI, async programming, WebSockets, REST, system design</span> · <span class="r">Flask, Django REST, Node.js, Express, NestJS, GraphQL, Celery, JWT, Rate limiting, Caching, NGINX, Pytest</span></dd>
-      <dt>AI &amp; model infrastructure</dt><dd><span class="k">LLM applications, RAG, multi-agent systems, computer vision</span> · <span class="r">LangChain, LangGraph, MCP, Groq, OpenAI and Anthropic APIs, vLLM, Ollama, Hugging Face, Qwen, PyTorch, OpenCV, CUDA, MLflow</span></dd>
-      <dt>Databases</dt><dd><span class="k">PostgreSQL, PostGIS, Redis</span> · <span class="r">pgvector, Supabase, MongoDB, MySQL, SQLite, Kafka</span></dd>
-      <dt>Cloud &amp; DevOps</dt><dd><span class="k">Docker, AWS, GitHub Actions</span> · <span class="r">Kubernetes, Terraform, GCP, Azure, Oracle Cloud, Firebase, GitLab CI/CD, Linux, Prometheus</span></dd>
-      <dt>Automation &amp; integrations</dt><dd><span class="k">n8n, Gmail API, OAuth 2.0</span> · <span class="r">Zapier, Playwright, Selenium, Google Apps Script, webhooks, Cashfree, Razorpay</span></dd>
-      <dt>3D, mobile &amp; robotics</dt><dd><span class="k">Three.js, Unity</span> · <span class="r">Flutter, React Native, ROS, Gazebo, NVIDIA Isaac Sim</span></dd>
-      <dt>Frontend</dt><dd><span class="k">React, Next.js</span> · <span class="r">Angular, Tailwind CSS, HTML5, CSS3</span></dd>
+<!-- 01 XENOM -->
+<section class="proj p-xenom" id="xenom">
+  <div class="wrap">
+    <div class="head">
+      <p class="idx mono">Independent project</p>
+      <h3 class="disp">XENOM<br>Intelli&shy;gence</h3>
+      <p class="deck">Company research where every insight keeps a path back to its source.</p>
+      <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/Xenom-Intelligence-System" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="viz"><figure class="pnl xv" data-viz="xenom" data-active="1">
+      <p class="try mono">Try it · pick a claim</p>
+      <svg viewBox="0 0 560 380" role="img" aria-label="Diagram: three highlighted claims in a document each connect to a numbered source. Use the buttons below to choose a claim.">
+        <g fill="#bfe8d6" opacity=".3"><rect y="30" width="240" height="10"/><rect y="56" width="220" height="10"/><rect y="108" width="180" height="10"/><rect y="134" width="240" height="10"/><rect y="186" width="200" height="10"/><rect y="212" width="250" height="10"/><rect y="264" width="210" height="10"/><rect y="290" width="240" height="10"/><rect y="316" width="170" height="10"/><rect y="82" width="250" height="10"/><rect y="160" width="230" height="10"/><rect y="238" width="160" height="10"/></g>
+        <g fill="none" stroke="#bfe8d6" stroke-width="2" opacity=".25"><path d="M170 87C290 87 270 62 380 62"/><path d="M180 165C290 165 280 188 380 188"/><path d="M110 243C250 243 270 314 380 314"/></g>
+        <g fill="none" stroke="#ff4f1f" stroke-width="2"><path class="ln l1" pathLength="1" d="M170 87C290 87 270 62 380 62"/><path class="ln l2" pathLength="1" d="M180 165C290 165 280 188 380 188"/><path class="ln l3" pathLength="1" d="M110 243C250 243 270 314 380 314"/></g>
+        <g fill="#ff4f1f"><rect class="cl c1" data-pick="1" x="30" y="80" width="140" height="14"/><rect class="cl c2" data-pick="2" x="70" y="158" width="110" height="14"/><rect class="cl c3" data-pick="3" x="20" y="236" width="90" height="14"/></g>
+        <g fill="none" stroke-width="2"><rect class="sb s1" x="380" y="20" width="180" height="84"/><rect class="sb s2" x="380" y="146" width="180" height="84"/><rect class="sb s3" x="380" y="272" width="180" height="84"/></g>
+        <g font-family="IBM Plex Mono,monospace" font-size="15" font-weight="500" fill="#bfe8d6"><text x="392" y="44">SOURCE A</text><text x="392" y="170">SOURCE B</text><text x="392" y="296">SOURCE C</text></g>
+        <g fill="#bfe8d6" opacity=".45"><rect x="392" y="58" width="150" height="6"/><rect x="392" y="74" width="110" height="6"/><rect x="392" y="184" width="150" height="6"/><rect x="392" y="200" width="110" height="6"/><rect x="392" y="310" width="150" height="6"/><rect x="392" y="326" width="110" height="6"/></g>
+        <g fill="#ff4f1f"><rect x="528" y="20" width="32" height="26"/><rect x="528" y="146" width="32" height="26"/><rect x="528" y="272" width="32" height="26"/></g>
+        <g font-family="IBM Plex Mono,monospace" font-size="18" font-weight="500" fill="#0b3a35" text-anchor="middle"><text x="544" y="39">1</text><text x="544" y="165">2</text><text x="544" y="291">3</text></g>
+      </svg>
+      <div class="ctls" role="group" aria-label="Choose a claim"><button type="button" class="ctl" data-pick="1" aria-pressed="true">Claim 1</button><button type="button" class="ctl" data-pick="2" aria-pressed="false">Claim 2</button><button type="button" class="ctl" data-pick="3" aria-pressed="false">Claim 3</button></div>
+      <figcaption aria-live="off"><b class="chip i">Illustrative</b> <span data-cap>Every insight keeps a link to the source that supports it, so a reader can check it.</span> Abstract diagram, not a screenshot.</figcaption>
+    </figure></div>
+    <div class="detail">
+      <dl class="f"><div><dt>Problem</dt><dd>AI-generated research is hard to trust when you can't see where a claim came from.</dd></div><div><dt>Approach</dt><dd>A research and company-intelligence platform: it ingests, normalizes and deduplicates sources, extracts claims, and links every insight to its supporting citations. It supports competitor analysis and opportunity detection.</dd></div><div><dt>Trade-off</dt><dd>Auditability comes first. Semantic embeddings are optional and live search depends on configuration, so the core pipeline runs without either. Docker configuration is included.</dd></div><div class="res"><dt>Result</dt><dd>Every insight carries a path back to its source. The same ideas drive the agentic research pipeline I built at Rootstock: news discovery, evidence ranking, source-backed intelligence.</dd></div></dl>
+      <p class="stack">React · TypeScript · FastAPI · PostgreSQL/pgvector · Groq</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Rooftop Rush -->
+<section class="proj p-rooftop" id="rooftop">
+  <div class="wrap">
+    <div class="viz rviz">
+      <figure class="pnl" data-viz="rooftop">
+        <div class="shot"><img src="assets/rooftop-neon.jpg" srcset="assets/rooftop-neon-800.jpg 800w, assets/rooftop-neon.jpg 1280w" sizes="(min-width:1000px) 52vw, 100vw" width="1280" height="562" loading="lazy" decoding="async" alt="Real gameplay screenshot of Rooftop Rush: a car on a three-lane neon road between glowing towers, with a translucent ghost car ahead, plus score, speed, flight and nitro meters.">
+          <button type="button" class="hot" data-h="ghost" style="left:50%;top:47%" aria-label="Ghost Rival">+</button>
+          <button type="button" class="hot" data-h="car" style="left:50%;top:62%" aria-label="The car">+</button>
+          <button type="button" class="hot" data-h="lanes" style="left:36%;top:78%" aria-label="Lanes">+</button>
+          <button type="button" class="hot" data-h="status" style="left:78%;top:15.7%" aria-label="Ghost HUD">+</button>
+          <button type="button" class="hot" data-h="flight" style="left:41%;top:88.5%" aria-label="Flight meter">+</button>
+          <button type="button" class="hot" data-h="nitro" style="left:59%;top:95%" aria-label="Nitro meter">+</button>
+        </div>
+        <p class="tip" aria-live="polite" data-tip>Tap a marker.</p>
+        <figcaption><b class="chip m">Real gameplay</b> Real gameplay from my QA captures (Neon district). Tap the markers.</figcaption>
+      </figure>
+      <figure class="pnl fl" data-viz="flight">
+        <p class="mono pt">Flight and landing safety · schematic</p>
+        <svg viewBox="0 0 640 200" role="img" aria-label="Side-view schematic: a car on the road with three obstacles. Use the controls to take off, fly over them, and land.">
+          <path d="M0 150H640" stroke="#0f1411" stroke-width="3"/><rect y="153" width="640" height="47" fill="#0f1411" opacity=".08"/>
+          <g fill="#0f1411"><rect x="170" y="116" width="50" height="34"/><rect x="350" y="116" width="74" height="34"/><rect x="520" y="116" width="44" height="34"/></g>
+          <g class="fx"><g class="fy"><g class="car"><rect y="136" width="36" height="14"/><rect x="8" y="128" width="18" height="8"/><circle cx="8" cy="150" r="5"/><circle cx="28" cy="150" r="5"/></g></g></g>
+        </svg>
+        <div class="ctls"><button type="button" class="ctl" data-fly aria-pressed="false" aria-keyshortcuts="Space ArrowLeft ArrowRight">Take off (Space)</button></div>
+        <label class="rl">Position along the road<input type="range" min="0" max="100" value="4"></label>
+        <p class="mtrl mono">Flight meter</p><div class="mtr"><i></i></div>
+        <p class="st" data-st aria-live="polite">ON GROUND. The meter recharges.</p>
+        <figcaption><b class="chip i">Illustrative</b> Schematic of the mechanic from the game's rules, not game footage. Landing never touches down on an obstacle: if something is below the descent path, the car holds above it.</figcaption>
+      </figure>
+    </div>
+    <div class="head">
+      <p class="idx mono">Independent project · Live demo</p>
+      <h3 class="disp">Rooftop<br>Rush</h3>
+      <p class="deck">A 3D multiplayer racing game, live on the web. The Google Play build is in testing.</p>
+      <p class="links"><a class="lnk" href="https://rooftoprush.web.app/" target="_blank" rel="noopener">Live demo ↗</a><a class="lnk" href="https://play.google.com/store/apps/details?id=com.anjaneya.rooftoprush" target="_blank" rel="noopener">Google Play — Tester Access ↗</a><a class="lnk" href="https://github.com/codebyanjaneya/Rooftop-Rush" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="detail">
+      <dl class="f"><div><dt>Problem</dt><dd>A browser 3D game has to stay stable through long sessions, and a multiplayer race has to stay fair.</dd></div><div><dt>Approach</dt><dd>A 3D racing game in TypeScript and Three.js with chase and first-person cameras, a GLB car model, three districts and combo scoring. Five-chapter Story, Endless and Multiplayer modes, plus Ghost Rival, which races a replay of your previous run.</dd></div><div><dt>Trade-off</dt><dd>A fixed-timestep loop and object pooling keep long sessions stable. Tracks are generated dynamically, with flight sections and landing-safety logic. Multiplayer runs on a separate Node.js WebSocket server that owns rooms and shared-seed tracks, so the server, not the clients, decides results.</dd></div><div class="res"><dt>Result</dt><dd>Live on the web. The Google Play build is on a testing track, so it is available to approved testers only.</dd></div><div><dt>Credit</dt><dd>The 3D car model was made with Vi3W. The game code, roads, districts, story and effects are my own work.</dd></div></dl>
+      <div class="sq"><span>Client · TypeScript, Three.js, Firebase Hosting</span><span>Server · Node.js, WebSockets</span></div>
+      <p class="stack">TypeScript · Three.js · Node.js · WebSockets · Firebase Hosting</p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Email Triage -->
+<section class="proj p-email" id="email">
+  <div class="wrap">
+    <div class="head">
+      <p class="idx mono">Independent project · Aug 2026</p>
+      <h3 class="disp"><span class="sr">Email Triage Assistant: </span>200 → 15</h3>
+      <p class="deck">Email Triage Assistant: an inbox assistant that learns from corrections and never sends on its own.</p>
+      <p class="links"><a class="lnk" href="https://github.com/codebyanjaneya/Email-Triage-Assistant" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="viz"><figure class="pnl ev" data-viz="email">
+      <p class="try mono">Try it · drag the slider</p>
+      <svg viewBox="0 0 480 240" role="img" aria-label="Grid of 200 squares representing Gmail API calls per inbox. 15 are highlighted and the rest fade as you move the slider from before to after."><rect class="k" x="3" y="3" width="18" height="18"/><rect class="k" x="27" y="3" width="18" height="18"/><rect class="k" x="51" y="3" width="18" height="18"/><rect class="k" x="75" y="3" width="18" height="18"/><rect class="k" x="99" y="3" width="18" height="18"/><rect class="o" x="123" y="3" width="18" height="18"/><rect class="o" x="147" y="3" width="18" height="18"/><rect class="o" x="171" y="3" width="18" height="18"/><rect class="o" x="195" y="3" width="18" height="18"/><rect class="o" x="219" y="3" width="18" height="18"/><rect class="o" x="243" y="3" width="18" height="18"/><rect class="o" x="267" y="3" width="18" height="18"/><rect class="o" x="291" y="3" width="18" height="18"/><rect class="o" x="315" y="3" width="18" height="18"/><rect class="o" x="339" y="3" width="18" height="18"/><rect class="o" x="363" y="3" width="18" height="18"/><rect class="o" x="387" y="3" width="18" height="18"/><rect class="o" x="411" y="3" width="18" height="18"/><rect class="o" x="435" y="3" width="18" height="18"/><rect class="o" x="459" y="3" width="18" height="18"/><rect class="k" x="3" y="27" width="18" height="18"/><rect class="k" x="27" y="27" width="18" height="18"/><rect class="k" x="51" y="27" width="18" height="18"/><rect class="k" x="75" y="27" width="18" height="18"/><rect class="k" x="99" y="27" width="18" height="18"/><rect class="o" x="123" y="27" width="18" height="18"/><rect class="o" x="147" y="27" width="18" height="18"/><rect class="o" x="171" y="27" width="18" height="18"/><rect class="o" x="195" y="27" width="18" height="18"/><rect class="o" x="219" y="27" width="18" height="18"/><rect class="o" x="243" y="27" width="18" height="18"/><rect class="o" x="267" y="27" width="18" height="18"/><rect class="o" x="291" y="27" width="18" height="18"/><rect class="o" x="315" y="27" width="18" height="18"/><rect class="o" x="339" y="27" width="18" height="18"/><rect class="o" x="363" y="27" width="18" height="18"/><rect class="o" x="387" y="27" width="18" height="18"/><rect class="o" x="411" y="27" width="18" height="18"/><rect class="o" x="435" y="27" width="18" height="18"/><rect class="o" x="459" y="27" width="18" height="18"/><rect class="k" x="3" y="51" width="18" height="18"/><rect class="k" x="27" y="51" width="18" height="18"/><rect class="k" x="51" y="51" width="18" height="18"/><rect class="k" x="75" y="51" width="18" height="18"/><rect class="k" x="99" y="51" width="18" height="18"/><rect class="o" x="123" y="51" width="18" height="18"/><rect class="o" x="147" y="51" width="18" height="18"/><rect class="o" x="171" y="51" width="18" height="18"/><rect class="o" x="195" y="51" width="18" height="18"/><rect class="o" x="219" y="51" width="18" height="18"/><rect class="o" x="243" y="51" width="18" height="18"/><rect class="o" x="267" y="51" width="18" height="18"/><rect class="o" x="291" y="51" width="18" height="18"/><rect class="o" x="315" y="51" width="18" height="18"/><rect class="o" x="339" y="51" width="18" height="18"/><rect class="o" x="363" y="51" width="18" height="18"/><rect class="o" x="387" y="51" width="18" height="18"/><rect class="o" x="411" y="51" width="18" height="18"/><rect class="o" x="435" y="51" width="18" height="18"/><rect class="o" x="459" y="51" width="18" height="18"/><rect class="o" x="3" y="75" width="18" height="18"/><rect class="o" x="27" y="75" width="18" height="18"/><rect class="o" x="51" y="75" width="18" height="18"/><rect class="o" x="75" y="75" width="18" height="18"/><rect class="o" x="99" y="75" width="18" height="18"/><rect class="o" x="123" y="75" width="18" height="18"/><rect class="o" x="147" y="75" width="18" height="18"/><rect class="o" x="171" y="75" width="18" height="18"/><rect class="o" x="195" y="75" width="18" height="18"/><rect class="o" x="219" y="75" width="18" height="18"/><rect class="o" x="243" y="75" width="18" height="18"/><rect class="o" x="267" y="75" width="18" height="18"/><rect class="o" x="291" y="75" width="18" height="18"/><rect class="o" x="315" y="75" width="18" height="18"/><rect class="o" x="339" y="75" width="18" height="18"/><rect class="o" x="363" y="75" width="18" height="18"/><rect class="o" x="387" y="75" width="18" height="18"/><rect class="o" x="411" y="75" width="18" height="18"/><rect class="o" x="435" y="75" width="18" height="18"/><rect class="o" x="459" y="75" width="18" height="18"/><rect class="o" x="3" y="99" width="18" height="18"/><rect class="o" x="27" y="99" width="18" height="18"/><rect class="o" x="51" y="99" width="18" height="18"/><rect class="o" x="75" y="99" width="18" height="18"/><rect class="o" x="99" y="99" width="18" height="18"/><rect class="o" x="123" y="99" width="18" height="18"/><rect class="o" x="147" y="99" width="18" height="18"/><rect class="o" x="171" y="99" width="18" height="18"/><rect class="o" x="195" y="99" width="18" height="18"/><rect class="o" x="219" y="99" width="18" height="18"/><rect class="o" x="243" y="99" width="18" height="18"/><rect class="o" x="267" y="99" width="18" height="18"/><rect class="o" x="291" y="99" width="18" height="18"/><rect class="o" x="315" y="99" width="18" height="18"/><rect class="o" x="339" y="99" width="18" height="18"/><rect class="o" x="363" y="99" width="18" height="18"/><rect class="o" x="387" y="99" width="18" height="18"/><rect class="o" x="411" y="99" width="18" height="18"/><rect class="o" x="435" y="99" width="18" height="18"/><rect class="o" x="459" y="99" width="18" height="18"/><rect class="o" x="3" y="123" width="18" height="18"/><rect class="o" x="27" y="123" width="18" height="18"/><rect class="o" x="51" y="123" width="18" height="18"/><rect class="o" x="75" y="123" width="18" height="18"/><rect class="o" x="99" y="123" width="18" height="18"/><rect class="o" x="123" y="123" width="18" height="18"/><rect class="o" x="147" y="123" width="18" height="18"/><rect class="o" x="171" y="123" width="18" height="18"/><rect class="o" x="195" y="123" width="18" height="18"/><rect class="o" x="219" y="123" width="18" height="18"/><rect class="o" x="243" y="123" width="18" height="18"/><rect class="o" x="267" y="123" width="18" height="18"/><rect class="o" x="291" y="123" width="18" height="18"/><rect class="o" x="315" y="123" width="18" height="18"/><rect class="o" x="339" y="123" width="18" height="18"/><rect class="o" x="363" y="123" width="18" height="18"/><rect class="o" x="387" y="123" width="18" height="18"/><rect class="o" x="411" y="123" width="18" height="18"/><rect class="o" x="435" y="123" width="18" height="18"/><rect class="o" x="459" y="123" width="18" height="18"/><rect class="o" x="3" y="147" width="18" height="18"/><rect class="o" x="27" y="147" width="18" height="18"/><rect class="o" x="51" y="147" width="18" height="18"/><rect class="o" x="75" y="147" width="18" height="18"/><rect class="o" x="99" y="147" width="18" height="18"/><rect class="o" x="123" y="147" width="18" height="18"/><rect class="o" x="147" y="147" width="18" height="18"/><rect class="o" x="171" y="147" width="18" height="18"/><rect class="o" x="195" y="147" width="18" height="18"/><rect class="o" x="219" y="147" width="18" height="18"/><rect class="o" x="243" y="147" width="18" height="18"/><rect class="o" x="267" y="147" width="18" height="18"/><rect class="o" x="291" y="147" width="18" height="18"/><rect class="o" x="315" y="147" width="18" height="18"/><rect class="o" x="339" y="147" width="18" height="18"/><rect class="o" x="363" y="147" width="18" height="18"/><rect class="o" x="387" y="147" width="18" height="18"/><rect class="o" x="411" y="147" width="18" height="18"/><rect class="o" x="435" y="147" width="18" height="18"/><rect class="o" x="459" y="147" width="18" height="18"/><rect class="o" x="3" y="171" width="18" height="18"/><rect class="o" x="27" y="171" width="18" height="18"/><rect class="o" x="51" y="171" width="18" height="18"/><rect class="o" x="75" y="171" width="18" height="18"/><rect class="o" x="99" y="171" width="18" height="18"/><rect class="o" x="123" y="171" width="18" height="18"/><rect class="o" x="147" y="171" width="18" height="18"/><rect class="o" x="171" y="171" width="18" height="18"/><rect class="o" x="195" y="171" width="18" height="18"/><rect class="o" x="219" y="171" width="18" height="18"/><rect class="o" x="243" y="171" width="18" height="18"/><rect class="o" x="267" y="171" width="18" height="18"/><rect class="o" x="291" y="171" width="18" height="18"/><rect class="o" x="315" y="171" width="18" height="18"/><rect class="o" x="339" y="171" width="18" height="18"/><rect class="o" x="363" y="171" width="18" height="18"/><rect class="o" x="387" y="171" width="18" height="18"/><rect class="o" x="411" y="171" width="18" height="18"/><rect class="o" x="435" y="171" width="18" height="18"/><rect class="o" x="459" y="171" width="18" height="18"/><rect class="o" x="3" y="195" width="18" height="18"/><rect class="o" x="27" y="195" width="18" height="18"/><rect class="o" x="51" y="195" width="18" height="18"/><rect class="o" x="75" y="195" width="18" height="18"/><rect class="o" x="99" y="195" width="18" height="18"/><rect class="o" x="123" y="195" width="18" height="18"/><rect class="o" x="147" y="195" width="18" height="18"/><rect class="o" x="171" y="195" width="18" height="18"/><rect class="o" x="195" y="195" width="18" height="18"/><rect class="o" x="219" y="195" width="18" height="18"/><rect class="o" x="243" y="195" width="18" height="18"/><rect class="o" x="267" y="195" width="18" height="18"/><rect class="o" x="291" y="195" width="18" height="18"/><rect class="o" x="315" y="195" width="18" height="18"/><rect class="o" x="339" y="195" width="18" height="18"/><rect class="o" x="363" y="195" width="18" height="18"/><rect class="o" x="387" y="195" width="18" height="18"/><rect class="o" x="411" y="195" width="18" height="18"/><rect class="o" x="435" y="195" width="18" height="18"/><rect class="o" x="459" y="195" width="18" height="18"/><rect class="o" x="3" y="219" width="18" height="18"/><rect class="o" x="27" y="219" width="18" height="18"/><rect class="o" x="51" y="219" width="18" height="18"/><rect class="o" x="75" y="219" width="18" height="18"/><rect class="o" x="99" y="219" width="18" height="18"/><rect class="o" x="123" y="219" width="18" height="18"/><rect class="o" x="147" y="219" width="18" height="18"/><rect class="o" x="171" y="219" width="18" height="18"/><rect class="o" x="195" y="219" width="18" height="18"/><rect class="o" x="219" y="219" width="18" height="18"/><rect class="o" x="243" y="219" width="18" height="18"/><rect class="o" x="267" y="219" width="18" height="18"/><rect class="o" x="291" y="219" width="18" height="18"/><rect class="o" x="315" y="219" width="18" height="18"/><rect class="o" x="339" y="219" width="18" height="18"/><rect class="o" x="363" y="219" width="18" height="18"/><rect class="o" x="387" y="219" width="18" height="18"/><rect class="o" x="411" y="219" width="18" height="18"/><rect class="o" x="435" y="219" width="18" height="18"/><rect class="o" x="459" y="219" width="18" height="18"/></svg>
+      <label class="rl">Before <span aria-hidden="true">←</span> drag <span aria-hidden="true">→</span> after<input type="range" min="0" max="100" value="100"></label>
+      <p class="read"><b data-n>15</b> API calls per inbox · <b data-pc>92.5%</b> fewer</p>
+      <div class="ctls"><button type="button" class="ctl" data-set="0">Before: 200</button><button type="button" class="ctl" data-set="1">After: 15</button></div>
+      <figcaption><b class="chip m">Measured</b> Vermilion: calls still made. Faded: calls avoided by batching and local semantic search together. The 200 → 15 and 92.5% figures are measured across 1,800+ messages; the squares in between are a scrub, not extra data.</figcaption>
+    </figure></div>
+    <div class="detail">
+      <dl class="f"><div><dt>Problem</dt><dd>Triaging a busy inbox takes a lot of Gmail API calls, and automatic replies are risky.</dd></div><div><dt>Approach</dt><dd>A Gmail add-on, FastAPI dashboard and CLI for multi-user triage: priority scoring, deadline extraction, local semantic search and reply drafts. Rules run first, with an LLM fallback, and the system adapts to user corrections.</dd></div><div><dt>Trade-off</dt><dd>Replies are saved as drafts only, never sent. OAuth 2.0 with PKCE and per-user data isolation. Local semantic search and batching replace API calls.</dd></div><div class="res"><dt>Result</dt><dd>Measured: API calls cut by 92.5% (200 → 15 per inbox) across 1,800+ messages. 59 regression tests, plus documented real-Gmail validation.</dd></div></dl>
+      <p class="stack">FastAPI · Google Apps Script · Groq · FastEmbed · OAuth 2.0 (PKCE)</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 LoadPulse -->
+<section class="proj p-load" id="loadpulse">
+  <div class="wrap">
+    <div class="head">
+      <p class="idx mono">Built during the Telogo internship</p>
+      <h3 class="disp">LoadPulse</h3>
+      <p class="deck">Concurrency benchmarking you can watch in real time.</p>
+      <p class="links"><a class="lnk" href="https://loadpulse-dashboard.vercel.app/" target="_blank" rel="noopener">Live dashboard ↗</a><a class="lnk" href="https://github.com/codebyanjaneya/loadpulse" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="viz"><figure class="pnl" data-viz="load">
+      <p class="try mono">Try it · send a burst</p>
+      <svg class="flow" viewBox="0 0 720 300" role="img" aria-label="Simulation: requests arrive from the left, pass a token-bucket rate limiter, are spread across a pool of async workers, and stream to a dashboard.">
+        <g stroke="#e7e9df" stroke-width="1" opacity=".22" fill="none"><path class="flowline" d="M0 40H210"/><path class="flowline" d="M0 66H210"/><path class="flowline" d="M0 92H210"/><path class="flowline" d="M0 118H210"/><path class="flowline" d="M0 144H210"/><path class="flowline" d="M0 170H210"/><path class="flowline" d="M0 196H210"/><path class="flowline" d="M0 222H210"/><path class="flowline" d="M0 248H210"/><path class="flowline" d="M0 274H210"/></g>
+        <path d="M232 36V290M248 36V290" stroke="#ff4f1f" stroke-width="4"/>
+        <g class="tk" fill="#ff4f1f"><rect x="150" y="10" width="10" height="10"/><rect x="164" y="10" width="10" height="10"/><rect x="178" y="10" width="10" height="10"/><rect x="192" y="10" width="10" height="10"/><rect x="206" y="10" width="10" height="10"/><rect x="220" y="10" width="10" height="10"/><rect x="234" y="10" width="10" height="10"/><rect x="248" y="10" width="10" height="10"/><rect x="262" y="10" width="10" height="10"/><rect x="276" y="10" width="10" height="10"/></g>
+        <g stroke="#e7e9df" stroke-width="2" fill="none" opacity=".85"><rect x="284" y="52" width="236" height="20"/><rect x="284" y="90" width="236" height="20"/><rect x="284" y="128" width="236" height="20"/><rect x="284" y="166" width="236" height="20"/><rect x="284" y="204" width="236" height="20"/><rect x="284" y="242" width="236" height="20"/></g>
+        <path d="M524 162H590L606 130 626 196 648 124 668 162H720" stroke="#ff4f1f" stroke-width="3" fill="none"/>
+        <g class="pts"></g>
+      </svg>
+      <div class="ctls"><button type="button" class="ctl" data-burst>Send a burst</button><button type="button" class="ctl" data-pause aria-pressed="false">Pause</button></div>
+      <svg class="lat" viewBox="0 0 420 170" role="img" aria-label="Illustrative latency histogram with markers for p50, p95 and p99">
+        <path d="M10 126H402" stroke="#e7e9df" stroke-width="2"/><rect class="hb" x="10" y="126" width="24" height="0"/><rect class="hb" x="38" y="126" width="24" height="0"/><rect class="hb" x="66" y="126" width="24" height="0"/><rect class="hb" x="94" y="126" width="24" height="0"/><rect class="hb" x="122" y="126" width="24" height="0"/><rect class="hb" x="150" y="126" width="24" height="0"/><rect class="hb" x="178" y="126" width="24" height="0"/><rect class="hb" x="206" y="126" width="24" height="0"/><rect class="hb" x="234" y="126" width="24" height="0"/><rect class="hb" x="262" y="126" width="24" height="0"/><rect class="hb" x="290" y="126" width="24" height="0"/><rect class="hb" x="318" y="126" width="24" height="0"/><rect class="hb" x="346" y="126" width="24" height="0"/><rect class="hb" x="374" y="126" width="24" height="0"/>
+        <polyline points="24.0,122.4 52.0,40.2 80.0,30.0 108.0,61.5 136.0,88.4 164.0,105.0 192.0,114.3 220.0,119.4 248.0,122.2 276.0,123.8 304.0,124.7 332.0,125.2 360.0,125.5 388.0,125.7" fill="none" stroke="#e7e9df" stroke-width="2" stroke-dasharray="3 4" opacity=".7"/>
+        <g font-family="IBM Plex Mono,monospace" font-size="16" font-weight="500" fill="#ff4f1f"><path d="M88.4 20V126" stroke="#ff4f1f" stroke-width="2" stroke-dasharray="4 4"/><text x="88.4" y="146" text-anchor="middle">p50</text><path d="M203.4 20V126" stroke="#ff4f1f" stroke-width="2" stroke-dasharray="4 4"/><text x="203.4" y="146" text-anchor="middle">p95</text><path d="M291.6 20V126" stroke="#ff4f1f" stroke-width="2" stroke-dasharray="4 4"/><text x="291.6" y="146" text-anchor="middle">p99</text></g>
+        <text x="402" y="164" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="13" fill="#e7e9df" opacity=".7">latency →</text>
+      </svg>
+      <figcaption><b class="chip i">Illustrative</b> A simulation, not measured data. Left to right: requests, token-bucket rate limiter (squares: tokens left; hollow dots are rejected, as the real system does with a 429 or 503), a pool of async workers (six drawn here), then a latency histogram. The real system also has a bounded queue, left out here for clarity. The dashed outline is the expected shape; p50 / p95 / p99 mark where half, 95% and 99% of requests finish.</figcaption>
+    </figure></div>
+    <div class="detail">
+      <dl class="f"><div><dt>Problem</dt><dd>A backend pushed past its capacity can crash or fall over. LoadPulse simulates that load and shows the service degrading gracefully instead, live.</dd></div><div><dt>Approach</dt><dd>A concurrency observability platform on FastAPI: a token-bucket rate limiter, a bounded queue and a fixed pool of async workers, with a React and Recharts dashboard fed over WebSockets.</dd></div><div><dt>Trade-off</dt><dd>Overload is rejected, not buffered forever. When capacity is exceeded, requests get a clean 429 (rate limited) or 503 (queue full) instead of being dropped silently or taking the service down.</dd></div><div class="res"><dt>Result</dt><dd>A live dashboard streams p50, p95 and p99 latency, queue depth, drop rate and active workers as a run happens, with an in-browser load generator and a CLI load tester.</dd></div></dl>
+      <p class="stack">FastAPI · asyncio · React · Recharts · WebSockets</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 AgentForge -->
+<section class="proj p-agent" id="agentforge">
+  <div class="wrap">
+    <div class="head">
+      <p class="idx mono">Independent project · Jun 2026</p>
+      <h3 class="disp">Agent<br>Forge</h3>
+      <p class="deck">A multi-agent operating system for running a company's functions.</p>
+      <p class="links"><a class="lnk" href="https://agentforge-omega-topaz.vercel.app/" target="_blank" rel="noopener">Live ↗</a><a class="lnk" href="https://github.com/codebyanjaneya/agentforge" target="_blank" rel="noopener">GitHub ↗</a></p>
+    </div>
+    <div class="detail">
+      <dl class="f"><div><dt>Problem</dt><dd>Coordinating several specialised agents around one goal.</dd></div><div><dt>Approach</dt><dd>Seven agents (CEO, Sales, Marketing, Support, Research, Finance, Hiring) on FastAPI, Next.js and LLM APIs. The CEO agent decomposes goals and delegates to the specialists, and agents talk to each other.</dd></div><div><dt>Trade-off</dt><dd>Central delegation through a CEO agent. Agent memory is dual-layer, Redis plus PostgreSQL, and a digital-twin dashboard tracks MRR, revenue, burn rate and runway.</dd></div><div class="res"><dt>Result</dt><dd>Deployed with Docker on AWS EC2 and tested by 4–5 users.</dd></div></dl>
+      <p class="stack">FastAPI · Next.js · Redis · PostgreSQL · Docker · AWS EC2</p>
+    </div>
+    <div class="viz"><figure class="pnl av" data-viz="agent" data-s="5">
+      <p class="try mono">Try it · step through, or inspect an agent</p>
+      <svg viewBox="0 -28 480 432" role="img" aria-label="Orchestration diagram: a goal enters the CEO agent, which delegates to six specialists. They share Redis and PostgreSQL memory, and results flow into a digital-twin dashboard.">
+        <path class="base" d="M240 64V236M210 116H270M210 176H270M210 236H270M20 116H8V270M20 176H8M20 236H8M460 116H472V270M460 176H472M460 236H472M8 270H472M120 270V282M360 270V282M120 320V340M360 320V340"/>
+        <path class="dr" data-s="1" pathLength="1" d="M240 -22V16M232 8L240 18L248 8"/>
+        <g font-family="IBM Plex Mono,monospace" font-size="15" font-weight="500" fill="#0f1411"><text x="256" y="0">GOAL</text></g>
+        <path class="dr" data-s="2" pathLength="1" d="M240 64V236"/><path class="dr" data-s="2" pathLength="1" d="M210 116H270"/><path class="dr" data-s="2" pathLength="1" d="M210 176H270"/><path class="dr" data-s="2" pathLength="1" d="M210 236H270"/>
+        <path class="dr" data-s="4" pathLength="1" d="M20 116H8V270H472V116H460M20 176H8M20 236H8M460 176H472M460 236H472M120 270V282M360 270V282"/>
+        <path class="dr res" data-s="5" pathLength="1" d="M120 320V340M360 320V340"/>
+        <rect class="ceo" data-s="1" x="170" y="20" width="140" height="44"/>
+        <g class="ag" data-n="Sales"><rect class="nd" data-s="3" x="20" y="96" width="190" height="40"/><text x="115" y="122">Sales</text></g>
+        <g class="ag" data-n="Marketing"><rect class="nd" data-s="3" x="20" y="156" width="190" height="40"/><text x="115" y="182">Marketing</text></g>
+        <g class="ag" data-n="Support"><rect class="nd" data-s="3" x="20" y="216" width="190" height="40"/><text x="115" y="242">Support</text></g>
+        <g class="ag" data-n="Research"><rect class="nd" data-s="3" x="270" y="96" width="190" height="40"/><text x="365" y="122">Research</text></g>
+        <g class="ag" data-n="Finance"><rect class="nd" data-s="3" x="270" y="156" width="190" height="40"/><text x="365" y="182">Finance</text></g>
+        <g class="ag" data-n="Hiring"><rect class="nd" data-s="3" x="270" y="216" width="190" height="40"/><text x="365" y="242">Hiring</text></g>
+        <rect class="mem" data-s="4" x="20" y="282" width="200" height="38"/><rect class="mem" data-s="4" x="260" y="282" width="200" height="38"/>
+        <rect class="tw" data-s="5" x="20" y="340" width="440" height="56"/>
+        <g font-family="IBM Plex Mono,monospace" font-size="19" font-weight="500" text-anchor="middle">
+          <text class="ceot" x="240" y="49">CEO</text><text class="memt" x="120" y="307">Redis</text><text class="memt" x="360" y="307">PostgreSQL</text>
+          <text class="twt" data-s="5" x="240" y="364" font-size="17">DIGITAL TWIN</text><text class="twt" data-s="5" x="240" y="384" font-size="14">MRR · revenue · burn · runway</text>
+        </g>
+      </svg>
+      <div class="ctls" role="group" aria-label="Orchestration steps"><button type="button" class="ctl" data-step="1" aria-pressed="false">1 Goal</button><button type="button" class="ctl" data-step="2" aria-pressed="false">2 Delegate</button><button type="button" class="ctl" data-step="3" aria-pressed="false">3 Work</button><button type="button" class="ctl" data-step="4" aria-pressed="false">4 Memory</button><button type="button" class="ctl" data-step="5" aria-pressed="true">5 Report</button></div>
+      <div class="ctls" role="group" aria-label="Inspect an agent"><button type="button" class="ctl sm" data-agent="Sales" aria-pressed="false">Sales</button><button type="button" class="ctl sm" data-agent="Marketing" aria-pressed="false">Marketing</button><button type="button" class="ctl sm" data-agent="Support" aria-pressed="false">Support</button><button type="button" class="ctl sm" data-agent="Research" aria-pressed="false">Research</button><button type="button" class="ctl sm" data-agent="Finance" aria-pressed="false">Finance</button><button type="button" class="ctl sm" data-agent="Hiring" aria-pressed="false">Hiring</button></div>
+      <figcaption aria-live="off"><b class="chip i">Illustrative</b> <span data-cap>5. Results flow into the digital-twin dashboard: MRR, revenue, burn rate and runway.</span> Schematic of the documented design, not live data.</figcaption>
+    </figure></div>
+  </div>
+</section>
+
+<section class="sec" id="also">
+  <div class="wrap">
+    <h2 class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Also built</h2>
+    <ul class="also">
+      <li><a href="projects.html#dermacam"><span class="n">DermaCam</span><span class="k">Multi-model AI skin diagnosis. HackIndia Spark 4, Round 2.</span><span class="ar" aria-hidden="true">→</span></a></li>
+      <li><a href="projects.html#autoapply"><span class="n">AutoApply Bot</span><span class="k">Multi-tenant recruitment SaaS on Telegram. Vibecon India, Round 2.</span><span class="ar" aria-hidden="true">→</span></a></li>
+      <li><a href="projects.html#llmgate"><span class="n">LLM Gate</span><span class="k">Policy-driven governance gateway for LLM APIs.</span><span class="ar" aria-hidden="true">→</span></a></li>
+      <li><a href="projects.html#nudge"><span class="n">Nudge</span><span class="k">AI coach that returns one concrete next action.</span><span class="ar" aria-hidden="true">→</span></a></li>
+      <li><a href="projects.html#hercs"><span class="n">H.E.R.C.S</span><span class="k">Fully local voice assistant. In progress.</span><span class="ar" aria-hidden="true">→</span></a></li>
+      <li><a href="projects.html#vitalai"><span class="n">VitalAI</span><span class="k">Groq-powered health assistant with streaks and XP.</span><span class="ar" aria-hidden="true">→</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="experience">
+  <div class="wrap">
+    <p class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Experience, Feb 2025 – now</p>
+    <h2 class="disp big">Experience</h2>
+    <p class="cap">Each column is a month, Feb 2025 to now. The hatched bar is my current role.</p>
+    <div class="wf">
+      <div class="scale" aria-hidden="true"><span class="yr" style="grid-column:1/12">2025</span><span class="yr" style="grid-column:12/23">2026</span><span class="mo" data-s="F" data-l="Feb"></span><span class="mo" data-s="M" data-l="Mar"></span><span class="mo" data-s="A" data-l="Apr"></span><span class="mo" data-s="M" data-l="May"></span><span class="mo" data-s="J" data-l="Jun"></span><span class="mo" data-s="J" data-l="Jul"></span><span class="mo" data-s="A" data-l="Aug"></span><span class="mo" data-s="S" data-l="Sep"></span><span class="mo" data-s="O" data-l="Oct"></span><span class="mo" data-s="N" data-l="Nov"></span><span class="mo" data-s="D" data-l="Dec"></span><span class="mo" data-s="J" data-l="Jan"></span><span class="mo" data-s="F" data-l="Feb"></span><span class="mo" data-s="M" data-l="Mar"></span><span class="mo" data-s="A" data-l="Apr"></span><span class="mo" data-s="M" data-l="May"></span><span class="mo" data-s="J" data-l="Jun"></span><span class="mo" data-s="J" data-l="Jul"></span><span class="mo" data-s="A" data-l="Aug"></span><span class="mo" data-s="S" data-l="Sep"></span><span class="mo" data-s="O" data-l="Oct"></span><span class="mo" data-s="N" data-l="Nov"></span></div>
+
+      <article class="job">
+        <div class="track" aria-hidden="true"><span class="bar now" style="grid-column:19/23"></span></div>
+        <div class="info">
+          <div><h3 class="disp"><a href="https://www.rootstocktech.co.in/" target="_blank" rel="noopener">Rootstock Technology</a></h3><p class="role">Research &amp; Development Apprentice</p><p class="when mono">Aug 2026 – present · New Delhi</p></div>
+          <ul><li>Engineered a 500+ API orchestration layer for AI workflows: endpoints, routing, API discovery and integrations.</li>
+          <li>Built GPU-accelerated computer-vision pipelines with Qwen on 2× Tesla V100 32GB GPUs for image recognition and ad verification.</li>
+          <li>Developed 3D and robotics simulation workflows with Unity (C#), ROS, Gazebo and NVIDIA Isaac Sim.</li></ul>
+        </div>
+      </article>
+
+      <article class="job" id="gleska-role">
+        <div class="track" aria-hidden="true"><span class="bar alt" style="grid-column:17/20"></span></div>
+        <div class="info">
+          <div><h3 class="disp"><a href="https://www.goleska.in/" target="_blank" rel="noopener">Gleska Private Limited</a></h3><p class="role">Full-Stack Developer</p><p class="when mono">Jun 2026 – Aug 2026 · New Delhi</p></div>
+          <ul><li>Built the FastAPI/PostgreSQL backend for a real-time workforce marketplace: 7+ REST APIs, 9 data models, 12 migrations.</li>
+          <li>Implemented PostGIS geospatial matching and a fault-tolerant job workflow with offer expiry and dual-OTP verification.</li>
+          <li>The matching engine uses PostGIS ST_DistanceSphere with an adaptive 10–30 km search radius and 50/30/20 weighted candidate ranking.</li>
+          <li>The job workflow has six stages, with two-minute offer expiry, transactional state transitions and dual-OTP verification.</li>
+          <li>Integrated Cashfree payment and verification APIs for billing, webhook reconciliation and KYC.</li></ul>
+        </div>
+      </article>
+
+      <article class="job" id="telogo-role">
+        <div class="track" aria-hidden="true"><span class="bar" style="grid-column:8/15"></span></div>
+        <div class="info">
+          <div><h3 class="disp"><a href="https://www.telogo.com/" target="_blank" rel="noopener">Telogo Communications</a></h3><p class="role">Backend &amp; AI Systems Intern</p><p class="when mono">Sep 2025 – Mar 2026 · Noida</p></div>
+          <ul><li>Architected voice-AI infrastructure processing 1,000+ concurrent requests with async workers, autoscaling and streaming inference, at under 2 seconds end to end.</li>
+          <li>Built a real-time observability stack for multilingual speech systems, profiling latency, throughput, queue depth and worker utilization.</li></ul>
+        </div>
+      </article>
+
+      <article class="job">
+        <div class="track" aria-hidden="true"><span class="bar alt" style="grid-column:1/7"></span></div>
+        <div class="info">
+          <div><h3 class="disp"><a href="https://www.motivusi.com/" target="_blank" rel="noopener">Motivus Innovation</a></h3><p class="role">Software Development Intern</p><p class="when mono">Feb 2025 – Jul 2025 · Noida</p></div>
+          <ul><li>Built production backend services and data pipelines for AI-driven ESG platforms, optimizing database workflows across renewable-energy and carbon-accounting systems.</li>
+          <li>Prototyped AI/ML models for sustainability analytics and turned research into deployable features.</li></ul>
+        </div>
+      </article>
+    </div>
+
+    <h3 class="lab xl">Expertise, by what I actually use</h3>
+    <dl class="ex">
+      <dt>Languages</dt><dd><b>Python, TypeScript</b> · <span>JavaScript, SQL, C#, Bash</span></dd>
+      <dt>Backend &amp; distributed systems</dt><dd><b>FastAPI, async programming, WebSockets, REST, system design</b> · <span>Flask, Django REST, Node.js, Express, NestJS, GraphQL, Celery, JWT, rate limiting, caching, NGINX, Pytest</span></dd>
+      <dt>AI &amp; model infrastructure</dt><dd><b>LLM applications, RAG, multi-agent systems, computer vision</b> · <span>LangChain, LangGraph, MCP, Groq, OpenAI and Anthropic APIs, vLLM, Ollama, Hugging Face, Qwen, PyTorch, OpenCV, CUDA, MLflow</span></dd>
+      <dt>Databases</dt><dd><b>PostgreSQL, PostGIS, Redis</b> · <span>pgvector, Supabase, MongoDB, MySQL, SQLite, Kafka</span></dd>
+      <dt>Cloud &amp; DevOps</dt><dd><b>Docker, AWS, GitHub Actions</b> · <span>Kubernetes, Terraform, GCP, Azure, Oracle Cloud, Firebase, GitLab CI/CD, Linux, Prometheus</span></dd>
+      <dt>Automation</dt><dd><b>n8n, Gmail API, OAuth 2.0</b> · <span>Zapier, Playwright, Selenium, Google Apps Script, webhooks, Cashfree, Razorpay</span></dd>
+      <dt>3D, mobile &amp; robotics</dt><dd><b>Three.js, Unity</b> · <span>Flutter, React Native, ROS, Gazebo, NVIDIA Isaac Sim</span></dd>
+      <dt>Frontend</dt><dd><b>React, Next.js</b> · <span>Angular, Tailwind CSS, HTML5, CSS3</span></dd>
     </dl>
   </div>
 </section>
 
-<section id="about">
-  <div class="wrap about">
-    <p class="mono">About</p>
-    <div>
-      <p>I like taking a problem all the way through: understand it, design the system, build it, put it in front of users.</p>
-      <p>That's meant working across layers: Postgres schemas and geospatial queries, async workers under load, LLM pipelines, and the interface on top. I'm drawn to the parts demos skip: failure handling, state transitions, auditability, measuring what actually happens. I'm studying B.Tech Computer Science at AKTU (2023–2027) while working in industry roles.</p>
-      <p>Outside work: HackIndia Spark 4 (Round 2) with DermaCam, built in 36 hours; Vibecon India (Round 2, 10,000+ participants) with AutoApply Bot; open-source contributor selected for GSSoC and SSOC 2026.</p>
+<section class="sec" id="about">
+  <div class="wrap">
+    <h2 class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>About</h2>
+    <div class="notes">
+      <div>
+        <p class="t">I usually end up working on the half of a problem a demo never shows: what happens when an offer expires, when one user's data has to stay out of another's, when a thousand calls arrive at once.</p>
+        <p>I'm a software engineer in Delhi, finishing a B.Tech in Computer Science while working in industry. My projects go from Postgres schemas and geospatial queries, through async workers and LLM pipelines, up to the interface people touch. I also build in 3D when I want to: Rooftop Rush is a game I built and deployed, with its own multiplayer server.</p>
+        <p>I like measuring things. If I can't say what changed, I haven't finished.</p>
+      </div>
+      <dl class="facts">
+        <div><dt class="mono">Education</dt><dd>B.Tech, Computer Science (Core), Dr. A.P.J. Abdul Kalam Technical University, 2023–2027, Lucknow</dd></div>
+        <div><dt class="mono">Now</dt><dd>R&amp;D Apprentice, Rootstock Technology</dd></div>
+        <div><dt class="mono">Recognition</dt><dd>HackIndia Spark 4, Round 2 · Vibecon India, Round 2 (10,000+ participants) · GSSoC and SSOC 2026 contributor</dd></div>
+        <div><dt class="mono">Certified</dt><dd>Zapier + n8n Automation Mastery · AI Engineer Bootcamp</dd></div>
+      </dl>
     </div>
+    <h3 class="lab xl">How it shows up in the work</h3>
+    <ul class="disc">
+      <li><b>Async &amp; distributed systems</b><span>1,000+ concurrent voice requests in under 2 seconds, with async workers, autoscaling and streaming inference.</span><a href="#telogo-role">Telogo</a></li>
+      <li><b>Orchestration &amp; API design</b><span>A 500+ API orchestration layer for AI workflows: endpoints, routing, discovery and integrations.</span><a href="#experience">Rootstock</a></li>
+      <li><b>Reliability &amp; testing</b><span>59 regression tests and real-Gmail validation behind a 92.5% cut in API calls.</span><a href="#email">Email Triage</a></li>
+      <li><b>Retrieval &amp; data pipelines</b><span>Sources ingested, deduplicated and linked to citations; evidence ranking in an agentic research pipeline.</span><a href="#xenom">XENOM</a></li>
+      <li><b>Agentic workflows</b><span>A CEO agent decomposing goals across six specialists, with shared Redis and PostgreSQL memory.</span><a href="#agentforge">AgentForge</a></li>
+      <li><b>Real-time &amp; performance</b><span>A fixed-timestep game loop, object pooling and a multiplayer race where the server decides results.</span><a href="#rooftop">Rooftop Rush</a></li>
+    </ul>
   </div>
 </section>
 
-<section id="contact" class="contact">
+<section class="sec contact" id="contact">
   <div class="wrap">
-    <p class="mono">Contact</p>
-    <h2>Let's build something real.</h2>
-    <a class="mail" href="mailto:anjaneyatiwarii@gmail.com">anjaneyatiwarii@gmail.com</a>
-    <div class="cta">
-      <a class="btn" href="https://www.linkedin.com/in/anjaneya-tiwari/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
-    </div>
+    <h2 class="lab"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Contact</h2>
+    <p class="close">If you're building backend or AI systems and care about the parts demos skip, I'd like to hear about it.</p>
+    <div class="mailbox"><a class="mail" href="mailto:anjaneyatiwarii@gmail.com">anjaneyatiwarii@<wbr>gmail.com</a></div>
+    <p class="go"><a class="lnk" href="https://www.linkedin.com/in/anjaneya-tiwari/" target="_blank" rel="noopener">LinkedIn ↗</a><a class="lnk" href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub ↗</a><a class="lnk" href="mailto:anjaneyatiwarii@gmail.com?subject=Resume%20request">Resume on request</a></p>
+    <p class="note">Open to full-time backend and AI roles. Delhi, UTC+5:30.</p>
   </div>
 </section>
 </main>
-<footer><div class="wrap"><span>© 2026 Anjaneya Tiwari</span><a href="#top">Back to top ↑</a></div></footer>
+<footer><div class="wrap"><span>© 2026 Anjaneya Tiwari</span><nav aria-label="Footer"><a href="#work">Work</a><a href="projects.html">Projects</a><a href="#experience">Experience</a><a href="#about">About</a><a href="https://github.com/codebyanjaneya" target="_blank" rel="noopener">GitHub</a></nav><button type="button" class="mt" data-motion-toggle hidden>Pause animations</button><a href="#top">Back to top ↑</a></div></footer>
+<script src="app.js" defer></script>
 </body>
 </html>
