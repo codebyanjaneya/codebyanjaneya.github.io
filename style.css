@@ -172,8 +172,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 }
 @media(max-width:420px){.skips a{grid-template-columns:minmax(86px,32%) 1fr}.sq{grid-template-columns:minmax(0,1fr)}}
 @media(min-width:2000px){:root{--max:1560px}body{font-size:20px}}
-@keyframes flow{to{stroke-dashoffset:-48}}
-.flowline{stroke-dasharray:6 10;animation:flow 2.4s linear infinite}
+.flowline{stroke-dasharray:6 10}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 
 @media(min-width:900px){

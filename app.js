@@ -20,6 +20,10 @@
     new IntersectionObserver(es => cb(es[es.length - 1].isIntersecting), { threshold: .3 }).observe(el);
   };
   const press = (btns, test) => btns.forEach(b => b.setAttribute('aria-pressed', test(b)));
+  // Demos never compete with an active scroll: they pause or wait until the page has been still for a moment.
+  let lastScroll = -1e9; addEventListener('scroll', () => { lastScroll = performance.now(); }, { passive: true });
+  const scrolling = () => performance.now() - lastScroll < 160;
+  const whenIdle = cb => { const tick = () => (scrolling() ? setTimeout(tick, 120) : cb()); tick(); };
 
   /* ---------- XENOM: claim -> source tracing ---------- */
   (() => {
@@ -36,7 +40,12 @@
     $$('button[data-pick]', f).forEach(b => b.addEventListener('click', () => pick(b.dataset.pick, true)));
     $$('.cl', f).forEach(r => r.addEventListener('click', () => pick(r.dataset.pick, true)));
     pick(1);
-    const sched = () => { clearInterval(t); if (vis && !user && !reduce()) t = setInterval(() => pick(f.dataset.active % 3 + 1), 3400); };
+    let played = false;
+    const sched = () => { // the demo walks through the three claims once, then rests
+      clearInterval(t); if (!vis || user || played || reduce()) return;
+      played = true; let n = 0;
+      t = setInterval(() => { pick(f.dataset.active % 3 + 1); if (++n >= 2) clearInterval(t); }, 3400);
+    };
     onView(f, v => { vis = v; sched(); });
     document.addEventListener('motionchange', sched);
   })();
@@ -147,9 +156,12 @@
     draw(1);
     onView(f, v => {
       if (!v || done || touched || reduce()) return; done = true;
+      whenIdle(() => { if (touched) return;
       let s; const dur = 2200;
-      const step = ts => { if (touched) return; s = s || ts; const p = Math.min(1, (ts - s) / dur); draw(p * p * (3 - 2 * p)); if (p < 1) requestAnimationFrame(step); };
+      let q = -1; // the grid is redrawn in ~10 coarse steps, not on every frame
+      const step = ts => { if (touched) return; s = s || ts; const p = Math.min(1, (ts - s) / dur), e = p * p * (3 - 2 * p), k = Math.round(e * 10); if (k !== q) { q = k; draw(k / 10); } if (p < 1) requestAnimationFrame(step); };
       draw(0); requestAnimationFrame(step);
+      });
     });
   })();
 
@@ -159,8 +171,8 @@
     const layer = $('.pts', f), tk = $$('.tk rect', f), hb = $$('.hb', f), pb = $('[data-pause]', f), bb = $('[data-burst]', f);
     const GATE = 228, LX = 284, LW = 236, LY = i => 52 + i * 38, BINS = 14, MAXMS = 600, MU = Math.log(120), SG = .55;
     const counts = new Array(BINS).fill(0), pool = [], load = new Array(6).fill(0);
-    for (let i = 0; i < 70; i++) pool.push({ el: mk('circle', { r: 4, cx: -20, cy: 0, fill: '#e7e9df' }, layer), s: 'idle' });
-    let tokens = 10, last = 0, acc = 0, run = true, raf = 0, vis = false, lastH = 0;
+    for (let i = 0; i < 70; i++) pool.push({ el: mk('circle', { r: 4, transform: 'translate(-20 0)', fill: '#e7e9df' }, layer), s: 'idle' });
+    let litTokens = -1, tokens = 10, last = 0, acc = 0, run = true, raf = 0, vis = false, lastH = 0;
     const gauss = () => Math.sqrt(-2 * Math.log(1 - Math.random())) * Math.cos(2 * Math.PI * Math.random());
     const spawn = (dx = 0) => {
       const p = pool.find(q => q.s === 'idle'); if (!p) return;
@@ -174,6 +186,7 @@
     };
     const frame = ts => {
       raf = 0; if (!vis || !run) return;
+      if (scrolling()) { last = ts; raf = requestAnimationFrame(frame); return; } // stay out of the way of an active scroll
       const dt = Math.min(.05, (ts - (last || ts)) / 1000); last = ts;
       tokens = Math.min(10, tokens + 8 * dt); acc += dt * 9;
       while (acc >= 1) { acc -= 1; spawn(); }
@@ -187,12 +200,12 @@
           }
         } else if (p.s === 'lane') {
           if (p.x < LX) p.x = Math.min(LX, p.x + 170 * dt);
-          else { p.t += dt; p.x = LX + LW * Math.min(1, p.t / p.dur); if (p.t >= p.dur) { rec(p.lat); load[p.lane]--; p.s = 'idle'; p.el.setAttribute('cx', -20); continue; } }
+          else { p.t += dt; p.x = LX + LW * Math.min(1, p.t / p.dur); if (p.t >= p.dur) { rec(p.lat); load[p.lane]--; p.s = 'idle'; p.el.setAttribute('transform', 'translate(-20 0)'); continue; } }
           p.y += (p.ty - p.y) * Math.min(1, dt * 9);
-        } else if (p.s === 'rej') { p.x -= 150 * dt; p.life -= dt * 1.5; p.el.style.opacity = Math.max(0, p.life); if (p.life <= 0) { p.s = 'idle'; p.el.setAttribute('cx', -20); continue; } }
-        p.el.setAttribute('cx', p.x.toFixed(1)); p.el.setAttribute('cy', p.y.toFixed(1));
+        } else if (p.s === 'rej') { p.x -= 150 * dt; p.life -= dt * 1.5; p.el.style.opacity = Math.max(0, p.life); if (p.life <= 0) { p.s = 'idle'; p.el.setAttribute('transform', 'translate(-20 0)'); continue; } }
+        p.el.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
       }
-      tk.forEach((r, i) => r.style.opacity = i < tokens ? 1 : .18);
+      const lit = Math.ceil(tokens); if (lit !== litTokens) { litTokens = lit; tk.forEach((r, i) => r.style.opacity = i < lit ? 1 : .18); }
       if (ts - lastH > 160) { lastH = ts; drawHist(); }
       raf = requestAnimationFrame(frame);
     };
@@ -231,10 +244,16 @@
       cap.textContent = `${b.dataset.agent} agent: one of the six specialists the CEO delegates to.`;
     }));
     set(5);
-    const sched = () => {
+    let played = false;
+    const sched = () => { // the five steps play once, then the diagram rests on the finished picture
       clearInterval(t); if (user) return;
-      if (!vis || reduce()) { if (reduce()) set(5); return; }
-      set(1); t = setInterval(() => { if (n >= 5) { n = 0; } set(n + 1); }, 1900);
+      if (reduce()) { set(5); return; }
+      if (!vis || played) return;
+      played = true;
+      whenIdle(() => {
+        if (user) return; set(1);
+        t = setInterval(() => { if (n >= 5) { clearInterval(t); return; } if (!scrolling()) set(n + 1); }, 1900);
+      });
     };
     onView(f, v => { vis = v; sched(); });
     document.addEventListener('motionchange', sched);
@@ -246,7 +265,10 @@
     const f = $('[data-viz=derma]'); if (!f) return;
     const chips = $$('.vote', f), res = $('[data-res]', f), run = $('[data-run]', f);
     const v = [1, 1, 0, 1, 0, 1, 1];
-    const tally = () => { const a = chips.filter(c => c.dataset.v === '1').length; res.textContent = `${a} of 7 models agree on ${a >= 4 ? 'class A' : 'class B'}. Majority wins.`; f.dataset.win = a >= 4 ? 'A' : 'B'; };
+    const tally = () => {
+      const a = chips.filter(c => c.dataset.v === '1').length, winA = a >= 4; // 7 votes, so there is always a strict majority
+      res.textContent = `${winA ? a : 7 - a} of 7 models agree on ${winA ? 'class A' : 'class B'}. Majority wins.`; f.dataset.win = winA ? 'A' : 'B';
+    };
     chips.forEach((c, i) => { c.dataset.v = v[i]; c.textContent = v[i] ? 'A' : 'B'; c.setAttribute('aria-label', `Model ${i + 1} votes ${v[i] ? 'A' : 'B'}. Click to flip.`);
       c.addEventListener('click', () => { c.dataset.v = c.dataset.v === '1' ? '0' : '1'; c.textContent = c.dataset.v === '1' ? 'A' : 'B'; c.setAttribute('aria-label', `Model ${i + 1} votes ${c.textContent}. Click to flip.`); tally(); }); });
     run.addEventListener('click', () => {
